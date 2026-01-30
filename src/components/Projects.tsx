@@ -5,6 +5,21 @@ import { ExternalLink, Github } from "lucide-react";
 
 const projects = [
     {
+        title: "Aura Bank",
+        tagline: "AI-Powered Banking Management System",
+        description: "A comprehensive full-stack fintech ecosystem with AI-powered features including fraud detection, loan risk analysis, and intelligent chatbot support using local LLM.",
+        tech: ["React", "Node.js", "PostgreSQL", "Python ML", "Three.js"],
+        points: [
+            "Built ML models for fraud detection and loan eligibility prediction.",
+            "Implemented double-entry ledger system for financial data integrity.",
+            "3D immersive login experience with Three.js animations."
+        ],
+        links: {
+            github: "https://github.com/9046balaji/bank-management-system",
+            demo: "/projects/aura-bank"
+        }
+    },
+    {
         title: "HeartGuard AI",
         tagline: "HIPAA-compliant Medical Agentic RAG System",
         description: "Most chatbots hallucinate. This system uses a self-correcting RAG pipeline with Knowledge Graphs to ensure medical accuracy. Orchestrated multi-agent workflows using LangGraph for patient triage.",
@@ -15,7 +30,7 @@ const projects = [
             "Fine-tuned Google's MedGemma model for cardiology-specific nuancing."
         ],
         links: {
-            github: "https://github.com/9046balaji", // Placeholder
+            github: "https://github.com/9046balaji/Heart",
             demo: "/projects/heartguard-ai"
         }
     },
@@ -44,7 +59,7 @@ const projects = [
             "Implemented Role-Based Access Control (RBAC) for doctors, patients, and admins."
         ],
         links: {
-            github: "https://github.com/9046balaji",
+            github: "https://github.com/9046balaji/Hospital-Management-System",
             demo: "/projects/hospital-management"
         }
     },
