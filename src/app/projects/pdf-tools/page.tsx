@@ -438,48 +438,156 @@ function APITab() {
 function ArchitectureTab() {
     return (
         <div className="space-y-8">
-            {/* Project Structure */}
+            {/* System Architecture Flow */}
             <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <FolderTree className="text-primary" /> Project Structure
+                    <FolderTree className="text-primary" /> System Architecture Flow
                 </h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-black/30 p-4 rounded-lg font-mono text-xs text-gray-300 overflow-x-auto">
-                        <div className="text-yellow-400 mb-2">🚀 Entry Points</div>
-                        <div className="pl-4 space-y-1">
-                            <div>├── run.py <span className="text-gray-500"># Application entry</span></div>
-                            <div>├── app.py <span className="text-gray-500"># Flask factory</span></div>
-                            <div>└── api.py <span className="text-gray-500"># FastAPI endpoints</span></div>
+                <p className="text-gray-400 mb-6">
+                    A dual-interface architecture with Flask web UI and FastAPI REST endpoints, 
+                    backed by Celery workers for async processing and PostgreSQL for persistence.
+                </p>
+
+                {/* Flow Diagram */}
+                <div className="flex flex-col items-center space-y-4 font-mono text-sm">
+                    {/* CLIENTS */}
+                    <div className="px-6 py-3 bg-gray-700 rounded-lg text-white">CLIENTS (Browser / API)</div>
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* Dual Interface */}
+                    <div className="grid grid-cols-2 gap-8 w-full max-w-2xl">
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-blue-500"></div>
+                            <div className="px-4 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 text-center w-full">
+                                <div className="font-bold mb-1">🌐 Flask App</div>
+                                <div className="text-xs text-gray-400">Web UI</div>
+                                <div className="text-xs text-gray-400">HTML Templates</div>
+                            </div>
                         </div>
-                        <div className="text-yellow-400 mt-4 mb-2">📚 Core PDF Modules</div>
-                        <div className="pl-4 space-y-1">
-                            <div>└── pdf_modules/</div>
-                            <div className="pl-4">├── pdf_base.py</div>
-                            <div className="pl-4">├── pdf_convert.py</div>
-                            <div className="pl-4">├── pdf_edit.py</div>
-                            <div className="pl-4">├── pdf_transform.py</div>
-                            <div className="pl-4">├── pdf_security.py</div>
-                            <div className="pl-4">└── pdf_validation.py</div>
-                        </div>
-                    </div>
-                    <div className="bg-black/30 p-4 rounded-lg font-mono text-xs text-gray-300 overflow-x-auto">
-                        <div className="text-yellow-400 mb-2">🎯 Features</div>
-                        <div className="pl-4 space-y-1">
-                            <div>└── Feature/</div>
-                            <div className="pl-4">├── admin_features.py</div>
-                            <div className="pl-4">├── authentication_features.py</div>
-                            <div className="pl-4">├── conversion_features.py</div>
-                            <div className="pl-4">└── feature_manager.py</div>
-                        </div>
-                        <div className="text-yellow-400 mt-4 mb-2">🔧 Utilities</div>
-                        <div className="pl-4 space-y-1">
-                            <div>└── common/</div>
-                            <div className="pl-4">├── file_validation.py</div>
-                            <div className="pl-4">├── error_recovery.py</div>
-                            <div className="pl-4">├── health_check.py</div>
-                            <div className="pl-4">└── progress.py</div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-purple-500"></div>
+                            <div className="px-4 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 text-center w-full">
+                                <div className="font-bold mb-1">⚡ FastAPI</div>
+                                <div className="text-xs text-gray-400">REST API</div>
+                                <div className="text-xs text-gray-400">Swagger Docs</div>
+                            </div>
                         </div>
                     </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* Feature Manager */}
+                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl text-center">
+                        <div className="font-bold">🎯 FEATURE MANAGER (Blueprints)</div>
+                        <div className="text-xs text-gray-400 mt-1">Routes organized into modular blueprints</div>
+                    </div>
+
+                    {/* Branches */}
+                    <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-orange-500"></div>
+                            <div className="px-3 py-2 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 text-xs text-center">
+                                PDF Processing<br />Features
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-green-500"></div>
+                            <div className="px-3 py-2 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-xs text-center">
+                                Auth & User<br />Features
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-cyan-500"></div>
+                            <div className="px-3 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-300 text-xs text-center">
+                                File Management<br />Features
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* PDF Processor */}
+                    <div className="px-6 py-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">📄 PDF PROCESSOR (Mixin Classes)</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["Edit (merge/split)", "Security (encrypt)", "Transform (rotate)", "Convert (formats)", "OCR (Tesseract)"].map(m => (
+                                <span key={m} className="px-2 py-1 bg-yellow-500/30 rounded text-xs">{m}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* Data Layer */}
+                    <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-red-500"></div>
+                            <div className="px-4 py-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-center w-full">
+                                <div className="font-bold mb-1">🔄 Celery + Redis</div>
+                                <div className="text-xs text-gray-400">Async Tasks</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-blue-500"></div>
+                            <div className="px-4 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 text-center w-full">
+                                <div className="font-bold mb-1">🗄️ PostgreSQL</div>
+                                <div className="text-xs text-gray-400">User Data</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-green-500"></div>
+                            <div className="px-4 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-center w-full">
+                                <div className="font-bold mb-1">📁 File System</div>
+                                <div className="text-xs text-gray-400">PDF Storage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Processing Modules */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Cpu className="text-secondary" /> PDF Processing Modules
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {[
+                        { name: "pdf_convert", desc: "Format Conversions", color: "blue" },
+                        { name: "pdf_edit", desc: "Merge, Split, Extract", color: "purple" },
+                        { name: "pdf_transform", desc: "Rotate, Compress", color: "green" },
+                        { name: "pdf_security", desc: "Passwords, Watermarks", color: "orange" },
+                        { name: "pdf_validation", desc: "File Validation", color: "red" },
+                        { name: "pdf_repair", desc: "Fix Corrupted Files", color: "teal" },
+                        { name: "pdf_ocr", desc: "Text Recognition", color: "pink" },
+                        { name: "pdf_compare", desc: "Diff Two PDFs", color: "cyan" },
+                    ].map((module) => (
+                        <div key={module.name} className={`p-4 rounded-xl bg-${module.color}-500/10 border border-${module.color}-500/30`}>
+                            <div className="font-mono text-sm text-white font-semibold mb-1">{module.name}</div>
+                            <div className="text-xs text-gray-400">{module.desc}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Async Processing Flow */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <RefreshCw className="text-red-400" /> Async Processing Flow
+                </h2>
+                <div className="grid grid-cols-5 gap-3">
+                    {[
+                        { step: "1", name: "UPLOAD", desc: "File Received", color: "blue" },
+                        { step: "2", name: "QUEUE", desc: "Redis Task", color: "red" },
+                        { step: "3", name: "PROCESS", desc: "Celery Worker", color: "yellow" },
+                        { step: "4", name: "STORE", desc: "Save Output", color: "green" },
+                        { step: "5", name: "NOTIFY", desc: "WebSocket", color: "purple" },
+                    ].map((flow) => (
+                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
+                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                            <div className="text-xs text-white font-medium">{flow.name}</div>
+                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -504,24 +612,6 @@ function ArchitectureTab() {
                                     <span key={item} className="px-2 py-0.5 bg-white/10 rounded text-xs text-gray-300">{item}</span>
                                 ))}
                             </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Optional Tools */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Optional Dependencies</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {[
-                        { name: "Tesseract", purpose: "OCR functionality" },
-                        { name: "Poppler", purpose: "PDF to image conversion" },
-                        { name: "Ghostscript", purpose: "Advanced PDF compression" },
-                        { name: "LibreOffice", purpose: "Office document conversion" },
-                    ].map((tool) => (
-                        <div key={tool.name} className="p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg">
-                            <h3 className="font-semibold text-orange-300 text-sm">{tool.name}</h3>
-                            <p className="text-xs text-gray-400">{tool.purpose}</p>
                         </div>
                     ))}
                 </div>

@@ -44,56 +44,113 @@ function OverviewTab() {
                 </p>
             </section>
 
-            {/* Architecture Diagram */}
+            {/* Architecture Flow Diagram */}
             <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Server className="text-secondary" /> System Architecture
+                    <Server className="text-secondary" /> System Architecture Flow
                 </h2>
+                <p className="text-gray-400 mb-6">
+                    A layered architecture with Express.js server handling API routes, middleware for security,
+                    models for data access, and PostgreSQL for persistence.
+                </p>
 
-                <div className="overflow-x-auto">
-                    <div className="min-w-[600px] flex items-center justify-between font-mono text-sm">
-                        {/* Frontend */}
-                        <div className="text-center">
-                            <div className="w-24 h-24 rounded-lg bg-blue-500/20 border border-blue-500/50 flex items-center justify-center mb-2">
-                                <span className="text-blue-300 text-2xl">🌐</span>
-                            </div>
-                            <div className="text-xs text-gray-400">Frontend</div>
-                            <div className="text-xs text-blue-300">HTML/CSS/JS</div>
-                        </div>
-
-                        <div className="flex-1 h-0.5 bg-gradient-to-r from-blue-500/50 to-purple-500/50 mx-4"></div>
-
-                        {/* API Layer */}
-                        <div className="text-center">
-                            <div className="w-24 h-24 rounded-lg bg-purple-500/20 border border-purple-500/50 flex items-center justify-center mb-2">
-                                <span className="text-purple-300 text-2xl">⚡</span>
-                            </div>
-                            <div className="text-xs text-gray-400">REST API</div>
-                            <div className="text-xs text-purple-300">Express.js</div>
-                        </div>
-
-                        <div className="flex-1 h-0.5 bg-gradient-to-r from-purple-500/50 to-green-500/50 mx-4"></div>
-
-                        {/* Auth */}
-                        <div className="text-center">
-                            <div className="w-24 h-24 rounded-lg bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center mb-2">
-                                <span className="text-yellow-300 text-2xl">🔐</span>
-                            </div>
-                            <div className="text-xs text-gray-400">Auth</div>
-                            <div className="text-xs text-yellow-300">JWT + bcrypt</div>
-                        </div>
-
-                        <div className="flex-1 h-0.5 bg-gradient-to-r from-yellow-500/50 to-green-500/50 mx-4"></div>
-
-                        {/* Database */}
-                        <div className="text-center">
-                            <div className="w-24 h-24 rounded-lg bg-green-500/20 border border-green-500/50 flex items-center justify-center mb-2">
-                                <span className="text-green-300 text-2xl">🗄️</span>
-                            </div>
-                            <div className="text-xs text-gray-400">Database</div>
-                            <div className="text-xs text-green-300">PostgreSQL</div>
+                {/* Flow Diagram */}
+                <div className="flex flex-col items-center space-y-4 font-mono text-sm">
+                    {/* CLIENT LAYER */}
+                    <div className="px-6 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🌐 CLIENT LAYER (Web Browser)</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["HTML", "CSS", "JavaScript", "Bootstrap 5"].map(t => (
+                                <span key={t} className="px-2 py-1 bg-blue-500/30 rounded text-xs">{t}</span>
+                            ))}
                         </div>
                     </div>
+
+                    <div className="flex items-center gap-2">
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">HTTP/HTTPS</span>
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                    </div>
+
+                    {/* SERVER LAYER */}
+                    <div className="px-6 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">⚡ SERVER LAYER (Node.js)</div>
+                        <div className="text-xs text-gray-400 text-center mb-2">Express.js Server (server.js)</div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* MIDDLEWARE */}
+                    <div className="px-6 py-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🛡️ MIDDLEWARE LAYER</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["Helmet Security", "CORS Policy", "Rate Limiter", "JWT Verify", "Auth Middleware"].map(m => (
+                                <span key={m} className="px-2 py-1 bg-yellow-500/30 rounded text-xs">{m}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* API ROUTES */}
+                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🔀 API ROUTES</div>
+                        <div className="grid grid-cols-5 gap-2">
+                            {["/api/departments", "/api/patients", "/api/doctors", "/api/appointments", "/api/auth"].map(route => (
+                                <div key={route} className="px-2 py-1 bg-teal-500/30 rounded text-xs text-center">{route}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* MODELS */}
+                    <div className="px-6 py-3 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">📦 MODELS LAYER</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["Department Model", "Patient Model", "Doctor Model", "Appointment Model", "User Model"].map(m => (
+                                <span key={m} className="px-2 py-1 bg-orange-500/30 rounded text-xs">{m}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">SQL Queries</span>
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                    </div>
+
+                    {/* DATABASE */}
+                    <div className="px-6 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🗄️ DATABASE LAYER (PostgreSQL)</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["departments", "patients", "doctors", "appointments", "users"].map(t => (
+                                <span key={t} className="px-2 py-1 bg-green-500/30 rounded text-xs">{t}</span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Data Flow */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Activity className="text-primary" /> Request Data Flow
+                </h2>
+                <div className="grid grid-cols-5 gap-3">
+                    {[
+                        { step: "1", name: "USER", desc: "Browser", color: "blue" },
+                        { step: "2", name: "FRONTEND", desc: "HTML/JS", color: "purple" },
+                        { step: "3", name: "ROUTES", desc: "API Handlers", color: "yellow" },
+                        { step: "4", name: "MODELS", desc: "Query Builder", color: "orange" },
+                        { step: "5", name: "DATABASE", desc: "PostgreSQL", color: "green" },
+                    ].map((flow) => (
+                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
+                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                            <div className="text-xs text-white font-medium">{flow.name}</div>
+                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                        </div>
+                    ))}
                 </div>
             </section>
 

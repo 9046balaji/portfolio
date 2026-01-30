@@ -173,69 +173,126 @@ function FeaturesTab() {
 function ArchitectureTab() {
     return (
         <div className="space-y-8">
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-6 overflow-x-auto">
-                <h2 className="text-2xl font-bold text-white mb-6">System Architecture</h2>
-                <pre className="text-xs md:text-sm text-gray-300 font-mono whitespace-pre overflow-x-auto">
-{`┌─────────────────────────────────────────────────────────────────┐
-│                        AURA BANK ARCHITECTURE                    │
-└─────────────────────────────────────────────────────────────────┘
+            {/* System Flow Diagram */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Server className="text-secondary" /> System Architecture Flow
+                </h2>
+                <p className="text-gray-400 mb-6">
+                    A full-stack banking architecture with React frontend, Node.js API layer, 
+                    PostgreSQL database, and Python ML microservice for intelligent features.
+                </p>
 
-                              ┌──────────────┐
-                              │    Users     │
-                              └──────┬───────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    🖥️  FRONTEND (React + TypeScript)             │
-│  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌─────────────┐  │
-│  │ Dashboard │  │ Transfers │  │   Loans   │  │ Admin Panel │  │
-│  │ • Balance │  │ • IMPS    │  │ • Apply   │  │ • User Mgmt │  │
-│  │ • Charts  │  │ • QR Pay  │  │ • AI Score│  │ • Analytics │  │
-│  └───────────┘  └───────────┘  └───────────┘  └─────────────┘  │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │ REST API
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    ⚙️  BACKEND (Node.js + Express)               │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────────────┐ │
-│  │  Auth   │  │ Security│  │  Ledger │  │     Services        │ │
-│  │  • JWT  │  │ • Rate  │  │ • Double│  │ • Circuit Breaker   │ │
-│  │ • bcrypt│  │   Limit │  │   Entry │  │ • Idempotency       │ │
-│  └─────────┘  └─────────┘  └─────────┘  └─────────────────────┘ │
-└───────────────────┬───────────────────────────┬─────────────────┘
-                    │                           │
-                    ▼                           ▼
-┌───────────────────────────────┐  ┌──────────────────────────────┐
-│     🗄️  PostgreSQL Database   │  │   🤖  ML API (Python/Flask)  │
-│  • Users & Auth               │  │  • Fraud Detection           │
-│  • Accounts & Transactions    │  │  • Loan Eligibility          │
-│  • Double-Entry Ledger        │  │  • Expense Categorization    │
-└───────────────────────────────┘  └──────────────────────────────┘`}
-                </pre>
+                {/* Flow Diagram */}
+                <div className="flex flex-col items-center space-y-4 font-mono text-sm">
+                    {/* USERS */}
+                    <div className="px-6 py-3 bg-gray-700 rounded-lg text-white">USERS (Customers & Admins)</div>
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* FRONTEND */}
+                    <div className="px-6 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🖥️ FRONTEND (React + TypeScript)</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["Dashboard", "Transfers", "Loans", "Cards", "Analytics", "Admin Panel", "3D Auth"].map(m => (
+                                <span key={m} className="px-2 py-1 bg-blue-500/30 rounded text-xs">{m}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">REST API</span>
+                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                    </div>
+
+                    {/* BACKEND */}
+                    <div className="px-6 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">⚙️ BACKEND (Node.js + Express)</div>
+                        <div className="text-xs text-gray-400 text-center mb-2">API Routes: /users /accounts /transactions /loans /cards /support</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["JWT Auth", "bcrypt", "Rate Limiting", "CORS", "Zod Validation", "Circuit Breaker"].map(s => (
+                                <span key={s} className="px-2 py-1 bg-purple-500/30 rounded text-xs">{s}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Branches */}
+                    <div className="grid grid-cols-2 gap-8 w-full max-w-2xl">
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-green-500"></div>
+                            <div className="px-4 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-center w-full">
+                                <div className="font-bold mb-1">🗄️ PostgreSQL</div>
+                                <div className="text-xs text-gray-400">Users • Accounts • Transactions</div>
+                                <div className="text-xs text-gray-400">Double-Entry Ledger • Cards</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-6 bg-orange-500"></div>
+                            <div className="px-4 py-3 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 text-center w-full">
+                                <div className="font-bold mb-1">🤖 ML API (Flask)</div>
+                                <div className="text-xs text-gray-400">Fraud Detection • Loan Risk</div>
+                                <div className="text-xs text-gray-400">Expense Categorization</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-0.5 h-6 bg-gray-600"></div>
+
+                    {/* External Services */}
+                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl">
+                        <div className="font-bold text-center mb-2">🔌 EXTERNAL INTEGRATIONS</div>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {["Ollama (LLM)", "LangChain Agents", "DuckDuckGo Search", "QR Payments"].map(e => (
+                                <span key={e} className="px-2 py-1 bg-teal-500/30 rounded text-xs">{e}</span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section>
-                <h2 className="text-2xl font-bold text-white mb-4">Project Structure</h2>
-                <div className="bg-black/50 rounded-xl p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-                    <pre>{`bank-management-system/
-├── 📂 backend/               # Node.js Express API
-│   ├── src/
-│   │   ├── controllers/      # Request handlers
-│   │   ├── middleware/       # Auth, rate limiting
-│   │   ├── routes/           # API endpoints
-│   │   └── services/         # Business logic
-│
-├── 📂 src/                   # Frontend source
-│   ├── components/           # React components
-│   │   └── 3d/               # Three.js components
-│   ├── contexts/             # React context
-│   └── views/                # Page components
-│
-├── 📂 model/                 # ML models & API
-│   ├── ml_api.py             # Flask ML server
-│   └── *.pkl                 # Trained models
-│
-└── 📂 database/              # SQL scripts`}</pre>
+            {/* Service Modules */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Layers className="text-primary" /> Service Modules
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {[
+                        { name: "Auth Service", desc: "JWT + Refresh Tokens", color: "blue" },
+                        { name: "Ledger Service", desc: "Double-Entry Accounting", color: "purple" },
+                        { name: "Transfer Service", desc: "IMPS, NEFT, QR Pay", color: "green" },
+                        { name: "Loan Service", desc: "AI Risk Scoring", color: "orange" },
+                        { name: "Card Service", desc: "Freeze, Limits, PIN", color: "red" },
+                        { name: "Analytics Service", desc: "Spending Insights", color: "teal" },
+                        { name: "Support Service", desc: "Tickets + AI Chat", color: "pink" },
+                        { name: "Admin Service", desc: "User & Loan Mgmt", color: "cyan" },
+                    ].map((service) => (
+                        <div key={service.name} className={`p-4 rounded-xl bg-${service.color}-500/10 border border-${service.color}-500/30`}>
+                            <div className="font-mono text-sm text-white font-semibold mb-1">{service.name}</div>
+                            <div className="text-xs text-gray-400">{service.desc}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Data Flow */}
+            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Database className="text-green-400" /> Transaction Data Flow
+                </h2>
+                <div className="grid grid-cols-5 gap-3">
+                    {[
+                        { step: "1", name: "REQUEST", desc: "User Action", color: "blue" },
+                        { step: "2", name: "VALIDATE", desc: "Auth + Input", color: "purple" },
+                        { step: "3", name: "PROCESS", desc: "Business Logic", color: "yellow" },
+                        { step: "4", name: "LEDGER", desc: "Double-Entry", color: "green" },
+                        { step: "5", name: "RESPONSE", desc: "Return Result", color: "teal" },
+                    ].map((flow) => (
+                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
+                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                            <div className="text-xs text-white font-medium">{flow.name}</div>
+                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                        </div>
+                    ))}
                 </div>
             </section>
         </div>
