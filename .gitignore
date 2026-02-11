@@ -11,7 +11,7 @@
 !.yarn/versions
 
 details
-
+DEPLOYMENT_GUIDE.md
 # testing
 /coverage
 
