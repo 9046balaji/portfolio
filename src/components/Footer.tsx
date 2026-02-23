@@ -21,7 +21,7 @@ const quickLinks = [
 
 export default function Footer() {
     return (
-        <footer className="py-12 border-t border-white/10">
+        <footer className="py-12 border-t border-border">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                     {/* Brand */}
@@ -29,7 +29,7 @@ export default function Footer() {
                         <Link href="/" className="text-2xl font-bold font-mono text-primary">
                             &lt;KBR /&gt;
                         </Link>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-text-tertiary text-sm">
                             AI & Full Stack Engineer building intelligent systems that make a difference.
                         </p>
                         <div className="flex gap-4">
@@ -41,10 +41,10 @@ export default function Footer() {
                                         href={social.href}
                                         target={social.href.startsWith("mailto") ? undefined : "_blank"}
                                         rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                                        className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-primary/50 transition-all"
+                                        className="w-10 h-10 rounded-lg bg-card-bg border border-border flex items-center justify-center hover:bg-card-bg-hover hover:border-primary/50 transition-all"
                                         aria-label={social.label}
                                     >
-                                        <Icon className="w-4 h-4 text-gray-400 hover:text-white" />
+                                        <Icon className="w-4 h-4 text-text-tertiary hover:text-foreground" />
                                     </a>
                                 );
                             })}
@@ -53,13 +53,13 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+                        <h3 className="text-text-primary font-semibold mb-4">Quick Links</h3>
                         <ul className="space-y-2">
                             {quickLinks.map((link, index) => (
                                 <li key={index}>
                                     <Link
                                         href={link.href}
-                                        className="text-gray-400 hover:text-primary transition-colors text-sm"
+                                        className="text-text-tertiary hover:text-primary transition-colors text-sm"
                                     >
                                         {link.name}
                                     </Link>
@@ -70,20 +70,20 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h3 className="text-white font-semibold mb-4">Get In Touch</h3>
+                        <h3 className="text-text-primary font-semibold mb-4">Get In Touch</h3>
                         <ul className="space-y-3 text-sm">
-                            <li className="text-gray-400">
-                                <span className="text-gray-500">Email:</span>{" "}
+                            <li className="text-text-tertiary">
+                                <span className="text-text-muted">Email:</span>{" "}
                                 <a href="mailto:balajikonda9046@gmail.com" className="hover:text-primary transition-colors">
                                     balajikonda9046@gmail.com
                                 </a>
                             </li>
-                            <li className="text-gray-400">
-                                <span className="text-gray-500">Location:</span>{" "}
+                            <li className="text-text-tertiary">
+                                <span className="text-text-muted">Location:</span>{" "}
                                 Guntur, Andhra Pradesh, India
                             </li>
-                            <li className="text-gray-400">
-                                <span className="text-gray-500">Status:</span>{" "}
+                            <li className="text-text-tertiary">
+                                <span className="text-text-muted">Status:</span>{" "}
                                 <span className="text-green-400">Open to opportunities</span>
                             </li>
                         </ul>
@@ -91,11 +91,11 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-gray-500 text-sm">
+                <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-text-muted text-sm">
                         © {new Date().getFullYear()} Konda Balaji Rao. All rights reserved.
                     </p>
-                    <p className="text-gray-500 text-sm flex items-center gap-1">
+                    <p className="text-text-muted text-sm flex items-center gap-1">
                         Built with <Heart className="w-3 h-3 text-red-500 fill-current" /> using Next.js, Tailwind CSS & Framer Motion
                     </p>
                 </div>

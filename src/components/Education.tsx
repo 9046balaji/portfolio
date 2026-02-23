@@ -27,7 +27,7 @@ const education = [
 
 export default function Education() {
     return (
-        <section id="education" className="py-20 px-4 bg-black/50">
+        <section id="education" className="py-20 px-4 bg-section-alt">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -37,7 +37,7 @@ export default function Education() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Education</h2>
-                    <p className="text-gray-400">
+                    <p className="text-text-tertiary">
                         Academic foundation and achievements.
                     </p>
                 </motion.div>
@@ -52,17 +52,17 @@ export default function Education() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
                         >
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-background shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                                 <GraduationCap className="w-5 h-5 text-primary" />
                             </div>
 
-                            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl border border-white/10 bg-white/5 hover:border-primary/30 transition-colors">
+                            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl border border-border bg-card-bg hover:border-primary/30 transition-colors">
                                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                                    <h3 className="font-bold text-lg text-white">{edu.degree}</h3>
-                                    <span className="text-xs font-mono text-gray-400 bg-white/10 px-2 py-1 rounded">{edu.year}</span>
+                                    <h3 className="font-bold text-lg text-text-primary">{edu.degree}</h3>
+                                    <span className="text-xs font-mono text-text-tertiary bg-card-bg-hover px-2 py-1 rounded">{edu.year}</span>
                                 </div>
                                 <p className="text-primary font-medium mb-2">{edu.institution}</p>
-                                <div className="flex gap-4 text-sm text-gray-400">
+                                <div className="flex gap-4 text-sm text-text-tertiary">
                                     <span>{edu.score}</span>
                                     {edu.status && <span>• {edu.status}</span>}
                                 </div>

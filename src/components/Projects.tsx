@@ -82,7 +82,7 @@ const projects = [
 
 export default function Projects() {
     return (
-        <section id="projects" className="py-20 px-4 bg-black/50">
+        <section id="projects" className="py-20 px-4 bg-section-alt">
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ export default function Projects() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-text-tertiary max-w-2xl mx-auto">
                         A selection of systems I've architected, focusing on scalability, AI integration, and complex data processing.
                     </p>
                 </motion.div>
@@ -105,17 +105,17 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-colors group flex flex-col"
+                            className="bg-card-bg border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-colors group flex flex-col"
                         >
                             <div className="p-6 flex-grow">
                                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
                                 <p className="text-sm text-secondary font-mono mb-4">{project.tagline}</p>
 
                                 <div className="space-y-4 mb-6">
-                                    <p className="text-gray-400 text-sm leading-relaxed">
+                                    <p className="text-text-tertiary text-sm leading-relaxed">
                                         {project.description}
                                     </p>
-                                    <ul className="list-disc list-inside text-sm text-gray-500 space-y-1">
+                                    <ul className="list-disc list-inside text-sm text-text-muted space-y-1">
                                         {project.points.map((point, i) => (
                                             <li key={i}>{point}</li>
                                         ))}
@@ -126,18 +126,18 @@ export default function Projects() {
                             <div className="p-6 pt-0 mt-auto">
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tech.map((t) => (
-                                        <span key={t} className="text-xs px-2 py-1 bg-white/10 rounded-full text-gray-300">
+                                        <span key={t} className="text-xs px-2 py-1 bg-card-bg-hover rounded-full text-text-secondary">
                                             {t}
                                         </span>
                                     ))}
                                 </div>
 
                                 <div className="flex gap-4">
-                                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-text-tertiary hover:text-foreground transition-colors">
                                         <Github className="w-4 h-4" /> Code
                                     </a>
                                     {project.links.demo !== "#" && (
-                                        <a href={project.links.demo} className="flex items-center gap-2 text-sm text-primary hover:text-white transition-colors">
+                                        <a href={project.links.demo} className="flex items-center gap-2 text-sm text-primary hover:text-foreground transition-colors">
                                             <ExternalLink className="w-4 h-4" /> View Case Study
                                         </a>
                                     )}

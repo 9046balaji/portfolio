@@ -66,7 +66,7 @@ export default function Hero() {
                         & Scalable Architectures.
                     </h1>
 
-                    <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-text-tertiary max-w-2xl mx-auto leading-relaxed">
                         AI & Full Stack Engineer transforming complex data into decision-making intelligence.
                         Creator of <span className="text-secondary font-semibold">HeartGuard AI</span>.
                     </p>
@@ -80,9 +80,9 @@ export default function Hero() {
                     className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-6"
                 >
                     {stats.map((stat, index) => (
-                        <div key={index} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/30 transition-colors">
+                        <div key={index} className="p-4 rounded-xl bg-card-bg border border-border hover:border-primary/30 transition-colors">
                             <div className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</div>
-                            <div className="text-sm text-gray-400">{stat.label}</div>
+                            <div className="text-sm text-text-tertiary">{stat.label}</div>
                         </div>
                     ))}
                 </motion.div>
@@ -99,23 +99,23 @@ export default function Hero() {
                     <a
                         href="/assets/Konda_Balaji_Rao_Resume.pdf"
                         download="Konda_Balaji_Rao_Resume.pdf"
-                        className="px-8 py-3 border border-gray-700 hover:border-gray-500 hover:bg-white/5 rounded-lg font-medium transition-all flex items-center gap-2"
+                        className="px-8 py-3 border border-border hover:border-primary/30 hover:bg-card-bg rounded-lg font-medium transition-all flex items-center gap-2"
                     >
                         <FileText className="w-4 h-4" />
                         Download Resume
                     </a>
                 </div>
 
-                <div className="flex gap-6 justify-center items-center pt-8 text-gray-400">
-                    <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <div className="flex gap-6 justify-center items-center pt-8 text-text-tertiary">
+                    <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                         <Github className="w-6 h-6" />
                         <span className="sr-only">GitHub</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    <a href="https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                         <Linkedin className="w-6 h-6" />
                         <span className="sr-only">LinkedIn</span>
                     </a>
-                    <a href="https://leetcode.com/u/KBalajiRao/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    <a href="https://leetcode.com/u/KBalajiRao/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                         <Code className="w-6 h-6" />
                         <span className="sr-only">LeetCode</span>
                     </a>

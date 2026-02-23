@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
     { name: "Home", href: "#hero" },
@@ -29,7 +30,7 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-background/80 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,24 +41,28 @@ export default function Navbar() {
                         </Link>
                     </div>
 
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
+                    <div className="hidden md:flex items-center gap-1">
+                        <div className="flex items-baseline space-x-6">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                    className="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                                 >
                                     {link.name}
                                 </Link>
                             ))}
                         </div>
+                        <div className="ml-4">
+                            <ThemeToggle />
+                        </div>
                     </div>
 
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center gap-3">
+                        <ThemeToggle />
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-300 hover:text-white focus:outline-none"
+                            className="text-text-secondary hover:text-foreground focus:outline-none"
                         >
                             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                         </button>
@@ -71,7 +76,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-background/95 backdrop-blur-md border-b border-white/10 overflow-hidden"
+                        className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden"
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navLinks.map((link) => (
@@ -79,7 +84,7 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                                    className="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
                                 >
                                     {link.name}
                                 </Link>

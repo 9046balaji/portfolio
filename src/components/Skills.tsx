@@ -49,7 +49,7 @@ export default function Skills() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Arsenal</h2>
-                    <p className="text-gray-400">
+                    <p className="text-text-tertiary">
                         A comprehensive toolkit for building scalable, intelligent systems.
                     </p>
                 </motion.div>
@@ -62,14 +62,14 @@ export default function Skills() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-primary/30 transition-colors"
+                            className="bg-card-bg border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
                         >
                             <h3 className="text-xl font-bold mb-4 text-primary">{skillGroup.category}</h3>
                             <div className="flex flex-wrap gap-2">
                                 {skillGroup.items.map((item) => (
                                     <span
                                         key={item}
-                                        className="px-3 py-1 bg-white/5 rounded-md text-sm text-gray-300 border border-white/5"
+                                        className="px-3 py-1 bg-card-bg rounded-md text-sm text-text-secondary border border-border"
                                     >
                                         {item}
                                     </span>
