@@ -263,10 +263,10 @@ const allProjects = [
 ];
 
 const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
-    ml: { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-400" },
-    dl: { bg: "bg-purple-500/10", border: "border-purple-500/30", text: "text-purple-400" },
-    cv: { bg: "bg-teal-500/10", border: "border-teal-500/30", text: "text-teal-400" },
-    ip: { bg: "bg-orange-500/10", border: "border-orange-500/30", text: "text-orange-400" },
+    ml: { bg: "bg-blue-50 dark:bg-blue-500/10", border: "border-blue-200 dark:border-blue-500/30", text: "text-blue-600 dark:text-blue-400" },
+    dl: { bg: "bg-purple-50 dark:bg-purple-500/10", border: "border-purple-200 dark:border-purple-500/30", text: "text-purple-600 dark:text-purple-400" },
+    cv: { bg: "bg-teal-50 dark:bg-teal-500/10", border: "border-teal-200 dark:border-teal-500/30", text: "text-teal-600 dark:text-teal-400" },
+    ip: { bg: "bg-orange-50 dark:bg-orange-500/10", border: "border-orange-200 dark:border-orange-500/30", text: "text-orange-600 dark:text-orange-400" },
 };
 
 const categoryLabels: Record<string, string> = {
@@ -298,12 +298,12 @@ export default function MLShowcase() {
                         transition={{ duration: 0.5 }}
                         className="mb-12 text-center"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-gray-400 hover:text-primary mb-6 transition-colors">
+                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
                         </Link>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">ML & Deep Learning Showcase</h1>
-                        <p className="text-xl text-gray-400 mb-6">
+                        <p className="text-xl text-text-tertiary mb-6">
                             A comprehensive collection of Jupyter notebooks covering Machine Learning, Deep Learning,
                             Computer Vision & Image Processing fundamentals.
                         </p>
@@ -311,7 +311,7 @@ export default function MLShowcase() {
                         {/* Tech Stack */}
                         <div className="flex flex-wrap justify-center gap-2 mb-8">
                             {techStack.map((tech) => (
-                                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">
+                                <span key={tech} className="px-3 py-1 bg-card-bg border border-border rounded-full text-sm text-text-secondary">
                                     {tech}
                                 </span>
                             ))}
@@ -320,19 +320,19 @@ export default function MLShowcase() {
                         {/* Key Stats */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
                             {keyStats.map((stat, idx) => (
-                                <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                <div key={idx} className="p-4 rounded-xl bg-card-bg border border-border text-center">
                                     <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
                                     <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                                    <div className="text-xs text-gray-400">{stat.label}</div>
+                                    <div className="text-xs text-text-tertiary">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
 
                         <div className="flex justify-center gap-4">
-                            <a href="https://github.com/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Repository
                             </a>
-                            <a href="https://colab.research.google.com/github/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://colab.research.google.com/github/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-primary hover:bg-blue-700 text-text-primary rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <ExternalLink className="w-5 h-5" /> Open in Colab
                             </a>
                         </div>
@@ -345,8 +345,8 @@ export default function MLShowcase() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="mb-12"
                     >
-                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Zap className="text-yellow-400" /> Featured Projects
+                        <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                            <Zap className="text-yellow-600 dark:text-yellow-400" /> Featured Projects
                         </h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                             {featuredProjects.map((project, idx) => {
@@ -366,13 +366,13 @@ export default function MLShowcase() {
                                                 {categoryLabels[project.category]}
                                             </span>
                                         </div>
-                                        <h3 className="font-semibold text-white mb-1 group-hover:text-primary transition-colors">
+                                        <h3 className="font-semibold text-text-primary mb-1 group-hover:text-primary transition-colors">
                                             {project.name}
                                         </h3>
-                                        <p className="text-sm text-gray-400 mb-3">{project.desc}</p>
+                                        <p className="text-sm text-text-tertiary mb-3">{project.desc}</p>
                                         <div className="flex flex-wrap gap-1">
                                             {project.techniques.slice(0, 3).map((tech) => (
-                                                <span key={tech} className="px-2 py-0.5 bg-white/10 rounded text-xs text-gray-300">
+                                                <span key={tech} className="px-2 py-0.5 bg-card-bg-hover rounded text-xs text-text-secondary">
                                                     {tech}
                                                 </span>
                                             ))}
@@ -385,20 +385,20 @@ export default function MLShowcase() {
 
                     {/* Tab Navigation */}
                     <div className="mb-8 overflow-x-auto">
-                        <div className="flex gap-2 p-1 bg-white/5 rounded-xl min-w-max">
+                        <div className="flex gap-2 p-1 bg-card-bg rounded-xl min-w-max">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                            ? "bg-primary text-white"
-                                            : "text-gray-400 hover:text-white hover:bg-white/10"
+                                            ? "bg-primary text-text-primary"
+                                            : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >
                                     <tab.icon className="w-4 h-4" />
                                     {tab.label}
                                     {tab.id !== "all" && (
-                                        <span className="ml-1 px-1.5 py-0.5 bg-white/10 rounded text-xs">
+                                        <span className="ml-1 px-1.5 py-0.5 bg-card-bg-hover rounded text-xs">
                                             {allProjects.filter(p => p.category === tab.id).length}
                                         </span>
                                     )}
@@ -434,13 +434,13 @@ export default function MLShowcase() {
                                                 {categoryLabels[project.category]}
                                             </span>
                                         </div>
-                                        <h3 className="font-semibold text-white mb-1 group-hover:text-primary transition-colors">
+                                        <h3 className="font-semibold text-text-primary mb-1 group-hover:text-primary transition-colors">
                                             {project.name}
                                         </h3>
-                                        <p className="text-sm text-gray-400 mb-2">{project.desc}</p>
+                                        <p className="text-sm text-text-tertiary mb-2">{project.desc}</p>
                                         <div className="flex flex-wrap gap-1">
                                             {project.techniques.map((tech) => (
-                                                <span key={tech} className="px-2 py-0.5 bg-white/10 rounded text-xs text-gray-300">
+                                                <span key={tech} className="px-2 py-0.5 bg-card-bg-hover rounded text-xs text-text-secondary">
                                                     {tech}
                                                 </span>
                                             ))}
@@ -456,9 +456,9 @@ export default function MLShowcase() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.5 }}
-                        className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-8"
+                        className="mt-12 bg-card-bg border border-border rounded-2xl p-8"
                     >
-                        <h2 className="text-2xl font-bold text-white mb-6">Technologies Used</h2>
+                        <h2 className="text-2xl font-bold text-text-primary mb-6">Technologies Used</h2>
                         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
                             {[
                                 { category: "Languages", items: ["Python 3.x"] },
@@ -467,11 +467,11 @@ export default function MLShowcase() {
                                 { category: "Computer Vision", items: ["OpenCV", "Skimage"] },
                                 { category: "Visualization", items: ["Matplotlib", "Seaborn", "Plotly"] },
                             ].map((stack) => (
-                                <div key={stack.category} className="p-4 bg-white/5 rounded-lg">
+                                <div key={stack.category} className="p-4 bg-card-bg rounded-lg">
                                     <h3 className="font-semibold text-primary mb-2 text-sm">{stack.category}</h3>
                                     <div className="flex flex-wrap gap-1">
                                         {stack.items.map((item) => (
-                                            <span key={item} className="px-2 py-0.5 bg-white/10 rounded text-xs text-gray-300">
+                                            <span key={item} className="px-2 py-0.5 bg-card-bg-hover rounded text-xs text-text-secondary">
                                                 {item}
                                             </span>
                                         ))}

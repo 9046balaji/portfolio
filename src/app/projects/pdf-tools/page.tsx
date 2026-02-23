@@ -33,11 +33,11 @@ function OverviewTab() {
     return (
         <div className="space-y-8">
             {/* The Challenge */}
-            <section className="prose prose-invert max-w-none">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="prose dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <FileText className="text-primary" /> The Challenge
                 </h2>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-text-secondary leading-relaxed text-lg">
                     Processing large PDF files (up to 1GB) synchronously blocks the UI and frustrates users.
                     Traditional PDF tools lack proper security for sensitive documents and don&apos;t scale well
                     for enterprise use. I needed to build a system that could handle heavy compute loads
@@ -46,8 +46,8 @@ function OverviewTab() {
             </section>
 
             {/* What It Does */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Zap className="text-secondary" /> What PDF Tools Does
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -59,18 +59,18 @@ function OverviewTab() {
                         { icon: Lock, title: "Password Protection", desc: "Add open/edit passwords with AES-256" },
                         { icon: Image, title: "Add Watermarks", desc: "Text or image watermarks on documents" },
                     ].map((item, idx) => (
-                        <div key={idx} className="p-4 bg-white/5 rounded-xl border border-white/10">
+                        <div key={idx} className="p-4 bg-card-bg rounded-xl border border-border">
                             <item.icon className="w-6 h-6 text-primary mb-2" />
-                            <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-                            <p className="text-sm text-gray-400">{item.desc}</p>
+                            <h3 className="font-semibold text-text-primary mb-1">{item.title}</h3>
+                            <p className="text-sm text-text-tertiary">{item.desc}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Async Architecture */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Server className="text-secondary" /> Async Processing Architecture
                 </h2>
 
@@ -88,67 +88,67 @@ function OverviewTab() {
                                     <div className={`w-20 h-20 rounded-lg bg-${item.color}-500/20 border border-${item.color}-500/50 flex items-center justify-center mb-2`}>
                                         <span className="text-2xl">{item.emoji}</span>
                                     </div>
-                                    <div className="text-xs text-gray-400">{item.label}</div>
+                                    <div className="text-xs text-text-tertiary">{item.label}</div>
                                     <div className={`text-xs text-${item.color}-300`}>{item.sub}</div>
                                 </div>
-                                {idx < 4 && <div className="w-8 h-0.5 bg-gray-600 mx-2"></div>}
+                                {idx < 4 && <div className="w-8 h-0.5 bg-border mx-2"></div>}
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="mt-6 text-center text-gray-400 text-sm">
+                <div className="mt-6 text-center text-text-tertiary text-sm">
                     Real-time status updates via <strong className="text-primary">WebSockets</strong>
                 </div>
             </section>
 
             {/* Key Achievements */}
             <section className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                <div className="bg-card-bg border border-border rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Zap className="w-8 h-8 text-primary" />
-                        <h3 className="text-lg font-bold text-white">Performance</h3>
+                        <h3 className="text-lg font-bold text-text-primary">Performance</h3>
                     </div>
-                    <ul className="space-y-2 text-sm text-gray-400">
+                    <ul className="space-y-2 text-sm text-text-tertiary">
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span>Handles files up to <strong className="text-white">1GB</strong></span>
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Handles files up to <strong className="text-text-primary">1GB</strong></span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span>Async processing with <strong className="text-white">Celery + Redis</strong></span>
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Async processing with <strong className="text-text-primary">Celery + Redis</strong></span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span>Real-time progress via <strong className="text-white">WebSockets</strong></span>
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Real-time progress via <strong className="text-text-primary">WebSockets</strong></span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                             <span>Batch processing for multiple files</span>
                         </li>
                     </ul>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                <div className="bg-card-bg border border-border rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <Lock className="w-8 h-8 text-secondary" />
-                        <h3 className="text-lg font-bold text-white">Security</h3>
+                        <h3 className="text-lg font-bold text-text-primary">Security</h3>
                     </div>
-                    <ul className="space-y-2 text-sm text-gray-400">
+                    <ul className="space-y-2 text-sm text-text-tertiary">
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span><strong className="text-white">AES-256</strong> encryption</span>
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <span><strong className="text-text-primary">AES-256</strong> encryption</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                             <span>Password protection for PDFs</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                             <span>JWT authentication</span>
                         </li>
                         <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                             <span>Rate limiting protection</span>
                         </li>
                     </ul>
@@ -163,17 +163,17 @@ function FeaturesTab() {
     return (
         <div className="space-y-8">
             {/* Conversion Features */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <RefreshCw className="text-blue-400" /> PDF Conversion
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <RefreshCw className="text-blue-600 dark:text-blue-400" /> PDF Conversion
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
                         <h3 className="text-lg font-semibold text-primary mb-3">From PDF To</h3>
                         <div className="space-y-2">
                             {["Word (DOCX)", "Excel (XLSX)", "PowerPoint (PPTX)", "HTML", "Images (PNG, JPG)", "Plain Text"].map((format) => (
-                                <div key={format} className="flex items-center gap-2 text-gray-300">
-                                    <CheckCircle className="w-4 h-4 text-green-400" />
+                                <div key={format} className="flex items-center gap-2 text-text-secondary">
+                                    <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                                     <span>{format}</span>
                                 </div>
                             ))}
@@ -183,8 +183,8 @@ function FeaturesTab() {
                         <h3 className="text-lg font-semibold text-primary mb-3">To PDF From</h3>
                         <div className="space-y-2">
                             {["Word (DOCX)", "Excel (XLSX)", "PowerPoint (PPTX)", "HTML", "Images", "Jupyter Notebooks"].map((format) => (
-                                <div key={format} className="flex items-center gap-2 text-gray-300">
-                                    <CheckCircle className="w-4 h-4 text-green-400" />
+                                <div key={format} className="flex items-center gap-2 text-text-secondary">
+                                    <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                                     <span>{format}</span>
                                 </div>
                             ))}
@@ -194,9 +194,9 @@ function FeaturesTab() {
             </section>
 
             {/* Editing Features */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Scissors className="text-purple-400" /> PDF Editing & Processing
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Scissors className="text-purple-600 dark:text-purple-400" /> PDF Editing & Processing
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {[
@@ -209,19 +209,19 @@ function FeaturesTab() {
                         { icon: Image, name: "Extract Images", desc: "Save all images" },
                         { icon: Settings, name: "Repair PDF", desc: "Fix corrupted files" },
                     ].map((feature) => (
-                        <div key={feature.name} className="p-4 bg-white/5 rounded-lg border border-white/10">
-                            <feature.icon className="w-5 h-5 text-purple-400 mb-2" />
-                            <h3 className="font-semibold text-white text-sm mb-1">{feature.name}</h3>
-                            <p className="text-xs text-gray-400">{feature.desc}</p>
+                        <div key={feature.name} className="p-4 bg-card-bg rounded-lg border border-border">
+                            <feature.icon className="w-5 h-5 text-purple-600 dark:text-purple-400 mb-2" />
+                            <h3 className="font-semibold text-text-primary text-sm mb-1">{feature.name}</h3>
+                            <p className="text-xs text-text-tertiary">{feature.desc}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Security Features */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Lock className="text-red-400" /> PDF Security
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Lock className="text-red-600 dark:text-red-400" /> PDF Security
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
@@ -231,19 +231,19 @@ function FeaturesTab() {
                         { icon: FileText, name: "Digital Signatures", desc: "Add signature stamps" },
                         { icon: Shield, name: "AES-256 Encryption", desc: "Secure PDFs with encryption" },
                     ].map((feature) => (
-                        <div key={feature.name} className="p-4 bg-red-500/10 rounded-lg border border-red-500/30">
-                            <feature.icon className="w-5 h-5 text-red-400 mb-2" />
-                            <h3 className="font-semibold text-white text-sm mb-1">{feature.name}</h3>
-                            <p className="text-xs text-gray-400">{feature.desc}</p>
+                        <div key={feature.name} className="p-4 bg-red-50 dark:bg-red-500/10 rounded-lg border border-red-200 dark:border-red-500/30">
+                            <feature.icon className="w-5 h-5 text-red-600 dark:text-red-400 mb-2" />
+                            <h3 className="font-semibold text-text-primary text-sm mb-1">{feature.name}</h3>
+                            <p className="text-xs text-text-tertiary">{feature.desc}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* OCR & Advanced */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Eye className="text-teal-400" /> OCR & Advanced Features
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Eye className="text-teal-600 dark:text-teal-400" /> OCR & Advanced Features
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {[
@@ -252,12 +252,12 @@ function FeaturesTab() {
                         { icon: Zap, name: "Progress Tracking", desc: "Monitor conversion progress in real-time" },
                         { icon: Server, name: "Background Tasks", desc: "Long operations run asynchronously with Celery" },
                     ].map((feature) => (
-                        <div key={feature.name} className="p-4 bg-teal-500/10 rounded-lg border border-teal-500/30">
+                        <div key={feature.name} className="p-4 bg-teal-50 dark:bg-teal-500/10 rounded-lg border border-teal-200 dark:border-teal-500/30">
                             <div className="flex items-center gap-3">
-                                <feature.icon className="w-6 h-6 text-teal-400" />
+                                <feature.icon className="w-6 h-6 text-teal-600 dark:text-teal-400" />
                                 <div>
-                                    <h3 className="font-semibold text-white">{feature.name}</h3>
-                                    <p className="text-sm text-gray-400">{feature.desc}</p>
+                                    <h3 className="font-semibold text-text-primary">{feature.name}</h3>
+                                    <p className="text-sm text-text-tertiary">{feature.desc}</p>
                                 </div>
                             </div>
                         </div>
@@ -307,25 +307,25 @@ function APITab() {
             <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                     <thead>
-                        <tr className="border-b border-white/10">
-                            <th className="text-left py-2 px-3 text-gray-400 font-medium">Method</th>
-                            <th className="text-left py-2 px-3 text-gray-400 font-medium">Endpoint</th>
-                            <th className="text-left py-2 px-3 text-gray-400 font-medium">Description</th>
+                        <tr className="border-b border-border">
+                            <th className="text-left py-2 px-3 text-text-tertiary font-medium">Method</th>
+                            <th className="text-left py-2 px-3 text-text-tertiary font-medium">Endpoint</th>
+                            <th className="text-left py-2 px-3 text-text-tertiary font-medium">Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         {endpoints.map((api, idx) => (
-                            <tr key={idx} className="border-b border-white/5 hover:bg-white/5">
+                            <tr key={idx} className="border-b border-white/5 hover:bg-card-bg">
                                 <td className="py-2 px-3">
-                                    <span className={`px-2 py-0.5 rounded text-xs font-mono ${api.method === "GET" ? "bg-green-500/20 text-green-300" :
-                                            api.method === "POST" ? "bg-blue-500/20 text-blue-300" :
-                                                "bg-yellow-500/20 text-yellow-300"
+                                    <span className={`px-2 py-0.5 rounded text-xs font-mono ${api.method === "GET" ? "bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-300" :
+                                            api.method === "POST" ? "bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300" :
+                                                "bg-yellow-100 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-300"
                                         }`}>
                                         {api.method}
                                     </span>
                                 </td>
-                                <td className="py-2 px-3 font-mono text-gray-300 text-xs">{api.endpoint}</td>
-                                <td className="py-2 px-3 text-gray-400">{api.desc}</td>
+                                <td className="py-2 px-3 font-mono text-text-secondary text-xs">{api.endpoint}</td>
+                                <td className="py-2 px-3 text-text-tertiary">{api.desc}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -337,32 +337,32 @@ function APITab() {
     return (
         <div className="space-y-8">
             {/* Interactive Docs */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Globe className="text-primary" /> Interactive API Documentation
                 </h2>
-                <p className="text-gray-400 mb-4">
+                <p className="text-text-tertiary mb-4">
                     Once the application is running, access the interactive API documentation:
                 </p>
                 <div className="grid md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                        <h3 className="font-semibold text-blue-300 mb-1">Swagger UI</h3>
-                        <code className="text-xs text-gray-400">http://localhost:5000/docs</code>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg">
+                        <h3 className="font-semibold text-blue-600 dark:text-blue-300 mb-1">Swagger UI</h3>
+                        <code className="text-xs text-text-tertiary">http://localhost:5000/docs</code>
                     </div>
-                    <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-                        <h3 className="font-semibold text-purple-300 mb-1">ReDoc</h3>
-                        <code className="text-xs text-gray-400">http://localhost:5000/redoc</code>
+                    <div className="p-4 bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/30 rounded-lg">
+                        <h3 className="font-semibold text-purple-600 dark:text-purple-300 mb-1">ReDoc</h3>
+                        <code className="text-xs text-text-tertiary">http://localhost:5000/redoc</code>
                     </div>
-                    <div className="p-4 bg-teal-500/10 border border-teal-500/30 rounded-lg">
-                        <h3 className="font-semibold text-teal-300 mb-1">OpenAPI JSON</h3>
-                        <code className="text-xs text-gray-400">http://localhost:5000/openapi.json</code>
+                    <div className="p-4 bg-teal-50 dark:bg-teal-500/10 border border-teal-200 dark:border-teal-500/30 rounded-lg">
+                        <h3 className="font-semibold text-teal-600 dark:text-teal-300 mb-1">OpenAPI JSON</h3>
+                        <code className="text-xs text-text-tertiary">http://localhost:5000/openapi.json</code>
                     </div>
                 </div>
             </section>
 
             {/* Endpoint Tables */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Code className="text-secondary" /> API Endpoints
                 </h2>
                 {renderEndpointTable(conversionEndpoints, "Conversion Endpoints")}
@@ -372,23 +372,23 @@ function APITab() {
             </section>
 
             {/* Example Usage */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Terminal className="text-orange-400" /> Example Usage
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Terminal className="text-orange-600 dark:text-orange-400" /> Example Usage
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
                         <h3 className="text-sm font-semibold text-primary mb-2">Convert PDF to Word</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300 overflow-x-auto">
-                            <div className="text-green-400">curl -X POST http://localhost:5000/api/pdf/convert-to-word \</div>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary overflow-x-auto">
+                            <div className="text-green-600 dark:text-green-400">curl -X POST http://localhost:5000/api/pdf/convert-to-word \</div>
                             <div className="pl-4">-F &quot;file=@document.pdf&quot; \</div>
                             <div className="pl-4">-H &quot;Content-Type: multipart/form-data&quot;</div>
                         </div>
                     </div>
                     <div>
                         <h3 className="text-sm font-semibold text-primary mb-2">Merge Multiple PDFs</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300 overflow-x-auto">
-                            <div className="text-green-400">curl -X POST http://localhost:5000/api/pdf/merge \</div>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary overflow-x-auto">
+                            <div className="text-green-600 dark:text-green-400">curl -X POST http://localhost:5000/api/pdf/merge \</div>
                             <div className="pl-4">-F &quot;files=@file1.pdf&quot; \</div>
                             <div className="pl-4">-F &quot;files=@file2.pdf&quot;</div>
                         </div>
@@ -397,12 +397,12 @@ function APITab() {
             </section>
 
             {/* Response Format */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Response Format</h2>
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6">Response Format</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                        <h3 className="text-sm font-semibold text-green-400 mb-2">Success Response</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300">
+                        <h3 className="text-sm font-semibold text-green-600 dark:text-green-400 mb-2">Success Response</h3>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary">
                             <pre>{`{
   "status": "success",
   "message": "Operation completed",
@@ -416,8 +416,8 @@ function APITab() {
                         </div>
                     </div>
                     <div>
-                        <h3 className="text-sm font-semibold text-red-400 mb-2">Error Response</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300">
+                        <h3 className="text-sm font-semibold text-red-600 dark:text-red-400 mb-2">Error Response</h3>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary">
                             <pre>{`{
   "status": "error",
   "message": "Invalid PDF file",
@@ -439,11 +439,11 @@ function ArchitectureTab() {
     return (
         <div className="space-y-8">
             {/* System Architecture Flow */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <FolderTree className="text-primary" /> System Architecture Flow
                 </h2>
-                <p className="text-gray-400 mb-6">
+                <p className="text-text-tertiary mb-6">
                     A dual-interface architecture with Flask web UI and FastAPI REST endpoints, 
                     backed by Celery workers for async processing and PostgreSQL for persistence.
                 </p>
@@ -451,63 +451,63 @@ function ArchitectureTab() {
                 {/* Flow Diagram */}
                 <div className="flex flex-col items-center space-y-4 font-mono text-sm">
                     {/* CLIENTS */}
-                    <div className="px-6 py-3 bg-gray-700 rounded-lg text-white">CLIENTS (Browser / API)</div>
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="px-6 py-3 bg-card-bg-hover rounded-lg text-text-primary">CLIENTS (Browser / API)</div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* Dual Interface */}
                     <div className="grid grid-cols-2 gap-8 w-full max-w-2xl">
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-blue-500"></div>
-                            <div className="px-4 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 text-center w-full">
+                            <div className="px-4 py-3 bg-blue-100 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300 text-center w-full">
                                 <div className="font-bold mb-1">🌐 Flask App</div>
-                                <div className="text-xs text-gray-400">Web UI</div>
-                                <div className="text-xs text-gray-400">HTML Templates</div>
+                                <div className="text-xs text-text-tertiary">Web UI</div>
+                                <div className="text-xs text-text-tertiary">HTML Templates</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-purple-500"></div>
-                            <div className="px-4 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 text-center w-full">
+                            <div className="px-4 py-3 bg-purple-100 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/50 rounded-lg text-purple-600 dark:text-purple-300 text-center w-full">
                                 <div className="font-bold mb-1">⚡ FastAPI</div>
-                                <div className="text-xs text-gray-400">REST API</div>
-                                <div className="text-xs text-gray-400">Swagger Docs</div>
+                                <div className="text-xs text-text-tertiary">REST API</div>
+                                <div className="text-xs text-text-tertiary">Swagger Docs</div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* Feature Manager */}
-                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl text-center">
+                    <div className="px-6 py-3 bg-teal-100 dark:bg-teal-500/20 border border-teal-300 dark:border-teal-500/50 rounded-lg text-teal-600 dark:text-teal-300 w-full max-w-2xl text-center">
                         <div className="font-bold">🎯 FEATURE MANAGER (Blueprints)</div>
-                        <div className="text-xs text-gray-400 mt-1">Routes organized into modular blueprints</div>
+                        <div className="text-xs text-text-tertiary mt-1">Routes organized into modular blueprints</div>
                     </div>
 
                     {/* Branches */}
                     <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-orange-500"></div>
-                            <div className="px-3 py-2 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 text-xs text-center">
+                            <div className="px-3 py-2 bg-orange-100 dark:bg-orange-500/20 border border-orange-300 dark:border-orange-500/50 rounded-lg text-orange-600 dark:text-orange-300 text-xs text-center">
                                 PDF Processing<br />Features
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-green-500"></div>
-                            <div className="px-3 py-2 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-xs text-center">
+                            <div className="px-3 py-2 bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300 text-xs text-center">
                                 Auth & User<br />Features
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-cyan-500"></div>
-                            <div className="px-3 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-300 text-xs text-center">
+                            <div className="px-3 py-2 bg-cyan-100 dark:bg-cyan-500/20 border border-cyan-300 dark:border-cyan-500/50 rounded-lg text-cyan-600 dark:text-cyan-300 text-xs text-center">
                                 File Management<br />Features
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* PDF Processor */}
-                    <div className="px-6 py-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-yellow-100 dark:bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-600 dark:text-yellow-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">📄 PDF PROCESSOR (Mixin Classes)</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["Edit (merge/split)", "Security (encrypt)", "Transform (rotate)", "Convert (formats)", "OCR (Tesseract)"].map(m => (
@@ -516,29 +516,29 @@ function ArchitectureTab() {
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* Data Layer */}
                     <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-red-500"></div>
-                            <div className="px-4 py-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-center w-full">
+                            <div className="px-4 py-3 bg-red-100 dark:bg-red-500/20 border border-red-300 dark:border-red-500/50 rounded-lg text-red-600 dark:text-red-300 text-center w-full">
                                 <div className="font-bold mb-1">🔄 Celery + Redis</div>
-                                <div className="text-xs text-gray-400">Async Tasks</div>
+                                <div className="text-xs text-text-tertiary">Async Tasks</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-blue-500"></div>
-                            <div className="px-4 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 text-center w-full">
+                            <div className="px-4 py-3 bg-blue-100 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300 text-center w-full">
                                 <div className="font-bold mb-1">🗄️ PostgreSQL</div>
-                                <div className="text-xs text-gray-400">User Data</div>
+                                <div className="text-xs text-text-tertiary">User Data</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-green-500"></div>
-                            <div className="px-4 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-center w-full">
+                            <div className="px-4 py-3 bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300 text-center w-full">
                                 <div className="font-bold mb-1">📁 File System</div>
-                                <div className="text-xs text-gray-400">PDF Storage</div>
+                                <div className="text-xs text-text-tertiary">PDF Storage</div>
                             </div>
                         </div>
                     </div>
@@ -546,8 +546,8 @@ function ArchitectureTab() {
             </section>
 
             {/* Processing Modules */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Cpu className="text-secondary" /> PDF Processing Modules
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -562,17 +562,17 @@ function ArchitectureTab() {
                         { name: "pdf_compare", desc: "Diff Two PDFs", color: "cyan" },
                     ].map((module) => (
                         <div key={module.name} className={`p-4 rounded-xl bg-${module.color}-500/10 border border-${module.color}-500/30`}>
-                            <div className="font-mono text-sm text-white font-semibold mb-1">{module.name}</div>
-                            <div className="text-xs text-gray-400">{module.desc}</div>
+                            <div className="font-mono text-sm text-text-primary font-semibold mb-1">{module.name}</div>
+                            <div className="text-xs text-text-tertiary">{module.desc}</div>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Async Processing Flow */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <RefreshCw className="text-red-400" /> Async Processing Flow
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <RefreshCw className="text-red-600 dark:text-red-400" /> Async Processing Flow
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
                     {[
@@ -584,16 +584,16 @@ function ArchitectureTab() {
                     ].map((flow) => (
                         <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
                             <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
-                            <div className="text-xs text-white font-medium">{flow.name}</div>
-                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                            <div className="text-xs text-text-primary font-medium">{flow.name}</div>
+                            <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Tech Stack Details */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Cpu className="text-secondary" /> Technology Stack
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -605,11 +605,11 @@ function ArchitectureTab() {
                         { category: "Conversion", items: ["pdf2docx", "python-docx", "python-pptx", "openpyxl"] },
                         { category: "OCR", items: ["Tesseract", "ocrmypdf"] },
                     ].map((stack) => (
-                        <div key={stack.category} className="p-4 bg-white/5 rounded-lg border border-white/10">
+                        <div key={stack.category} className="p-4 bg-card-bg rounded-lg border border-border">
                             <h3 className="font-semibold text-primary mb-2">{stack.category}</h3>
                             <div className="flex flex-wrap gap-1">
                                 {stack.items.map((item) => (
-                                    <span key={item} className="px-2 py-0.5 bg-white/10 rounded text-xs text-gray-300">{item}</span>
+                                    <span key={item} className="px-2 py-0.5 bg-card-bg-hover rounded text-xs text-text-secondary">{item}</span>
                                 ))}
                             </div>
                         </div>
@@ -625,18 +625,18 @@ function ConfigTab() {
     return (
         <div className="space-y-8">
             {/* Environment Variables */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Settings className="text-primary" /> Environment Variables
                 </h2>
 
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                        <h3 className="text-lg font-semibold text-red-400 mb-3">Required Settings</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300">
-                            <div className="text-gray-500"># Security - CHANGE IN PRODUCTION!</div>
+                        <h3 className="text-lg font-semibold text-red-600 dark:text-red-400 mb-3">Required Settings</h3>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary">
+                            <div className="text-text-muted"># Security - CHANGE IN PRODUCTION!</div>
                             <div>SECRET_KEY=your-secret-key</div>
-                            <div className="mt-2 text-gray-500"># Database Connection</div>
+                            <div className="mt-2 text-text-muted"># Database Connection</div>
                             <div>DB_HOST=localhost</div>
                             <div>DB_PORT=5432</div>
                             <div>DB_USER=postgres</div>
@@ -645,15 +645,15 @@ function ConfigTab() {
                         </div>
                     </div>
                     <div>
-                        <h3 className="text-lg font-semibold text-blue-400 mb-3">Optional Settings</h3>
-                        <div className="bg-black/50 p-4 rounded-lg font-mono text-xs text-gray-300">
-                            <div className="text-gray-500"># Application Mode</div>
+                        <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3">Optional Settings</h3>
+                        <div className="bg-section-alt p-4 rounded-lg font-mono text-xs text-text-secondary">
+                            <div className="text-text-muted"># Application Mode</div>
                             <div>FLASK_ENV=development</div>
                             <div>FLASK_DEBUG=1</div>
-                            <div className="mt-2 text-gray-500"># File Handling</div>
+                            <div className="mt-2 text-text-muted"># File Handling</div>
                             <div>UPLOAD_FOLDER=uploads</div>
                             <div>MAX_CONTENT_LENGTH=1073741824</div>
-                            <div className="mt-2 text-gray-500"># Redis</div>
+                            <div className="mt-2 text-text-muted"># Redis</div>
                             <div>REDIS_URL=redis://localhost:6379/0</div>
                         </div>
                     </div>
@@ -661,8 +661,8 @@ function ConfigTab() {
             </section>
 
             {/* Quick Start */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Terminal className="text-secondary" /> Quick Start (5 Minutes)
                 </h2>
                 <div className="space-y-4">
@@ -678,8 +678,8 @@ function ConfigTab() {
                                 <span className="text-primary font-bold text-sm">{item.step}</span>
                             </div>
                             <div className="flex-1">
-                                <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-                                <code className="text-xs text-gray-400 bg-black/30 px-2 py-1 rounded">{item.cmd}</code>
+                                <h3 className="font-semibold text-text-primary mb-1">{item.title}</h3>
+                                <code className="text-xs text-text-tertiary bg-surface/50 px-2 py-1 rounded">{item.cmd}</code>
                             </div>
                         </div>
                     ))}
@@ -687,15 +687,15 @@ function ConfigTab() {
             </section>
 
             {/* System Requirements */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">System Requirements</h2>
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6">System Requirements</h2>
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className="border-b border-white/10">
-                                <th className="text-left py-2 px-4 text-gray-400">Component</th>
-                                <th className="text-left py-2 px-4 text-gray-400">Minimum</th>
-                                <th className="text-left py-2 px-4 text-gray-400">Recommended</th>
+                            <tr className="border-b border-border">
+                                <th className="text-left py-2 px-4 text-text-tertiary">Component</th>
+                                <th className="text-left py-2 px-4 text-text-tertiary">Minimum</th>
+                                <th className="text-left py-2 px-4 text-text-tertiary">Recommended</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -706,9 +706,9 @@ function ConfigTab() {
                                 { component: "Disk Space", min: "500 MB", rec: "2 GB+" },
                             ].map((row) => (
                                 <tr key={row.component} className="border-b border-white/5">
-                                    <td className="py-2 px-4 text-white font-medium">{row.component}</td>
-                                    <td className="py-2 px-4 text-gray-400">{row.min}</td>
-                                    <td className="py-2 px-4 text-green-400">{row.rec}</td>
+                                    <td className="py-2 px-4 text-text-primary font-medium">{row.component}</td>
+                                    <td className="py-2 px-4 text-text-tertiary">{row.min}</td>
+                                    <td className="py-2 px-4 text-green-600 dark:text-green-400">{row.rec}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -746,7 +746,7 @@ export default function PDFToolsCaseStudy() {
                         transition={{ duration: 0.5 }}
                         className="mb-12"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-gray-400 hover:text-primary mb-6 transition-colors">
+                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
                         </Link>
 
@@ -755,7 +755,7 @@ export default function PDFToolsCaseStudy() {
 
                         <div className="flex flex-wrap gap-3 mb-8">
                             {techStack.map((tech) => (
-                                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">
+                                <span key={tech} className="px-3 py-1 bg-card-bg border border-border rounded-full text-sm text-text-secondary">
                                     {tech}
                                 </span>
                             ))}
@@ -764,16 +764,16 @@ export default function PDFToolsCaseStudy() {
                         {/* Key Stats */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                             {keyStats.map((stat, idx) => (
-                                <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                <div key={idx} className="p-4 rounded-xl bg-card-bg border border-border text-center">
                                     <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
                                     <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                                    <div className="text-xs text-gray-400">{stat.label}</div>
+                                    <div className="text-xs text-text-tertiary">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://github.com/9046balaji/Pdf-Tools" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/Pdf-Tools" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
@@ -781,14 +781,14 @@ export default function PDFToolsCaseStudy() {
 
                     {/* Tab Navigation */}
                     <div className="mb-8 overflow-x-auto">
-                        <div className="flex gap-2 p-1 bg-white/5 rounded-xl min-w-max">
+                        <div className="flex gap-2 p-1 bg-card-bg rounded-xl min-w-max">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                            ? "bg-primary text-white"
-                                            : "text-gray-400 hover:text-white hover:bg-white/10"
+                                            ? "bg-primary text-text-primary"
+                                            : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >
                                     <tab.icon className="w-4 h-4" />

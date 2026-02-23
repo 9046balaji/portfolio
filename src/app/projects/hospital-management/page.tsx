@@ -33,11 +33,11 @@ function OverviewTab() {
     return (
         <div className="space-y-8">
             {/* The Challenge */}
-            <section className="prose prose-invert max-w-none">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="prose dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <ClipboardList className="text-primary" /> The Challenge
                 </h2>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-text-secondary leading-relaxed text-lg">
                     Hospitals need efficient systems to manage the complex relationships between patients, doctors,
                     departments, and appointments. Manual scheduling leads to double-bookings, missed appointments,
                     and poor patient experience. This system provides a centralized solution for healthcare administration.
@@ -45,11 +45,11 @@ function OverviewTab() {
             </section>
 
             {/* Architecture Flow Diagram */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Server className="text-secondary" /> System Architecture Flow
                 </h2>
-                <p className="text-gray-400 mb-6">
+                <p className="text-text-tertiary mb-6">
                     A layered architecture with Express.js server handling API routes, middleware for security,
                     models for data access, and PostgreSQL for persistence.
                 </p>
@@ -57,31 +57,31 @@ function OverviewTab() {
                 {/* Flow Diagram */}
                 <div className="flex flex-col items-center space-y-4 font-mono text-sm">
                     {/* CLIENT LAYER */}
-                    <div className="px-6 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-blue-100 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🌐 CLIENT LAYER (Web Browser)</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["HTML", "CSS", "JavaScript", "Bootstrap 5"].map(t => (
-                                <span key={t} className="px-2 py-1 bg-blue-500/30 rounded text-xs">{t}</span>
+                                <span key={t} className="px-2 py-1 bg-blue-200 dark:bg-blue-500/30 rounded text-xs">{t}</span>
                             ))}
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
-                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">HTTP/HTTPS</span>
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <div className="w-0.5 h-6 bg-border"></div>
+                        <span className="text-xs text-text-muted bg-surface px-2 py-1 rounded">HTTP/HTTPS</span>
+                        <div className="w-0.5 h-6 bg-border"></div>
                     </div>
 
                     {/* SERVER LAYER */}
-                    <div className="px-6 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-purple-100 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/50 rounded-lg text-purple-600 dark:text-purple-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">⚡ SERVER LAYER (Node.js)</div>
-                        <div className="text-xs text-gray-400 text-center mb-2">Express.js Server (server.js)</div>
+                        <div className="text-xs text-text-tertiary text-center mb-2">Express.js Server (server.js)</div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* MIDDLEWARE */}
-                    <div className="px-6 py-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-yellow-100 dark:bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-600 dark:text-yellow-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🛡️ MIDDLEWARE LAYER</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["Helmet Security", "CORS Policy", "Rate Limiter", "JWT Verify", "Auth Middleware"].map(m => (
@@ -90,10 +90,10 @@ function OverviewTab() {
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* API ROUTES */}
-                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-teal-100 dark:bg-teal-500/20 border border-teal-300 dark:border-teal-500/50 rounded-lg text-teal-600 dark:text-teal-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🔀 API ROUTES</div>
                         <div className="grid grid-cols-5 gap-2">
                             {["/api/departments", "/api/patients", "/api/doctors", "/api/appointments", "/api/auth"].map(route => (
@@ -102,10 +102,10 @@ function OverviewTab() {
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* MODELS */}
-                    <div className="px-6 py-3 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-orange-100 dark:bg-orange-500/20 border border-orange-300 dark:border-orange-500/50 rounded-lg text-orange-600 dark:text-orange-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">📦 MODELS LAYER</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["Department Model", "Patient Model", "Doctor Model", "Appointment Model", "User Model"].map(m => (
@@ -115,13 +115,13 @@ function OverviewTab() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
-                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">SQL Queries</span>
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <div className="w-0.5 h-6 bg-border"></div>
+                        <span className="text-xs text-text-muted bg-surface px-2 py-1 rounded">SQL Queries</span>
+                        <div className="w-0.5 h-6 bg-border"></div>
                     </div>
 
                     {/* DATABASE */}
-                    <div className="px-6 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🗄️ DATABASE LAYER (PostgreSQL)</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["departments", "patients", "doctors", "appointments", "users"].map(t => (
@@ -133,8 +133,8 @@ function OverviewTab() {
             </section>
 
             {/* Data Flow */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Activity className="text-primary" /> Request Data Flow
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
@@ -147,41 +147,41 @@ function OverviewTab() {
                     ].map((flow) => (
                         <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
                             <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
-                            <div className="text-xs text-white font-medium">{flow.name}</div>
-                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                            <div className="text-xs text-text-primary font-medium">{flow.name}</div>
+                            <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Key Achievements */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Shield className="text-green-500" /> Key Achievements
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
                         <div className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm">Optimized scheduling logic in PostgreSQL to <strong className="text-white">prevent double-booking conflicts</strong></p>
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-text-secondary text-sm">Optimized scheduling logic in PostgreSQL to <strong className="text-text-primary">prevent double-booking conflicts</strong></p>
                         </div>
                         <div className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm">Implemented <strong className="text-white">Role-Based Access Control (RBAC)</strong> for doctors, patients, and admins</p>
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-text-secondary text-sm">Implemented <strong className="text-text-primary">Role-Based Access Control (RBAC)</strong> for doctors, patients, and admins</p>
                         </div>
                         <div className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm">Built secure authentication with <strong className="text-white">JWT tokens</strong> and password hashing</p>
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-text-secondary text-sm">Built secure authentication with <strong className="text-text-primary">JWT tokens</strong> and password hashing</p>
                         </div>
                     </div>
                     <div className="space-y-3">
                         <div className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm">Created RESTful API with proper <strong className="text-white">CRUD operations</strong> for all entities</p>
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-text-secondary text-sm">Created RESTful API with proper <strong className="text-text-primary">CRUD operations</strong> for all entities</p>
                         </div>
                         <div className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-300 text-sm">Added <strong className="text-white">rate limiting</strong> and security headers for production readiness</p>
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                            <p className="text-text-secondary text-sm">Added <strong className="text-text-primary">rate limiting</strong> and security headers for production readiness</p>
                         </div>
                     </div>
                 </div>
@@ -221,15 +221,15 @@ function FeaturesTab() {
                         features: ["Resource allocation", "Staff management", "Service catalog"]
                     }
                 ].map((feature, idx) => (
-                    <div key={idx} className="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-primary/30 transition-colors">
+                    <div key={idx} className="p-6 bg-card-bg border border-border rounded-xl hover:border-primary/30 transition-colors">
                         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                             <feature.icon className="w-6 h-6 text-primary" />
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                        <p className="text-gray-400 text-sm mb-4">{feature.desc}</p>
+                        <h3 className="text-lg font-bold text-text-primary mb-2">{feature.title}</h3>
+                        <p className="text-text-tertiary text-sm mb-4">{feature.desc}</p>
                         <div className="flex flex-wrap gap-2">
                             {feature.features.map((f, i) => (
-                                <span key={i} className="px-2 py-1 bg-white/5 rounded text-xs text-gray-500">{f}</span>
+                                <span key={i} className="px-2 py-1 bg-card-bg rounded text-xs text-text-muted">{f}</span>
                             ))}
                         </div>
                     </div>
@@ -237,22 +237,22 @@ function FeaturesTab() {
             </section>
 
             {/* Dashboard Preview */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <LayoutDashboard className="text-secondary" /> Admin Dashboard
                 </h2>
                 <div className="grid md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
-                        <div className="text-3xl font-bold text-blue-400 mb-1">124</div>
-                        <div className="text-sm text-gray-400">Total Patients</div>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">124</div>
+                        <div className="text-sm text-text-tertiary">Total Patients</div>
                     </div>
-                    <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl text-center">
-                        <div className="text-3xl font-bold text-purple-400 mb-1">45</div>
-                        <div className="text-sm text-gray-400">Active Doctors</div>
+                    <div className="p-4 bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/30 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">45</div>
+                        <div className="text-sm text-text-tertiary">Active Doctors</div>
                     </div>
-                    <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl text-center">
-                        <div className="text-3xl font-bold text-green-400 mb-1">28</div>
-                        <div className="text-sm text-gray-400">Today's Appointments</div>
+                    <div className="p-4 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">28</div>
+                        <div className="text-sm text-text-tertiary">Today's Appointments</div>
                     </div>
                 </div>
             </section>
@@ -279,33 +279,33 @@ function APITab() {
 
     return (
         <div className="space-y-8">
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Server className="text-primary" /> REST API Endpoints
                 </h2>
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className="border-b border-white/10">
-                                <th className="text-left py-3 px-4 text-gray-400 font-medium">Method</th>
-                                <th className="text-left py-3 px-4 text-gray-400 font-medium">Endpoint</th>
-                                <th className="text-left py-3 px-4 text-gray-400 font-medium">Description</th>
+                            <tr className="border-b border-border">
+                                <th className="text-left py-3 px-4 text-text-tertiary font-medium">Method</th>
+                                <th className="text-left py-3 px-4 text-text-tertiary font-medium">Endpoint</th>
+                                <th className="text-left py-3 px-4 text-text-tertiary font-medium">Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             {endpoints.map((api, index) => (
-                                <tr key={index} className="border-b border-white/5 hover:bg-white/5">
+                                <tr key={index} className="border-b border-white/5 hover:bg-card-bg">
                                     <td className="py-3 px-4">
-                                        <span className={`px-2 py-1 rounded text-xs font-mono font-bold ${api.method === "GET" ? "bg-green-500/20 text-green-300" :
-                                            api.method === "POST" ? "bg-blue-500/20 text-blue-300" :
-                                                api.method === "PUT" ? "bg-yellow-500/20 text-yellow-300" :
-                                                    "bg-red-500/20 text-red-300"
+                                        <span className={`px-2 py-1 rounded text-xs font-mono font-bold ${api.method === "GET" ? "bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-300" :
+                                            api.method === "POST" ? "bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300" :
+                                                api.method === "PUT" ? "bg-yellow-100 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-300" :
+                                                    "bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-300"
                                             }`}>
                                             {api.method}
                                         </span>
                                     </td>
-                                    <td className="py-3 px-4 font-mono text-gray-300">{api.path}</td>
-                                    <td className="py-3 px-4 text-gray-400">{api.desc}</td>
+                                    <td className="py-3 px-4 font-mono text-text-secondary">{api.path}</td>
+                                    <td className="py-3 px-4 text-text-tertiary">{api.desc}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -314,16 +314,16 @@ function APITab() {
             </section>
 
             {/* Example Request */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Terminal className="text-secondary" /> Example Request
                 </h2>
-                <div className="bg-black/50 p-4 rounded-lg font-mono text-sm text-gray-300">
-                    <div className="text-gray-500">// Schedule a new appointment</div>
-                    <div className="text-blue-400">POST /api/appointments</div>
-                    <div className="text-yellow-400">Content-Type: application/json</div>
-                    <div className="text-purple-400">Authorization: Bearer &lt;token&gt;</div>
-                    <div className="mt-2 text-white">{`{
+                <div className="bg-section-alt p-4 rounded-lg font-mono text-sm text-text-secondary">
+                    <div className="text-text-muted">// Schedule a new appointment</div>
+                    <div className="text-blue-600 dark:text-blue-400">POST /api/appointments</div>
+                    <div className="text-yellow-600 dark:text-yellow-400">Content-Type: application/json</div>
+                    <div className="text-purple-600 dark:text-purple-400">Authorization: Bearer &lt;token&gt;</div>
+                    <div className="mt-2 text-text-primary">{`{
   "patient_id": 123,
   "doctor_id": 45,
   "date": "2024-03-20",
@@ -348,21 +348,21 @@ function DatabaseTab() {
 
     return (
         <div className="space-y-8">
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Database className="text-secondary" /> PostgreSQL Schema
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {tables.map((table, idx) => (
-                        <div key={idx} className="p-4 bg-black/30 border border-white/5 rounded-xl">
+                        <div key={idx} className="p-4 bg-surface/50 border border-white/5 rounded-xl">
                             <div className="flex items-center gap-2 mb-2">
-                                <Database className="w-4 h-4 text-blue-400" />
+                                <Database className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                                 <span className="font-mono text-primary font-semibold">{table.name}</span>
                             </div>
-                            <p className="text-xs text-gray-400 mb-3">{table.purpose}</p>
+                            <p className="text-xs text-text-tertiary mb-3">{table.purpose}</p>
                             <div className="space-y-1">
                                 {table.cols.map((col) => (
-                                    <div key={col} className="text-xs text-gray-500 font-mono pl-2 border-l border-gray-700">
+                                    <div key={col} className="text-xs text-text-muted font-mono pl-2 border-l border-gray-700">
                                         {col}
                                     </div>
                                 ))}
@@ -379,29 +379,29 @@ function DatabaseTab() {
 function SecurityTab() {
     return (
         <div className="space-y-8">
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Shield className="text-green-400" /> Security Implementation
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Shield className="text-green-600 dark:text-green-400" /> Security Implementation
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                    <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-xl">
+                    <div className="p-6 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl">
                         <div className="flex items-center gap-3 mb-4">
-                            <Lock className="w-6 h-6 text-green-400" />
-                            <h3 className="font-semibold text-white">Authentication</h3>
+                            <Lock className="w-6 h-6 text-green-600 dark:text-green-400" />
+                            <h3 className="font-semibold text-text-primary">Authentication</h3>
                         </div>
-                        <ul className="space-y-2 text-sm text-gray-400">
+                        <ul className="space-y-2 text-sm text-text-tertiary">
                             <li>• <strong>Bcrypt</strong> for password hashing (12 rounds)</li>
                             <li>• <strong>JWT</strong> (JSON Web Tokens) for stateless auth</li>
                             <li>• Token expiration and refresh mechanism</li>
                             <li>• Secure HTTP-only cookies</li>
                         </ul>
                     </div>
-                    <div className="p-6 bg-blue-500/10 border border-blue-500/30 rounded-xl">
+                    <div className="p-6 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl">
                         <div className="flex items-center gap-3 mb-4">
-                            <Shield className="w-6 h-6 text-blue-400" />
-                            <h3 className="font-semibold text-white">Protection</h3>
+                            <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                            <h3 className="font-semibold text-text-primary">Protection</h3>
                         </div>
-                        <ul className="space-y-2 text-sm text-gray-400">
+                        <ul className="space-y-2 text-sm text-text-tertiary">
                             <li>• <strong>Helmet.js</strong> for security headers</li>
                             <li>• <strong>Rate Limiting</strong> (100 req/15min)</li>
                             <li>• <strong>CORS</strong> configuration</li>
@@ -441,7 +441,7 @@ export default function HospitalManagementCaseStudy() {
                         transition={{ duration: 0.5 }}
                         className="mb-12"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-gray-400 hover:text-primary mb-6 transition-colors">
+                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
                         </Link>
 
@@ -450,7 +450,7 @@ export default function HospitalManagementCaseStudy() {
 
                         <div className="flex flex-wrap gap-3 mb-8">
                             {techStack.map((tech) => (
-                                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">
+                                <span key={tech} className="px-3 py-1 bg-card-bg border border-border rounded-full text-sm text-text-secondary">
                                     {tech}
                                 </span>
                             ))}
@@ -459,16 +459,16 @@ export default function HospitalManagementCaseStudy() {
                         {/* Key Stats */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                             {keyStats.map((stat, idx) => (
-                                <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                <div key={idx} className="p-4 rounded-xl bg-card-bg border border-border text-center">
                                     <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
                                     <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                                    <div className="text-xs text-gray-400">{stat.label}</div>
+                                    <div className="text-xs text-text-tertiary">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
@@ -476,14 +476,14 @@ export default function HospitalManagementCaseStudy() {
 
                     {/* Tab Navigation */}
                     <div className="mb-8 overflow-x-auto">
-                        <div className="flex gap-2 p-1 bg-white/5 rounded-xl min-w-max">
+                        <div className="flex gap-2 p-1 bg-card-bg rounded-xl min-w-max">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                        ? "bg-primary text-white"
-                                        : "text-gray-400 hover:text-white hover:bg-white/10"
+                                        ? "bg-primary text-text-primary"
+                                        : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >
                                     <tab.icon className="w-4 h-4" />

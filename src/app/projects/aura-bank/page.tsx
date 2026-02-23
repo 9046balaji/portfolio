@@ -38,11 +38,11 @@ const techStack = {
 function OverviewTab() {
     return (
         <div className="space-y-8">
-            <section className="prose prose-invert max-w-none">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="prose dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <Banknote className="text-primary" /> The Vision
                 </h2>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-text-secondary leading-relaxed text-lg">
                     Aura Bank is a comprehensive, full-stack banking management system that brings together 
                     modern web technologies and AI-powered features. Designed for both customers and administrators, 
                     it provides a seamless digital banking experience with real-time transactions, intelligent 
@@ -51,47 +51,47 @@ function OverviewTab() {
             </section>
 
             {/* Architecture Overview */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Server className="text-secondary" /> System Overview
                 </h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="text-center p-4 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                        <Globe className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-                        <div className="text-sm font-bold text-white">Frontend</div>
-                        <div className="text-xs text-gray-400">React + Three.js</div>
+                    <div className="text-center p-4 bg-blue-50 dark:bg-blue-500/10 rounded-xl border border-blue-500/20">
+                        <Globe className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                        <div className="text-sm font-bold text-text-primary">Frontend</div>
+                        <div className="text-xs text-text-tertiary">React + Three.js</div>
                     </div>
-                    <div className="text-center p-4 bg-purple-500/10 rounded-xl border border-purple-500/20">
-                        <Server className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                        <div className="text-sm font-bold text-white">Backend</div>
-                        <div className="text-xs text-gray-400">Node.js + Express</div>
+                    <div className="text-center p-4 bg-purple-50 dark:bg-purple-500/10 rounded-xl border border-purple-500/20">
+                        <Server className="w-8 h-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
+                        <div className="text-sm font-bold text-text-primary">Backend</div>
+                        <div className="text-xs text-text-tertiary">Node.js + Express</div>
                     </div>
-                    <div className="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/20">
-                        <Database className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                        <div className="text-sm font-bold text-white">Database</div>
-                        <div className="text-xs text-gray-400">PostgreSQL</div>
+                    <div className="text-center p-4 bg-green-50 dark:bg-green-500/10 rounded-xl border border-green-500/20">
+                        <Database className="w-8 h-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
+                        <div className="text-sm font-bold text-text-primary">Database</div>
+                        <div className="text-xs text-text-tertiary">PostgreSQL</div>
                     </div>
-                    <div className="text-center p-4 bg-orange-500/10 rounded-xl border border-orange-500/20">
-                        <Brain className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-                        <div className="text-sm font-bold text-white">ML API</div>
-                        <div className="text-xs text-gray-400">Python + Flask</div>
+                    <div className="text-center p-4 bg-orange-50 dark:bg-orange-500/10 rounded-xl border border-orange-500/20">
+                        <Brain className="w-8 h-8 text-orange-600 dark:text-orange-400 mx-auto mb-2" />
+                        <div className="text-sm font-bold text-text-primary">ML API</div>
+                        <div className="text-xs text-text-tertiary">Python + Flask</div>
                     </div>
                 </div>
             </section>
 
             {/* Tech Stack */}
             <section>
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Terminal className="text-primary" /> Tech Stack
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {Object.entries(techStack).map(([category, techs]) => (
-                        <div key={category} className="bg-white/5 border border-white/10 rounded-xl p-4">
+                        <div key={category} className="bg-card-bg border border-border rounded-xl p-4">
                             <h3 className="text-sm font-bold text-primary mb-3 capitalize">{category}</h3>
                             <div className="flex flex-wrap gap-2">
                                 {techs.map((tech) => (
-                                    <span key={tech} className="text-xs px-2 py-1 bg-white/10 rounded-full text-gray-300">
+                                    <span key={tech} className="text-xs px-2 py-1 bg-card-bg-hover rounded-full text-text-secondary">
                                         {tech}
                                     </span>
                                 ))}
@@ -125,7 +125,7 @@ function FeaturesTab() {
     return (
         <div className="space-y-8">
             <section>
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Users className="text-primary" /> Customer Features
                 </h2>
                 <div className="grid md:grid-cols-3 gap-4">
@@ -135,18 +135,18 @@ function FeaturesTab() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.05 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-primary/30 transition-colors"
+                            className="bg-card-bg border border-border rounded-xl p-4 hover:border-primary/30 transition-colors"
                         >
                             <feature.icon className="w-6 h-6 text-primary mb-2" />
-                            <h3 className="font-bold text-white mb-1">{feature.title}</h3>
-                            <p className="text-sm text-gray-400">{feature.desc}</p>
+                            <h3 className="font-bold text-text-primary mb-1">{feature.title}</h3>
+                            <p className="text-sm text-text-tertiary">{feature.desc}</p>
                         </motion.div>
                     ))}
                 </div>
             </section>
 
             <section>
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Building2 className="text-secondary" /> Admin Features
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -156,11 +156,11 @@ function FeaturesTab() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.05 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-secondary/30 transition-colors"
+                            className="bg-card-bg border border-border rounded-xl p-4 hover:border-secondary/30 transition-colors"
                         >
                             <feature.icon className="w-6 h-6 text-secondary mb-2" />
-                            <h3 className="font-bold text-white mb-1">{feature.title}</h3>
-                            <p className="text-sm text-gray-400">{feature.desc}</p>
+                            <h3 className="font-bold text-text-primary mb-1">{feature.title}</h3>
+                            <p className="text-sm text-text-tertiary">{feature.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -174,11 +174,11 @@ function ArchitectureTab() {
     return (
         <div className="space-y-8">
             {/* System Flow Diagram */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Server className="text-secondary" /> System Architecture Flow
                 </h2>
-                <p className="text-gray-400 mb-6">
+                <p className="text-text-tertiary mb-6">
                     A full-stack banking architecture with React frontend, Node.js API layer, 
                     PostgreSQL database, and Python ML microservice for intelligent features.
                 </p>
@@ -186,32 +186,32 @@ function ArchitectureTab() {
                 {/* Flow Diagram */}
                 <div className="flex flex-col items-center space-y-4 font-mono text-sm">
                     {/* USERS */}
-                    <div className="px-6 py-3 bg-gray-700 rounded-lg text-white">USERS (Customers & Admins)</div>
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="px-6 py-3 bg-card-bg-hover rounded-lg text-text-primary">USERS (Customers & Admins)</div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* FRONTEND */}
-                    <div className="px-6 py-3 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-blue-100 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🖥️ FRONTEND (React + TypeScript)</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["Dashboard", "Transfers", "Loans", "Cards", "Analytics", "Admin Panel", "3D Auth"].map(m => (
-                                <span key={m} className="px-2 py-1 bg-blue-500/30 rounded text-xs">{m}</span>
+                                <span key={m} className="px-2 py-1 bg-blue-200 dark:bg-blue-500/30 rounded text-xs">{m}</span>
                             ))}
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
-                        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">REST API</span>
-                        <div className="w-0.5 h-6 bg-gray-600"></div>
+                        <div className="w-0.5 h-6 bg-border"></div>
+                        <span className="text-xs text-text-muted bg-surface px-2 py-1 rounded">REST API</span>
+                        <div className="w-0.5 h-6 bg-border"></div>
                     </div>
 
                     {/* BACKEND */}
-                    <div className="px-6 py-3 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-purple-100 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/50 rounded-lg text-purple-600 dark:text-purple-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">⚙️ BACKEND (Node.js + Express)</div>
-                        <div className="text-xs text-gray-400 text-center mb-2">API Routes: /users /accounts /transactions /loans /cards /support</div>
+                        <div className="text-xs text-text-tertiary text-center mb-2">API Routes: /users /accounts /transactions /loans /cards /support</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["JWT Auth", "bcrypt", "Rate Limiting", "CORS", "Zod Validation", "Circuit Breaker"].map(s => (
-                                <span key={s} className="px-2 py-1 bg-purple-500/30 rounded text-xs">{s}</span>
+                                <span key={s} className="px-2 py-1 bg-purple-200 dark:bg-purple-500/30 rounded text-xs">{s}</span>
                             ))}
                         </div>
                     </div>
@@ -220,26 +220,26 @@ function ArchitectureTab() {
                     <div className="grid grid-cols-2 gap-8 w-full max-w-2xl">
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-green-500"></div>
-                            <div className="px-4 py-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-300 text-center w-full">
+                            <div className="px-4 py-3 bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300 text-center w-full">
                                 <div className="font-bold mb-1">🗄️ PostgreSQL</div>
-                                <div className="text-xs text-gray-400">Users • Accounts • Transactions</div>
-                                <div className="text-xs text-gray-400">Double-Entry Ledger • Cards</div>
+                                <div className="text-xs text-text-tertiary">Users • Accounts • Transactions</div>
+                                <div className="text-xs text-text-tertiary">Double-Entry Ledger • Cards</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="w-0.5 h-6 bg-orange-500"></div>
-                            <div className="px-4 py-3 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-300 text-center w-full">
+                            <div className="px-4 py-3 bg-orange-100 dark:bg-orange-500/20 border border-orange-300 dark:border-orange-500/50 rounded-lg text-orange-600 dark:text-orange-300 text-center w-full">
                                 <div className="font-bold mb-1">🤖 ML API (Flask)</div>
-                                <div className="text-xs text-gray-400">Fraud Detection • Loan Risk</div>
-                                <div className="text-xs text-gray-400">Expense Categorization</div>
+                                <div className="text-xs text-text-tertiary">Fraud Detection • Loan Risk</div>
+                                <div className="text-xs text-text-tertiary">Expense Categorization</div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-0.5 h-6 bg-gray-600"></div>
+                    <div className="w-0.5 h-6 bg-border"></div>
 
                     {/* External Services */}
-                    <div className="px-6 py-3 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-300 w-full max-w-2xl">
+                    <div className="px-6 py-3 bg-teal-100 dark:bg-teal-500/20 border border-teal-300 dark:border-teal-500/50 rounded-lg text-teal-600 dark:text-teal-300 w-full max-w-2xl">
                         <div className="font-bold text-center mb-2">🔌 EXTERNAL INTEGRATIONS</div>
                         <div className="flex flex-wrap gap-2 justify-center">
                             {["Ollama (LLM)", "LangChain Agents", "DuckDuckGo Search", "QR Payments"].map(e => (
@@ -251,8 +251,8 @@ function ArchitectureTab() {
             </section>
 
             {/* Service Modules */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
                     <Layers className="text-primary" /> Service Modules
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -267,17 +267,17 @@ function ArchitectureTab() {
                         { name: "Admin Service", desc: "User & Loan Mgmt", color: "cyan" },
                     ].map((service) => (
                         <div key={service.name} className={`p-4 rounded-xl bg-${service.color}-500/10 border border-${service.color}-500/30`}>
-                            <div className="font-mono text-sm text-white font-semibold mb-1">{service.name}</div>
-                            <div className="text-xs text-gray-400">{service.desc}</div>
+                            <div className="font-mono text-sm text-text-primary font-semibold mb-1">{service.name}</div>
+                            <div className="text-xs text-text-tertiary">{service.desc}</div>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Data Flow */}
-            <section className="bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                    <Database className="text-green-400" /> Transaction Data Flow
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Database className="text-green-600 dark:text-green-400" /> Transaction Data Flow
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
                     {[
@@ -289,8 +289,8 @@ function ArchitectureTab() {
                     ].map((flow) => (
                         <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
                             <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
-                            <div className="text-xs text-white font-medium">{flow.name}</div>
-                            <div className="text-xs text-gray-400">{flow.desc}</div>
+                            <div className="text-xs text-text-primary font-medium">{flow.name}</div>
+                            <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
                     ))}
                 </div>
@@ -330,11 +330,11 @@ function MLTab() {
 
     return (
         <div className="space-y-8">
-            <section className="prose prose-invert max-w-none">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="prose dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <Brain className="text-primary" /> AI & Machine Learning
                 </h2>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-text-secondary leading-relaxed">
                     Aura Bank integrates multiple AI/ML features to provide intelligent banking services,
                     from fraud detection to personalized financial insights.
                 </p>
@@ -347,11 +347,11 @@ function MLTab() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl p-6 hover:border-primary/30 transition-colors"
+                        className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
                     >
                         <feature.icon className="w-10 h-10 text-primary mb-4" />
-                        <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                        <p className="text-gray-400 mb-4">{feature.desc}</p>
+                        <h3 className="text-lg font-bold text-text-primary mb-2">{feature.title}</h3>
+                        <p className="text-text-tertiary mb-4">{feature.desc}</p>
                         <span className="text-xs px-3 py-1 bg-primary/20 text-primary rounded-full">
                             {feature.tech}
                         </span>
@@ -359,25 +359,25 @@ function MLTab() {
                 ))}
             </div>
 
-            <section className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="bg-card-bg border border-border rounded-xl p-6">
+                <h3 className="text-xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <Search className="text-secondary" /> External Integrations
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
-                    <div className="text-center p-4 bg-black/30 rounded-lg">
+                    <div className="text-center p-4 bg-surface/50 rounded-lg">
                         <div className="text-2xl mb-2">🦙</div>
-                        <div className="font-bold text-white">Ollama</div>
-                        <div className="text-xs text-gray-400">Local LLM</div>
+                        <div className="font-bold text-text-primary">Ollama</div>
+                        <div className="text-xs text-text-tertiary">Local LLM</div>
                     </div>
-                    <div className="text-center p-4 bg-black/30 rounded-lg">
+                    <div className="text-center p-4 bg-surface/50 rounded-lg">
                         <div className="text-2xl mb-2">🔗</div>
-                        <div className="font-bold text-white">LangChain</div>
-                        <div className="text-xs text-gray-400">AI Agents</div>
+                        <div className="font-bold text-text-primary">LangChain</div>
+                        <div className="text-xs text-text-tertiary">AI Agents</div>
                     </div>
-                    <div className="text-center p-4 bg-black/30 rounded-lg">
+                    <div className="text-center p-4 bg-surface/50 rounded-lg">
                         <div className="text-2xl mb-2">🦆</div>
-                        <div className="font-bold text-white">DuckDuckGo</div>
-                        <div className="text-xs text-gray-400">Web Search</div>
+                        <div className="font-bold text-text-primary">DuckDuckGo</div>
+                        <div className="text-xs text-text-tertiary">Web Search</div>
                     </div>
                 </div>
             </section>
@@ -398,11 +398,11 @@ function SecurityTab() {
 
     return (
         <div className="space-y-8">
-            <section className="prose prose-invert max-w-none">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="prose dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 flex items-center gap-2">
                     <Shield className="text-primary" /> Security First
                 </h2>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-text-secondary leading-relaxed">
                     Banking applications require the highest level of security. Aura Bank implements
                     multiple layers of protection to ensure data integrity and user safety.
                 </p>
@@ -415,32 +415,32 @@ function SecurityTab() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: i * 0.05 }}
-                        className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-green-500/30 transition-colors"
+                        className="bg-card-bg border border-border rounded-xl p-4 hover:border-green-200 dark:border-green-500/30 transition-colors"
                     >
-                        <feature.icon className="w-6 h-6 text-green-400 mb-2" />
-                        <h3 className="font-bold text-white mb-1">{feature.title}</h3>
-                        <p className="text-sm text-gray-400">{feature.desc}</p>
+                        <feature.icon className="w-6 h-6 text-green-600 dark:text-green-400 mb-2" />
+                        <h3 className="font-bold text-text-primary mb-1">{feature.title}</h3>
+                        <p className="text-sm text-text-tertiary">{feature.desc}</p>
                     </motion.div>
                 ))}
             </div>
 
             <section className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4">🔐 Security Highlights</h3>
-                <ul className="space-y-2 text-gray-300">
+                <h3 className="text-xl font-bold text-text-primary mb-4">🔐 Security Highlights</h3>
+                <ul className="space-y-2 text-text-secondary">
                     <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                         HttpOnly cookies for token storage
                     </li>
                     <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                         CORS protection with restricted origins
                     </li>
                     <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                         Helmet.js for HTTP security headers
                     </li>
                     <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
                         Atomic transactions for financial operations
                     </li>
                 </ul>
@@ -471,7 +471,7 @@ export default function AuraBankProject() {
                 <section className="relative py-16 px-4 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
                     <div className="max-w-6xl mx-auto relative z-10">
-                        <Link href="/#projects" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors">
+                        <Link href="/#projects" className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary mb-8 transition-colors">
                             <ArrowLeft className="w-4 h-4" /> Back to Projects
                         </Link>
 
@@ -498,11 +498,11 @@ export default function AuraBankProject() {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
+                                        className="bg-card-bg border border-border rounded-xl p-4 text-center"
                                     >
                                         <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                                        <div className="text-xl font-bold text-white">{stat.value}</div>
-                                        <div className="text-xs text-gray-400">{stat.label}</div>
+                                        <div className="text-xl font-bold text-text-primary">{stat.value}</div>
+                                        <div className="text-xs text-text-tertiary">{stat.label}</div>
                                     </motion.div>
                                 ))}
                             </div>
@@ -512,7 +512,7 @@ export default function AuraBankProject() {
                                 href="https://github.com/9046balaji/bank-management-system"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-colors"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-card-bg-hover hover:bg-white/20 border border-border rounded-lg transition-colors"
                             >
                                 <Github className="w-5 h-5" /> View on GitHub
                             </a>
@@ -521,7 +521,7 @@ export default function AuraBankProject() {
                 </section>
 
                 {/* Tabs Section */}
-                <section className="py-8 px-4 border-b border-white/10 sticky top-16 bg-background/80 backdrop-blur-md z-20">
+                <section className="py-8 px-4 border-b border-border sticky top-16 bg-background/80 backdrop-blur-md z-20">
                     <div className="max-w-6xl mx-auto">
                         <div className="flex gap-2 overflow-x-auto pb-2">
                             {tabs.map((tab) => (
@@ -530,8 +530,8 @@ export default function AuraBankProject() {
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
                                         activeTab === tab.id
-                                            ? "bg-primary text-white"
-                                            : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                                            ? "bg-primary text-text-primary"
+                                            : "bg-card-bg text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                     }`}
                                 >
                                     <tab.icon className="w-4 h-4" />
