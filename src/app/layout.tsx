@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Konda Balaji Rao", url: siteUrl }],
   creator: "Konda Balaji Rao",
+  verification: {
+    google: "google18471c02441f3e2b.html",
+  },
   robots: {
     index: true,
     follow: true,
