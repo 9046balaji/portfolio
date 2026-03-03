@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Eye, Star } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { PROJECT_IDS } from "@/lib/projects";
 
 // ─── helpers ────────────────────────────────────────────────
@@ -37,7 +37,8 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
 
   // ── fetch stats ──────────────────────────────────────────
   const fetchStats = useCallback(async () => {
-    if (!projectId) return;
+    const supabase = getSupabase();
+    if (!projectId || !supabase) return;
 
     // views count
     const { count } = await supabase
@@ -78,7 +79,8 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
 
   // ── record view ──────────────────────────────────────────
   useEffect(() => {
-    if (!projectId) return;
+    const supabase = getSupabase();
+    if (!projectId || !supabase) return;
 
     const visitorId = getVisitorId();
     if (!visitorId) return;
@@ -92,7 +94,8 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
 
   // ── submit rating ────────────────────────────────────────
   const handleRate = async (stars: number) => {
-    if (submitting || !projectId) return;
+    const supabase = getSupabase();
+    if (submitting || !projectId || !supabase) return;
     setSubmitting(true);
 
     const visitorId = getVisitorId();
