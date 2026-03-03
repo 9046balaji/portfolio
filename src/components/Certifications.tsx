@@ -29,7 +29,7 @@ const certifications: Certificate[] = [
         details: ["Reading: 137", "Writing: 148", "Listening: 132", "Speaking: 147"],
         date: "May 2024",
         icon: "🇬🇧",
-        certificateImage: "/certificates/pet_exam.png",
+        certificateImage: "/certificates/pet_exam.jpg",
         color: "#3b82f6",
     },
     {
@@ -58,6 +58,24 @@ const certifications: Certificate[] = [
         icon: "🏛️",
         certificateImage: "/certificates/Organizational Behaviour.png",
         color: "#10b981",
+    },
+    {
+        title: "Full Stack Hackathon",
+        issuer: "Dept. of ACSE, Vignan's Foundation for Science, Technology & Research",
+        description: "Demonstrated outstanding performance in Full Stack Development — secured consolation position showcasing creativity, problem-solving, and teamwork",
+        date: "2024",
+        icon: "🏆",
+        certificateImage: "/certificates/hackton.jpg",
+        color: "#ef4444",
+    },
+    {
+        title: "UEAC Volunteering",
+        issuer: "Vignan's Foundation for Science, Technology & Research",
+        description: "Certificate of Appreciation for completing 30 hours of active volunteering in UEAC during 2024–2025, building teamwork, leadership & community engagement skills",
+        date: "2024–2025",
+        icon: "🤝",
+        certificateImage: "/certificates/ueac.jpg",
+        color: "#06b6d4",
     },
 ];
 

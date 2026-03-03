@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectStats from "@/components/ProjectStats";
 
 const tabs = [
     { id: "all", label: "All Projects", icon: Grid3X3 },
@@ -336,6 +337,8 @@ export default function MLShowcase() {
                                 <ExternalLink className="w-5 h-5" /> Open in Colab
                             </a>
                         </div>
+
+                        <ProjectStats slug="ml-showcase" />
                     </motion.div>
 
                     {/* Featured Projects */}

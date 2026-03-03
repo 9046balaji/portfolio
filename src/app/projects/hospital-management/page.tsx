@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectStats from "@/components/ProjectStats";
 
 const tabs = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
@@ -472,6 +473,8 @@ export default function HospitalManagementCaseStudy() {
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
+
+                        <ProjectStats slug="hospital-management" />
                     </motion.div>
 
                     {/* Tab Navigation */}

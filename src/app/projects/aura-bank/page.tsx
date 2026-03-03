@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectStats from "@/components/ProjectStats";
 
 const tabs = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
@@ -516,6 +517,8 @@ export default function AuraBankProject() {
                             >
                                 <Github className="w-5 h-5" /> View on GitHub
                             </a>
+
+                            <ProjectStats slug="aura-bank" />
                         </motion.div>
                     </div>
                 </section>
