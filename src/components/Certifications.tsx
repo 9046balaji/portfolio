@@ -309,13 +309,24 @@ export default function Certifications() {
 
                     {/* Sparkles */}
                     <div className="carousel-sparkles">
-                        {[...Array(10)].map((_, i) => (
+                        {[
+                            { left: 15, top: 25, dur: 4.2, delay: 1.0 },
+                            { left: 42, top: 68, dur: 3.8, delay: 2.3 },
+                            { left: 73, top: 18, dur: 5.1, delay: 0.5 },
+                            { left: 28, top: 82, dur: 3.4, delay: 3.1 },
+                            { left: 88, top: 45, dur: 4.7, delay: 1.8 },
+                            { left: 55, top: 35, dur: 3.2, delay: 0.2 },
+                            { left: 35, top: 55, dur: 5.5, delay: 2.7 },
+                            { left: 65, top: 75, dur: 4.0, delay: 3.5 },
+                            { left: 20, top: 48, dur: 3.6, delay: 0.8 },
+                            { left: 80, top: 62, dur: 4.4, delay: 1.5 },
+                        ].map((s, i) => (
                             <motion.div
                                 key={i}
                                 className="sparkle-dot"
                                 style={{
-                                    left: `${10 + Math.random() * 80}%`,
-                                    top: `${10 + Math.random() * 80}%`,
+                                    left: `${s.left}%`,
+                                    top: `${s.top}%`,
                                 }}
                                 animate={{
                                     y: [0, -12, 0],
@@ -323,9 +334,9 @@ export default function Certifications() {
                                     scale: [0.7, 1.1, 0.7],
                                 }}
                                 transition={{
-                                    duration: 3 + Math.random() * 3,
+                                    duration: s.dur,
                                     repeat: Infinity,
-                                    delay: Math.random() * 4,
+                                    delay: s.delay,
                                     ease: "easeInOut",
                                 }}
                             >
