@@ -8,33 +8,34 @@ const highlights = [
     {
         icon: Brain,
         title: "AI & Machine Learning",
-        description: "Passionate about building intelligent systems that solve real-world problems, especially in healthcare."
+        description: "Passionate about building intelligent ML models and systems that solve real-world problems, especially in healthcare."
     },
     {
         icon: Heart,
-        title: "Healthcare Technology",
-        description: "Dedicated to leveraging AI to improve patient outcomes and make healthcare more accessible."
-    },
-    {
-        icon: Code2,
-        title: "Full-Stack Development",
-        description: "Building scalable applications from database architecture to responsive frontends."
+        title: "Deep Learning & CV",
+        description: "Designing neural networks for computer vision, NLP, and medical image analysis with TensorFlow & PyTorch."
     },
     {
         icon: Rocket,
-        title: "System Architecture",
-        description: "Designing robust, production-grade systems that handle complex data flows efficiently."
+        title: "DevOps & Cloud",
+        description: "Deploying and scaling AI models on AWS with CI/CD pipelines, Docker, and infrastructure automation."
+    },
+    {
+        icon: Code2,
+        title: "MLOps & Research",
+        description: "End-to-end ML lifecycle management — from experiment tracking to production monitoring and retraining."
     }
 ];
 
 const interests = [
-    "Agentic AI Systems",
-    "Medical AI",
-    "Knowledge Graphs",
-    "RAG Pipelines",
     "Deep Learning",
     "Computer Vision",
-    "System Design",
+    "Medical AI",
+    "MLOps",
+    "Cloud Architecture",
+    "RAG Pipelines",
+    "Agentic AI Systems",
+    "CI/CD & Automation",
     "Open Source"
 ];
 
@@ -71,14 +72,16 @@ export default function About() {
                                 Vignan's Foundation for Science, Technology and Research.
                             </p>
                             <p className="text-text-tertiary leading-relaxed">
-                                My journey in tech started with a curiosity about how machines can learn and make decisions.
-                                This curiosity has evolved into a deep passion for building AI systems that can genuinely
-                                help people—particularly in healthcare where the stakes are high and the impact is profound.
+                                I'm deeply fascinated by how deep learning and intelligent systems can transform raw data into
+                                life-saving decisions. My core expertise lies in <span className="text-primary">AI/ML</span>,
+                                <span className="text-secondary"> Deep Learning</span>, and
+                                <span className="text-primary"> DevOps & Cloud</span> — building production-grade models
+                                and deploying them reliably at scale.
                             </p>
                             <p className="text-text-tertiary leading-relaxed">
-                                When I'm not coding, you'll find me exploring the latest research papers, contributing to
-                                open-source projects, or working on my next big idea. I believe in learning by building,
-                                and every project is an opportunity to push my boundaries.
+                                From training neural networks for medical image analysis to setting up CI/CD pipelines on AWS,
+                                I enjoy the full spectrum of taking an AI idea from research to real-world deployment.
+                                When I'm not coding, you'll find me reading the latest ML papers or experimenting with new architectures.
                             </p>
                         </div>
 
