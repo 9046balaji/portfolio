@@ -21,13 +21,13 @@ const projects = [
     },
     {
         title: "HeartGuard AI",
-        tagline: "HIPAA-compliant Medical Agentic RAG System",
-        description: "Most chatbots hallucinate. This system uses a self-correcting RAG pipeline with Knowledge Graphs to ensure medical accuracy. Orchestrated multi-agent workflows using LangGraph for patient triage.",
-        tech: ["LangGraph", "Neo4j", "MedGemma", "Vector Search"],
+        tagline: "AI-Powered Heart Health Companion",
+        description: "An intelligent medical AI that actually checks its own answers. 8 specialist AI agents work together to answer heart health questions using 125K+ trusted medical documents.",
+        tech: ["LangGraph", "MedGemma", "FastAPI", "ChromaDB", "PostgreSQL"],
         points: [
-            "Orchestrated multi-agent workflows using LangGraph for patient triage.",
-            "Reduced medical query response time by 60% using hybrid search (Vector + Knowledge Graph).",
-            "Fine-tuned Google's MedGemma model for cardiology-specific nuancing."
+            "8 AI agents collaborate like specialist doctors — each handles a different type of medical question.",
+            "Self-correcting search verifies every answer against trusted sources before responding.",
+            "Fine-tuned Google's MedGemma model specifically for cardiology with healthcare-grade security."
         ],
         links: {
             github: "https://github.com/9046balaji/Heart",
