@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const skills = [
     {
         category: "AI Agents & LLMs",
-        items: ["LangGraph", "LangChain", "RAG Pipelines", "MedGemma", "Fine-tuning (LoRA/QLoRA)", "ONNX Runtime"]
+        items: ["LangGraph", "LangChain", "RAG Pipelines", "MedGemma", "Fine-tuning (LoRA/QLoRA)", "llama.cpp"]
     },
     {
         category: "Machine Learning",
@@ -17,23 +17,19 @@ const skills = [
     },
     {
         category: "Backend Engineering",
-        items: ["Python (FastAPI)", "Node.js", "Celery", "REST APIs", "WebSockets", "Docker"]
+        items: ["Python (FastAPI)", "REST APIs", "Docker"]
     },
     {
         category: "Databases & Storage",
-        items: ["PostgreSQL", "Neo4j", "Redis", "pgvector", "SQLAlchemy"]
-    },
-    {
-        category: "Frontend",
-        items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+        items: ["PostgreSQL", "Redis"]
     },
     {
         category: "Cloud & DevOps",
-        items: ["AWS (EC2, S3)", "GitHub Actions", "CI/CD", "Linux"]
+        items: ["AWS (EC2, S3)", "GitHub Actions", "CI/CD", "Linux", "Docker Compose", "Terraform"]
     },
     {
         category: "Tools & Practices",
-        items: ["Git", "Jupyter", "Google Colab", "VS Code", "Agile"]
+        items: ["Git", "Jupyter", "Google Colab", "VS Code", "MLflow", "Weights & Biases"]
     }
 ];
 
