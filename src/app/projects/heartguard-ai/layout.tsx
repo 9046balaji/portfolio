@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "HeartGuard AI — Agentic Medical AI System",
+    title: "HeartGuard AI — AI-Powered Heart Health Companion",
     description:
-        "A 55K+ line agentic medical AI system with LangGraph orchestrator, 10 specialized agents, MedGemma LLM, Self-RAG pipeline, Neo4j knowledge graph, and HIPAA-compliant security.",
+        "An intelligent AI system that understands heart health — powered by 8 specialist AI agents, a fine-tuned medical model, and 125K+ medical documents. Built with LangGraph, MedGemma, and healthcare-grade security.",
     alternates: {
         canonical: "https://portfolio-sable-tau-b7ysjwnjns.vercel.app/projects/heartguard-ai",
     },
     openGraph: {
-        title: "HeartGuard AI — Agentic Medical AI System",
+        title: "HeartGuard AI — AI-Powered Heart Health Companion",
         description:
-            "A 55K+ line agentic medical AI system with LangGraph orchestrator, 10 specialized agents, MedGemma LLM, and Self-RAG pipeline.",
+            "An intelligent AI system with 8 specialist agents, fine-tuned MedGemma model, and 125K+ medical documents — built for accuracy, privacy, and trust.",
         url: "https://kbalajirao.dev/projects/heartguard-ai",
         type: "article",
     },
