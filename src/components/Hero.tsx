@@ -8,10 +8,10 @@ import Image from "next/image";
 import NeuralBackground from "./NeuralBackground";
 
 const stats = [
-    { value: "55K+", label: "Lines of Code" },
-    { value: "50+", label: "API Endpoints" },
-    { value: "3", label: "Database Systems" },
-    { value: "10+", label: "AI Agents" },
+    { value: "10+", label: "AI/ML Models Built", icon: "🧠" },
+    { value: "5+", label: "Cloud Deployments", icon: "☁️" },
+    { value: "15+", label: "Deep Learning Projects", icon: "⚡" },
+    { value: "3+", label: "CI/CD Pipelines", icon: "🔄" },
 ];
 
 export default function Hero() {
@@ -58,16 +58,16 @@ export default function Hero() {
                         transition={{ delay: 0.2, duration: 0.8 }}
                         className="text-primary font-mono text-sm md:text-base tracking-wider uppercase"
                     >
-                        System Architect & AI Researcher
+                        AI/ML Engineer & Cloud Architect
                     </motion.h2>
 
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                        Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Agentic AI Systems</span> <br className="hidden md:block" />
-                        & Scalable Architectures.
+                        Crafting <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Intelligent AI Systems</span> <br className="hidden md:block" />
+                        with Deep Learning & Cloud.
                     </h1>
 
                     <p className="text-lg md:text-xl text-text-tertiary max-w-2xl mx-auto leading-relaxed">
-                        AI & Full Stack Engineer transforming complex data into decision-making intelligence.
+                        AI/ML & Deep Learning Engineer building production-grade models and deploying them at scale with DevOps & Cloud.
                         Creator of <span className="text-secondary font-semibold">HeartGuard AI</span>.
                     </p>
                 </div>
@@ -80,10 +80,15 @@ export default function Hero() {
                     className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-6"
                 >
                     {stats.map((stat, index) => (
-                        <div key={index} className="p-4 rounded-xl bg-card-bg border border-border hover:border-primary/30 transition-colors">
-                            <div className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</div>
-                            <div className="text-sm text-text-tertiary">{stat.label}</div>
-                        </div>
+                        <motion.div
+                            key={index}
+                            whileHover={{ scale: 1.05, y: -4 }}
+                            className="p-5 rounded-xl bg-gradient-to-br from-card-bg to-card-bg/80 border border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 cursor-default"
+                        >
+                            <div className="text-2xl mb-1">{stat.icon}</div>
+                            <div className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{stat.value}</div>
+                            <div className="text-sm text-text-tertiary mt-1 font-medium">{stat.label}</div>
+                        </motion.div>
                     ))}
                 </motion.div>
 
