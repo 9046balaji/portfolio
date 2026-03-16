@@ -72,26 +72,6 @@ export default function Hero() {
                     </p>
                 </div>
 
-                {/* Stats Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.6 }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-6"
-                >
-                    {stats.map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            whileHover={{ scale: 1.05, y: -4 }}
-                            className="p-5 rounded-xl bg-gradient-to-br from-card-bg to-card-bg/80 border border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 cursor-default"
-                        >
-                            <div className="text-2xl mb-1">{stat.icon}</div>
-                            <div className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{stat.value}</div>
-                            <div className="text-sm text-text-tertiary mt-1 font-medium">{stat.label}</div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                     <Link
                         href="#projects"
