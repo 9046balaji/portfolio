@@ -13,11 +13,11 @@ const skills = [
     },
     {
         category: "Deep Learning & CV",
-        items: ["TensorFlow", "Keras", "PyTorch", "OpenCV", "Transfer Learning", "CNN/LSTM"]
+        items: ["Keras", "PyTorch", "OpenCV", "Transfer Learning", "CNN/LSTM"]
     },
     {
         category: "Backend Engineering",
-        items: ["Python (FastAPI)", "REST APIs", "Docker"]
+        items: ["Python (FastAPI)", "REST APIs"]
     },
     {
         category: "Databases & Storage",
@@ -25,11 +25,11 @@ const skills = [
     },
     {
         category: "Cloud & DevOps",
-        items: ["AWS (EC2, S3)", "GitHub Actions", "CI/CD", "Linux", "Docker Compose", "Terraform"]
+        items: ["AWS (EC2, S3)", "GitHub Actions", "CI/CD", "Linux", "Docker", "Docker Compose", "Terraform", "Networking", "VPC"]
     },
     {
         category: "Tools & Practices",
-        items: ["Git", "Jupyter", "Google Colab", "VS Code", "MLflow", "Weights & Biases"]
+        items: ["Git", "Jupyter", "Google Colab", "VS Code", "MLflow"]
     }
 ];
 
