@@ -21,7 +21,7 @@ const education = [
         degree: "SSC (10th Grade)",
         institution: "Z.P. High School",
         score: "9.58 CGPA (96%)",
-        year: "2021"
+        year: "2019 – 2021"
     }
 ];
 
