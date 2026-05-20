@@ -1,584 +1,630 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Award, Calendar, Maximize2, X, Sparkles } from "lucide-react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { Award, Calendar, X, Trophy, ZoomIn } from "lucide-react";
 import Image from "next/image";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Category = "all" | "hackathon" | "competitive" | "academic" | "other";
+
 interface Certificate {
-    title: string;
-    issuer: string;
-    grade?: string;
-    level?: string;
-    score?: string;
-    details?: string[];
-    description?: string;
-    date: string;
-    icon: string;
-    certificateImage: string;
-    color: string;
+  title: string;
+  issuer: string;
+  date: string;
+  icon: string;
+  certificateImage: string;
+  category: Category;
+  description?: string;
+  grade?: string;
+  score?: string;
+  details?: string[];
+  featured?: boolean;
+  tilt?: number;
 }
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const certifications: Certificate[] = [
-    {
-        title: "Cambridge English PET",
-        issuer: "Cambridge University",
-        grade: "Grade C",
-        level: "B1 Level",
-        score: "Score: 141",
-        details: ["Reading: 137", "Writing: 148", "Listening: 132", "Speaking: 147"],
-        date: "May 2024",
-        icon: "🇬🇧",
-        certificateImage: "/certificates/pet_exam.jpg",
-        color: "#3b82f6",
-    },
-    {
-        title: "Generative AI",
-        issuer: "Professional Certification",
-        description: "Comprehensive Generative AI technologies & applications",
-        date: "2024",
-        icon: "🤖",
-        certificateImage: "/certificates/generative_ai_certificate.png",
-        color: "#8b5cf6",
-    },
-    {
-        title: "E-Business",
-        issuer: "NPTEL / SWAYAM",
-        description: "Electronic business strategies, digital commerce & enterprise frameworks",
-        date: "2024",
-        icon: "💼",
-        certificateImage: "/certificates/E-Business.png",
-        color: "#f59e0b",
-    },
-    {
-        title: "Organizational Behaviour",
-        issuer: "NPTEL / SWAYAM",
-        description: "Organizational dynamics, leadership, and management behaviour",
-        date: "2024",
-        icon: "🏛️",
-        certificateImage: "/certificates/Organizational Behaviour.png",
-        color: "#10b981",
-    },
-    {
-        title: "Full Stack Hackathon",
-        issuer: "Dept. of ACSE, Vignan's Foundation for Science, Technology & Research",
-        description: "Demonstrated outstanding performance in Full Stack Development — secured consolation position showcasing creativity, problem-solving, and teamwork",
-        date: "2024",
-        icon: "🏆",
-        certificateImage: "/certificates/hackton.jpg",
-        color: "#ef4444",
-    },
-    {
-        title: "UEAC Volunteering",
-        issuer: "Vignan's Foundation for Science, Technology & Research",
-        description: "Certificate of Appreciation for completing 30 hours of active volunteering in UEAC during 2024–2025, building teamwork, leadership & community engagement skills",
-        date: "2024–2025",
-        icon: "🤝",
-        certificateImage: "/certificates/ueac.jpg",
-        color: "#06b6d4",
-    },
+  {
+    title: "Agentic AI Hackathon",
+    issuer: "Hackathon Competition",
+    date: "April 2026",
+    icon: "🤖",
+    certificateImage: "/certificates/agentic ai hackthon.webp",
+    category: "hackathon",
+    featured: true,
+    tilt: -1.5,
+    description: "Individual recognition for building autonomous AI systems in a competitive Agentic AI hackathon",
+  },
+  {
+    title: "Agentic AI Hackathon — Team",
+    issuer: "Hackathon Competition",
+    date: "April 2026",
+    icon: "🏆",
+    certificateImage: "/certificates/agentic ai hackthon team.webp",
+    category: "hackathon",
+    featured: true,
+    tilt: 1.2,
+    description: "Team award for collaborative design and deployment of an Agentic AI solution",
+  },
+  {
+    title: "ML Neurothon",
+    issuer: "Neurothon ML Competition",
+    date: "May 2026",
+    icon: "🧠",
+    tilt: -2.1,
+    certificateImage: "/certificates/Ml-neurothon.webp",
+    category: "competitive",
+    description: "Machine learning competition focused on neural network design and real-world problem-solving",
+  },
+  {
+    title: "HackerRank Hackathon",
+    issuer: "HackerRank",
+    date: "May 2026",
+    icon: "💻",
+    tilt: 1.8,
+    certificateImage: "/certificates/Hackerrank-Hackthon.webp",
+    category: "competitive",
+    description: "Competitive programming hackathon recognition for algorithmic problem-solving performance",
+  },
+  {
+    title: "HackerRank Leaderboard",
+    issuer: "HackerRank",
+    date: "May 2026",
+    icon: "📊",
+    tilt: -1.0,
+    certificateImage: "/certificates/hacker rank leaderboard.webp",
+    category: "competitive",
+    description: "Top leaderboard ranking recognition for consistent competitive coding performance",
+  },
+  {
+    title: "Cambridge English PET",
+    issuer: "Cambridge University",
+    date: "May 2024",
+    icon: "🇬🇧",
+    tilt: 2.3,
+    certificateImage: "/certificates/pet_exam.webp",
+    category: "academic",
+    grade: "Grade C — B1 Level",
+    score: "Score: 141",
+    details: ["Reading: 137", "Writing: 148", "Listening: 132", "Speaking: 147"],
+  },
+  {
+    title: "Generative AI",
+    issuer: "Professional Certification",
+    date: "2024",
+    icon: "✨",
+    tilt: -1.7,
+    certificateImage: "/certificates/generative_ai_certificate.webp",
+    category: "academic",
+    description: "Comprehensive Generative AI technologies & applications",
+  },
+  {
+    title: "E-Business",
+    issuer: "NPTEL / SWAYAM",
+    date: "2024",
+    icon: "💼",
+    tilt: 1.1,
+    certificateImage: "/certificates/E-Business.webp",
+    category: "academic",
+    description: "Electronic business strategies, digital commerce & enterprise frameworks",
+  },
+  {
+    title: "Principles of Management",
+    issuer: "NPTEL / SWAYAM",
+    date: "2025",
+    icon: "📋",
+    tilt: -2.5,
+    certificateImage: "/certificates/Principles of Management_page-0001.webp",
+    category: "other",
+    description: "Certified in core management principles — planning, organizing, leading, and controlling",
+  },
+  {
+    title: "Organisational Behaviour",
+    issuer: "NPTEL / SWAYAM",
+    date: "2024",
+    icon: "🏛️",
+    tilt: 1.6,
+    certificateImage: "/certificates/Organizational Behaviour.webp",
+    category: "other",
+    description: "Organizational dynamics, leadership, and management behaviour",
+  },
+  {
+    title: "Full Stack Hackathon",
+    issuer: "Dept. of ACSE, Vignan's Foundation",
+    date: "2024",
+    icon: "🚀",
+    tilt: -0.8,
+    certificateImage: "/certificates/hackton.webp",
+    category: "hackathon",
+    description: "Consolation position — Full Stack Development hackathon showcasing creativity and teamwork",
+  },
+  {
+    title: "Full Stack Hackathon — Team",
+    issuer: "Dept. of ACSE, Vignan's Foundation",
+    date: "2024",
+    icon: "🤝",
+    tilt: 2.0,
+    certificateImage: "/certificates/hackton_team.webp",
+    category: "hackathon",
+    description: "Team certificate for collaborative Full Stack Development hackathon delivery",
+  },
+  {
+    title: "UEAC Volunteering",
+    issuer: "Vignan's Foundation",
+    date: "2024–2025",
+    icon: "💛",
+    tilt: -1.3,
+    certificateImage: "/certificates/ueac.webp",
+    category: "other",
+    description: "30 hours of active volunteering — teamwork, leadership & community engagement",
+  },
 ];
 
-/* ─── Image Modal ─── */
-function CertificateModal({ cert, onClose }: { cert: Certificate; onClose: () => void }) {
-    useEffect(() => {
-        const handler = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-        };
-        window.addEventListener("keydown", handler);
-        return () => window.removeEventListener("keydown", handler);
-    }, [onClose]);
+const CATEGORIES: { id: Category; label: string; icon: string; aperture: string }[] = [
+  { id: "all",         label: "All",         icon: "⬤", aperture: "f/∞" },
+  { id: "hackathon",   label: "Hackathons",  icon: "⚡", aperture: "f/1.2" },
+  { id: "competitive", label: "Competitive", icon: "🏅", aperture: "f/1.8" },
+  { id: "academic",    label: "Academic",    icon: "🎓", aperture: "f/2.8" },
+  { id: "other",       label: "Other",       icon: "📌", aperture: "f/4.0" },
+];
 
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
-            onClick={onClose}
-        >
-            <motion.div
-                initial={{ scale: 0.85, opacity: 0, y: 30 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.85, opacity: 0, y: 30 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="relative w-full max-w-4xl max-h-[90vh] bg-surface rounded-2xl overflow-hidden border border-border shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-            >
-                {/* Header */}
-                <div className="flex items-center justify-between p-4 bg-background/80 border-b border-border">
-                    <div className="flex items-center gap-3">
-                        <span className="text-2xl">{cert.icon}</span>
-                        <div>
-                            <h3 className="font-bold text-text-primary">{cert.title}</h3>
-                            <p className="text-sm text-text-tertiary">{cert.issuer}</p>
-                        </div>
-                    </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 rounded-lg bg-card-bg hover:bg-red-500/20 hover:text-red-400 transition-colors"
-                    >
-                        <X className="w-5 h-5" />
-                    </button>
-                </div>
+const CAT_COLOR: Record<Category, string> = {
+  all:         "#2563eb",
+  hackathon:   "#f59e0b",
+  competitive: "#06b6d4",
+  academic:    "#8b5cf6",
+  other:       "#10b981",
+};
 
-                {/* Certificate Image */}
-                <div className="overflow-auto max-h-[calc(90vh-80px)] p-4 flex justify-center bg-background/50">
-                    <Image
-                        src={cert.certificateImage}
-                        alt={`${cert.title} Certificate`}
-                        width={1200}
-                        height={900}
-                        className="w-full h-auto max-w-3xl rounded-lg shadow-lg"
-                        quality={100}
-                        priority
-                    />
-                </div>
-            </motion.div>
-        </motion.div>
-    );
+// ─── Developing shimmer — photo darkroom effect ──────────────────────────────
+
+function DevelopingSkeleton() {
+  return (
+    <motion.div
+      className="absolute inset-0 rounded-t-sm overflow-hidden"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+    >
+      <div className="w-full h-full bg-[#1a0a00]" />
+      <motion.div
+        className="absolute inset-0"
+        initial={{ x: "-100%" }}
+        animate={{ x: "200%" }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(255,150,50,0.15), transparent)",
+        }}
+      />
+    </motion.div>
+  );
 }
 
-/* ─── Main Component ─── */
-export default function Certifications() {
-    const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
-    const [isPaused, setIsPaused] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [isInView, setIsInView] = useState(false);
+// ─── Lightbox / Darkroom Modal ────────────────────────────────────────────────
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) setIsInView(true);
-            },
-            { threshold: 0.1 }
-        );
-        if (containerRef.current) observer.observe(containerRef.current);
-        return () => observer.disconnect();
-    }, []);
+function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => void }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
 
-    const totalCards = certifications.length;
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
-    return (
-        <section
-            id="certifications"
-            className="py-20 px-4 bg-section-alt overflow-hidden"
-            ref={containerRef}
-        >
-            <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
-                >
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4"
-                    >
-                        <Award className="w-4 h-4 text-primary" />
-                        <span className="text-sm text-primary font-medium">Achievements</span>
-                    </motion.div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                            Certifications
-                        </span>
-                    </h2>
-                    <p className="text-text-tertiary max-w-md mx-auto">
-                        Professional certifications validating my skills and expertise
-                    </p>
-                </motion.div>
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      onClick={onClose}
+    >
+      {/* Darkroom backdrop */}
+      <motion.div
+        className="absolute inset-0 bg-black/92 backdrop-blur-2xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
 
-                {/* ─── 3D Carousel ─── */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="carousel-wrapper"
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                >
-                    <div className={`carousel-inner ${isPaused ? "paused" : ""}`}>
-                        {certifications.map((cert, index) => (
-                            <div
-                                key={index}
-                                className="carousel-card"
-                                style={{
-                                    "--index": index,
-                                    "--cards-count": totalCards,
-                                    "--color": cert.color,
-                                } as React.CSSProperties}
-                                onClick={() => setSelectedCert(cert)}
-                            >
-                                <div className="card-face">
-                                    {/* Color accent top */}
-                                    <div
-                                        className="card-accent-strip"
-                                        style={{
-                                            background: `linear-gradient(90deg, ${cert.color}, ${cert.color}80, transparent)`,
-                                        }}
-                                    />
+      {/* Red darkroom safelight glow */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={{
+          background: `radial-gradient(ellipse 60% 40% at 50% 100%, rgba(180,20,20,0.08) 0%, transparent 70%)`,
+        }}
+      />
 
-                                    <div className="card-content">
-                                        {/* Icon + Badge */}
-                                        <div className="flex items-center justify-between mb-3">
-                                            <div
-                                                className="card-icon"
-                                                style={{
-                                                    background: `linear-gradient(135deg, ${cert.color}25, ${cert.color}08)`,
-                                                    borderColor: `${cert.color}35`,
-                                                }}
-                                            >
-                                                <span className="text-xl">{cert.icon}</span>
-                                            </div>
-                                            <div
-                                                className="card-verified-badge"
-                                                style={{
-                                                    color: cert.color,
-                                                    borderColor: `${cert.color}30`,
-                                                    background: `${cert.color}10`,
-                                                }}
-                                            >
-                                                ✓ Verified
-                                            </div>
-                                        </div>
+      {/* Panel */}
+      <motion.div
+        layoutId={`cert-${cert.title}`}
+        className="relative w-full max-w-3xl rounded-none overflow-hidden z-10"
+        onClick={(e) => e.stopPropagation()}
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+      >
+        {/* Polaroid-style white frame */}
+        <div className="bg-[#f5f0e8] p-3 pb-14 shadow-[0_40px_120px_rgba(0,0,0,0.8)]">
+          {/* Image container */}
+          <div className="relative bg-[#1a0a00] overflow-hidden min-h-[300px] flex items-center justify-center">
+            {!imgLoaded && <DevelopingSkeleton />}
 
-                                        {/* Title */}
-                                        <h3 className="text-sm font-bold text-text-primary mb-0.5 leading-tight">
-                                            {cert.title}
-                                        </h3>
-                                        <p className="text-[10px] text-text-muted mb-2">{cert.issuer}</p>
+            <motion.div
+              animate={{
+                filter: imgLoaded ? "saturate(1) brightness(1)" : "saturate(0) brightness(0.3)",
+              }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="w-full"
+            >
+              <Image
+                src={cert.certificateImage}
+                alt={`${cert.title} certificate`}
+                width={1200}
+                height={900}
+                className="w-full h-auto max-h-[70vh] object-contain"
+                quality={95}
+                priority
+                onLoad={() => setImgLoaded(true)}
+              />
+            </motion.div>
 
-                                        {/* Badges */}
-                                        {cert.grade && (
-                                            <div className="flex flex-wrap gap-1.5 mb-2">
-                                                <span className="cert-badge bg-green-500/15 text-green-400 border-green-500/20">
-                                                    {cert.grade}
-                                                </span>
-                                                <span
-                                                    className="cert-badge"
-                                                    style={{
-                                                        color: cert.color,
-                                                        borderColor: `${cert.color}25`,
-                                                        background: `${cert.color}12`,
-                                                    }}
-                                                >
-                                                    {cert.level}
-                                                </span>
-                                            </div>
-                                        )}
-
-                                        {/* Score */}
-                                        {cert.score && (
-                                            <div className="cert-score-bar">
-                                                <p className="text-primary font-bold text-[11px]">{cert.score}</p>
-                                            </div>
-                                        )}
-
-                                        {/* Description */}
-                                        {cert.description && (
-                                            <p className="text-[10px] text-text-tertiary mb-2 line-clamp-2 leading-relaxed">
-                                                {cert.description}
-                                            </p>
-                                        )}
-
-                                        {/* Footer */}
-                                        <div className="card-footer">
-                                            <span className="flex items-center gap-1">
-                                                <Calendar className="w-3 h-3" />
-                                                {cert.date}
-                                            </span>
-                                            <span className="card-view-hint">
-                                                <Maximize2 className="w-3 h-3" />
-                                                View
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Glow */}
-                                    <div className="card-glow" style={{ background: cert.color }} />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Sparkles */}
-                    <div className="carousel-sparkles">
-                        {[
-                            { left: 15, top: 25, dur: 4.2, delay: 1.0 },
-                            { left: 42, top: 68, dur: 3.8, delay: 2.3 },
-                            { left: 73, top: 18, dur: 5.1, delay: 0.5 },
-                            { left: 28, top: 82, dur: 3.4, delay: 3.1 },
-                            { left: 88, top: 45, dur: 4.7, delay: 1.8 },
-                            { left: 55, top: 35, dur: 3.2, delay: 0.2 },
-                            { left: 35, top: 55, dur: 5.5, delay: 2.7 },
-                            { left: 65, top: 75, dur: 4.0, delay: 3.5 },
-                            { left: 20, top: 48, dur: 3.6, delay: 0.8 },
-                            { left: 80, top: 62, dur: 4.4, delay: 1.5 },
-                        ].map((s, i) => (
-                            <motion.div
-                                key={i}
-                                className="sparkle-dot"
-                                style={{
-                                    left: `${s.left}%`,
-                                    top: `${s.top}%`,
-                                }}
-                                animate={{
-                                    y: [0, -12, 0],
-                                    opacity: [0.15, 0.5, 0.15],
-                                    scale: [0.7, 1.1, 0.7],
-                                }}
-                                transition={{
-                                    duration: s.dur,
-                                    repeat: Infinity,
-                                    delay: s.delay,
-                                    ease: "easeInOut",
-                                }}
-                            >
-                                <Sparkles className="w-3 h-3 text-primary/40" />
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Hint */}
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.2 }}
-                    className="text-center text-sm text-text-muted mt-8"
-                >
-                    ✨ Hover to pause rotation • Click a certificate to view
-                </motion.p>
-            </div>
-
-            {/* Modal */}
+            {/* Developing overlay text */}
             <AnimatePresence>
-                {selectedCert && (
-                    <CertificateModal
-                        cert={selectedCert}
-                        onClose={() => setSelectedCert(null)}
-                    />
-                )}
+              {!imgLoaded && (
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <motion.p
+                    animate={{ opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="text-[11px] tracking-[0.4em] text-orange-400/60 uppercase font-mono"
+                  >
+                    Developing…
+                  </motion.p>
+                </motion.div>
+              )}
             </AnimatePresence>
+          </div>
 
-            {/* ─── 3D Carousel CSS ─── */}
-            <style jsx global>{`
-                /* ── Wrapper ── */
-                .carousel-wrapper {
-                    --card-width: 200px;
-                    --card-height: 260px;
-                    width: 100%;
-                    height: 400px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    perspective: 900px;
-                    position: relative;
-                }
+          {/* Polaroid caption */}
+          <div className="flex items-end justify-between pt-3 px-1">
+            <div>
+              <p className="font-bold text-[#1a1a1a] text-sm" style={{ fontFamily: "'Georgia', serif" }}>
+                {cert.title}
+              </p>
+              <p className="text-[11px] text-[#5a5a5a] mt-0.5">{cert.issuer} · {cert.date}</p>
+              {cert.score && (
+                <p className="text-[11px] font-bold text-[#2563eb] mt-1">{cert.score}</p>
+              )}
+            </div>
+            <span className="text-2xl">{cert.icon}</span>
+          </div>
+        </div>
 
-                @media (max-width: 640px) {
-                    .carousel-wrapper {
-                        --card-width: 160px;
-                        --card-height: 220px;
-                        height: 340px;
-                        perspective: 700px;
-                    }
-                }
+        {/* Close button */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={onClose}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" />
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  );
+}
 
-                @media (min-width: 1024px) {
-                    .carousel-wrapper {
-                        --card-width: 220px;
-                        --card-height: 280px;
-                        height: 440px;
-                        perspective: 1100px;
-                    }
-                }
+// ─── Polaroid Certificate Card ────────────────────────────────────────────────
 
-                /* ── Inner ── */
-                .carousel-inner {
-                    position: relative;
-                    width: var(--card-width);
-                    height: var(--card-height);
-                    transform-style: preserve-3d;
-                    animation: carousel-spin 16s linear infinite;
-                }
+function PolaroidCard({
+  cert,
+  onClick,
+  reducedMotion,
+  index,
+}: {
+  cert: Certificate;
+  onClick: () => void;
+  reducedMotion: boolean;
+  index: number;
+}) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+  const tiltDeg = cert.tilt ?? 0;
 
-                .carousel-inner.paused {
-                    animation-play-state: paused;
-                }
+  return (
+    <motion.div
+      layoutId={`cert-${cert.title}`}
+      layout
+      initial={{ opacity: 0, scale: 0.85, rotate: tiltDeg - 5 }}
+      animate={{ opacity: 1, scale: 1, rotate: isHover ? 0 : tiltDeg }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{
+        opacity: { duration: 0.4, delay: index * 0.06 },
+        scale: { type: "spring", stiffness: 280, damping: 22, delay: index * 0.06 },
+        rotate: isHover
+          ? { type: "spring", stiffness: 400, damping: 20 }
+          : { duration: 0.5, delay: index * 0.06 },
+      }}
+      className={`cursor-pointer origin-bottom ${cert.featured ? "md:col-span-2" : ""}`}
+      onClick={onClick}
+      onHoverStart={() => setIsHover(true)}
+      onHoverEnd={() => setIsHover(false)}
+      style={{ willChange: "transform" }}
+    >
+      <motion.div
+        animate={{
+          y: isHover ? -10 : 0,
+          boxShadow: isHover
+            ? "0 30px 70px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.3)"
+            : "0 8px 24px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15)",
+        }}
+        transition={{ type: "spring", stiffness: 380, damping: 22 }}
+        className="bg-[#f5f0e8] p-3 pb-12"
+      >
+        {/* Photo area */}
+        <div
+          className={`relative overflow-hidden bg-[#1a0a00] ${cert.featured ? "h-52 sm:h-60" : "h-40 sm:h-44"}`}
+        >
+          {/* Skeleton developing effect */}
+          {!imgLoaded && (
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="w-full h-full bg-[#1a0a00]" />
+              <motion.div
+                className="absolute inset-0"
+                animate={{ x: ["-100%", "200%"] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }}
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(255,150,50,0.18), transparent)",
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.p
+                  animate={{ opacity: [0.2, 0.5, 0.2] }}
+                  transition={{ duration: 1.8, repeat: Infinity }}
+                  className="text-[9px] tracking-[0.5em] text-orange-400/50 uppercase font-mono"
+                >
+                  Developing
+                </motion.p>
+              </div>
+            </div>
+          )}
 
-                @keyframes carousel-spin {
-                    from { transform: rotateY(0deg); }
-                    to   { transform: rotateY(360deg); }
-                }
+          <motion.div
+            animate={{
+              filter: imgLoaded ? "saturate(1) brightness(1)" : "saturate(0) brightness(0)",
+            }}
+            transition={{ duration: 1.0, ease: "easeOut" }}
+            className="w-full h-full"
+          >
+            <Image
+              src={cert.certificateImage}
+              alt={cert.title}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+              quality={80}
+              onLoad={() => setImgLoaded(true)}
+            />
+          </motion.div>
 
-                /* ── Card positioning in 3D ── */
-                .carousel-card {
-                    position: absolute;
-                    width: var(--card-width);
-                    height: var(--card-height);
-                    top: 0;
-                    left: 0;
-                    cursor: pointer;
-                    transform:
-                        rotateY(calc(360deg / var(--cards-count) * var(--index)))
-                        translateZ(calc((var(--card-width) + var(--card-height)) * 0.52));
-                    transition: transform 0.4s ease;
-                }
+          {/* Photo overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
-                .carousel-card:hover {
-                    transform:
-                        rotateY(calc(360deg / var(--cards-count) * var(--index)))
-                        translateZ(calc((var(--card-width) + var(--card-height)) * 0.52))
-                        scale(1.06);
-                }
+          {/* Featured badge */}
+          {cert.featured && (
+            <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-amber-500/90 text-white shadow-lg">
+              <Trophy className="w-2.5 h-2.5" />
+              Featured
+            </div>
+          )}
 
-                /* ── Card face ── */
-                .card-face {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 14px;
-                    border: 1px solid var(--border);
-                    overflow: hidden;
-                    position: relative;
-                    background: var(--surface);
-                    backdrop-filter: blur(12px);
-                    box-shadow: 0 8px 32px var(--shadow-color), 0 0 0 1px rgba(255,255,255,0.04);
-                    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-                }
+          {/* View hint */}
+          <motion.div
+            animate={{ opacity: isHover ? 1 : 0, y: isHover ? 0 : 4 }}
+            transition={{ duration: 0.2 }}
+            className="absolute bottom-2 right-2 flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-white/90 text-[#1a1a1a] text-[10px] font-semibold shadow-lg"
+          >
+            <ZoomIn className="w-3 h-3" />
+            View
+          </motion.div>
+        </div>
 
-                .carousel-card:hover .card-face {
-                    border-color: var(--color);
-                    box-shadow:
-                        0 20px 60px color-mix(in srgb, var(--color) 20%, transparent),
-                        0 0 30px color-mix(in srgb, var(--color) 10%, transparent);
-                }
+        {/* Polaroid caption area */}
+        <div className="pt-3 px-1">
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0 flex-1">
+              <p
+                className="font-bold text-[#1a1a1a] text-[12px] leading-tight truncate"
+                style={{ fontFamily: "'Georgia', serif" }}
+              >
+                {cert.title}
+              </p>
+              <p className="text-[10px] text-[#7a7a7a] mt-0.5 truncate">{cert.issuer}</p>
+            </div>
+            <span className="text-lg shrink-0">{cert.icon}</span>
+          </div>
 
-                .card-accent-strip {
-                    height: 3px;
-                    width: 100%;
-                }
+          {cert.score && (
+            <p className="text-[10px] font-bold text-[#2563eb] mt-1.5">{cert.score}</p>
+          )}
 
-                .card-content {
-                    padding: 14px 16px;
-                    height: calc(100% - 3px);
-                    display: flex;
-                    flex-direction: column;
-                }
+          <div className="flex items-center gap-1 mt-2">
+            <Calendar className="w-2.5 h-2.5 text-[#aaa]" />
+            <span className="text-[9px] text-[#aaa] font-mono">{cert.date}</span>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
-                .card-icon {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid;
-                    flex-shrink: 0;
-                }
+// ─── Main Section ─────────────────────────────────────────────────────────────
 
-                .card-verified-badge {
-                    padding: 2px 7px;
-                    border-radius: 999px;
-                    font-size: 9px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.04em;
-                    border: 1px solid;
-                }
+export default function Certifications() {
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const reducedMotion = useReducedMotion() ?? false;
 
-                .cert-badge {
-                    padding: 2px 7px;
-                    font-size: 10px;
-                    font-weight: 600;
-                    border-radius: 999px;
-                    border: 1px solid;
-                }
+  const counts = CATEGORIES.reduce<Record<Category, number>>(
+    (acc, cat) => {
+      acc[cat.id] =
+        cat.id === "all"
+          ? certifications.length
+          : certifications.filter((c) => c.category === cat.id).length;
+      return acc;
+    },
+    {} as Record<Category, number>
+  );
 
-                .cert-score-bar {
-                    margin-bottom: 8px;
-                    padding: 5px 8px;
-                    border-radius: 6px;
-                    background: color-mix(in srgb, var(--primary) 8%, transparent);
-                    border-left: 2px solid var(--primary);
-                }
+  const visible = certifications
+    .filter((c) => activeCategory === "all" || c.category === activeCategory)
+    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
-                .card-footer {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    font-size: 10px;
-                    color: var(--text-muted);
-                    padding-top: 6px;
-                    border-top: 1px solid var(--border);
-                    margin-top: auto;
-                }
+  const accentColor = CAT_COLOR[activeCategory];
 
-                .card-view-hint {
-                    display: flex;
-                    align-items: center;
-                    gap: 4px;
-                    color: var(--primary);
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                }
+  return (
+    <section
+      id="certifications"
+      className="py-24 px-4 relative overflow-hidden"
+      style={{ background: "var(--section-alt)" }}
+    >
+      {/* Dark room ambient blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full blur-[130px] opacity-30"
+          style={{ background: accentColor, transition: "background 0.6s ease" }} />
+        <div className="absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full blur-[110px] opacity-20"
+          style={{ background: accentColor, transition: "background 0.6s ease" }} />
+      </div>
 
-                .carousel-card:hover .card-view-hint {
-                    opacity: 1;
-                }
+      <div className="max-w-6xl mx-auto">
+        {/* ── Section Header ─────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.65 }}
+          className="text-center mb-14"
+        >
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.15 }}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-5 backdrop-blur-md"
+            style={{
+              background: `${accentColor}14`,
+              borderColor: `${accentColor}30`,
+              transition: "background 0.5s, border-color 0.5s",
+            }}
+          >
+            <Award className="w-4 h-4" style={{ color: accentColor }} />
+            <span className="text-sm font-semibold tracking-wide" style={{ color: accentColor }}>
+              Achievements
+            </span>
+          </motion.div>
 
-                .card-glow {
-                    position: absolute;
-                    bottom: -8px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 60%;
-                    height: 12px;
-                    border-radius: 50%;
-                    filter: blur(12px);
-                    opacity: 0.06;
-                    transition: opacity 0.3s;
-                    pointer-events: none;
-                }
+          <h2 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight text-text-primary">
+            Certifications{" "}
+            <span className="text-text-tertiary font-normal text-3xl">&amp; Awards</span>
+          </h2>
+          <p className="text-text-tertiary text-sm max-w-md mx-auto">
+            {certifications.length} credentials — click any photo to develop it in full
+          </p>
+        </motion.div>
 
-                .carousel-card:hover .card-glow {
-                    opacity: 0.25;
-                }
+        {/* ── Camera aperture filter tabs ────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="flex flex-wrap gap-2 justify-center mb-14"
+        >
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            const color = CAT_COLOR[cat.id];
+            return (
+              <motion.button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 border overflow-hidden font-mono"
+                style={{
+                  background: isActive ? color : "rgba(255,255,255,0.04)",
+                  borderColor: isActive ? color : "rgba(255,255,255,0.08)",
+                  color: isActive ? "#fff" : "var(--text-secondary)",
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  <span className="text-[10px] opacity-60">{cat.aperture}</span>
+                  {cat.label}
+                  <span
+                    className="text-[10px] px-1.5 py-0.5 rounded-sm font-bold"
+                    style={{
+                      background: isActive ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    {counts[cat.id]}
+                  </span>
+                </span>
+              </motion.button>
+            );
+          })}
+        </motion.div>
 
-                /* ── Sparkles ── */
-                .carousel-sparkles {
-                    position: absolute;
-                    inset: 0;
-                    pointer-events: none;
-                    z-index: -1;
-                }
+        {/* ── Photography album grid ─────────────────────────── */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {visible.map((cert, i) => (
+              <PolaroidCard
+                key={cert.title}
+                cert={cert}
+                index={i}
+                onClick={() => setSelectedCert(cert)}
+                reducedMotion={reducedMotion}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-                .sparkle-dot {
-                    position: absolute;
-                }
+        {/* Empty state */}
+        <AnimatePresence>
+          {visible.length === 0 && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center text-text-tertiary text-sm py-20"
+            >
+              No certificates in this category yet.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
 
-                /* ── Shadow under carousel ── */
-                .carousel-wrapper::after {
-                    content: "";
-                    position: absolute;
-                    bottom: -20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 200px;
-                    height: 30px;
-                    background: var(--primary);
-                    filter: blur(40px);
-                    opacity: 0.08;
-                    border-radius: 50%;
-                }
-            `}</style>
-        </section>
-    );
+      {/* ── Darkroom Lightbox Modal ─────────────────────────────── */}
+      <AnimatePresence>
+        {selectedCert && (
+          <DarkroomModal
+            cert={selectedCert}
+            onClose={() => setSelectedCert(null)}
+          />
+        )}
+      </AnimatePresence>
+    </section>
+  );
 }
