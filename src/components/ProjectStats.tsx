@@ -40,40 +40,52 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
     const supabase = getSupabase();
     if (!projectId || !supabase) return;
 
-    // views count
-    const { count } = await supabase
-      .from("project_views")
-      .select("*", { count: "exact", head: true })
-      .eq("project_id", projectId);
+    try {
+      // views count
+      const { count, error: countError } = await supabase
+        .from("project_views")
+        .select("*", { count: "exact", head: true })
+        .eq("project_id", projectId);
 
-    setViews(count ?? 0);
+      if (countError) throw countError;
+      setViews(count ?? 0);
 
-    // rating summary
-    const { data: ratings } = await supabase
-      .from("project_ratings")
-      .select("rating")
-      .eq("project_id", projectId);
-
-    if (ratings && ratings.length > 0) {
-      const avg = ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
-      setAvgRating(Math.round(avg * 10) / 10);
-      setTotalRatings(ratings.length);
-    } else {
-      setAvgRating(0);
-      setTotalRatings(0);
-    }
-
-    // existing user rating
-    const visitorId = getVisitorId();
-    if (visitorId) {
-      const { data: existing } = await supabase
+      // rating summary
+      const { data: ratings, error: ratingsError } = await supabase
         .from("project_ratings")
         .select("rating")
-        .eq("project_id", projectId)
-        .eq("visitor_hash", visitorId)
-        .maybeSingle();
+        .eq("project_id", projectId);
 
-      if (existing) setUserRating(existing.rating);
+      if (ratingsError) throw ratingsError;
+
+      if (ratings && ratings.length > 0) {
+        const avg = ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
+        setAvgRating(Math.round(avg * 10) / 10);
+        setTotalRatings(ratings.length);
+      } else {
+        setAvgRating(0);
+        setTotalRatings(0);
+      }
+
+      // existing user rating
+      const visitorId = getVisitorId();
+      if (visitorId) {
+        const { data: existing, error: existingError } = await supabase
+          .from("project_ratings")
+          .select("rating")
+          .eq("project_id", projectId)
+          .eq("visitor_hash", visitorId)
+          .maybeSingle();
+
+        if (existingError && existingError.code !== "PGRST116") throw existingError;
+        if (existing) setUserRating(existing.rating);
+      }
+    } catch (err) {
+      console.warn("Supabase stats fetch failed, gracefully degrading.", err);
+      // Fallback values on error
+      setViews(0);
+      setAvgRating(0);
+      setTotalRatings(0);
     }
   }, [projectId]);
 
@@ -86,10 +98,19 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
     if (!visitorId) return;
 
     // fire-and-forget unique view — duplicate silently fails via UNIQUE constraint
-    supabase
-      .from("project_views")
-      .insert([{ project_id: projectId, visitor_hash: visitorId }])
-      .then(() => fetchStats());
+    const recordView = async () => {
+      try {
+        await supabase
+          .from("project_views")
+          .insert([{ project_id: projectId, visitor_hash: visitorId }]);
+        fetchStats();
+      } catch (err) {
+        console.warn("Supabase view record failed, gracefully degrading.", err);
+        fetchStats();
+      }
+    };
+    
+    recordView();
   }, [projectId, fetchStats]);
 
   // ── submit rating ────────────────────────────────────────
@@ -100,18 +121,25 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
 
     const visitorId = getVisitorId();
 
-    await supabase.from("project_ratings").upsert(
-      {
-        project_id: projectId,
-        rating: stars,
-        visitor_hash: visitorId,
-      },
-      { onConflict: "project_id,visitor_hash" }
-    );
+    try {
+      const { error } = await supabase.from("project_ratings").upsert(
+        {
+          project_id: projectId,
+          rating: stars,
+          visitor_hash: visitorId,
+        },
+        { onConflict: "project_id,visitor_hash" }
+      );
+      
+      if (error) throw error;
 
-    setUserRating(stars);
-    await fetchStats();
-    setSubmitting(false);
+      setUserRating(stars);
+      await fetchStats();
+    } catch (err) {
+      console.warn("Supabase rating submit failed.", err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!projectId) return null;
