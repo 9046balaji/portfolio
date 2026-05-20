@@ -9,11 +9,13 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
+project details/
 details
 DEPLOYMENT_GUIDE.md
 # testing
 /coverage
+
+scripts
 
 # next.js
 /.next/
@@ -117,7 +119,7 @@ storybook-static/
 *.temp
 tmp/
 temp/
-
+docs
 # Personal/sensitive documents (keep certificates in details folder but don't commit sensitive docs)
 *.pdf
 !public/assets/*.pdf
@@ -127,3 +129,7 @@ temp/
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
+
+# Optimize certificates assets - keep webp only
+/public/certificates/*
+!/public/certificates/*.webp
