@@ -65,12 +65,21 @@ export const metadata: Metadata = {
     title: "Konda Balaji Rao | AI & Full Stack Engineer",
     description:
       "Building Agentic AI Systems & Scalable Full-Stack Architectures. Creator of HeartGuard AI, Aura Bank, and more.",
+    images: [
+      {
+        url: "/assets/profile.png",
+        width: 1200,
+        height: 630,
+        alt: "Konda Balaji Rao — AI & Full Stack Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Konda Balaji Rao | AI & Full Stack Engineer",
     description:
       "Building Agentic AI Systems & Scalable Full-Stack Architectures. Creator of HeartGuard AI, Aura Bank, and more.",
+    images: ["/assets/profile.png"],
   },
 };
 

@@ -16,11 +16,12 @@ export default function NeuralBackground() {
         let height = canvas.height = window.innerHeight;
 
         const particles: Particle[] = [];
-        const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100); // Responsive count
+        const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100);
         const connectionDistance = 150;
         const mouseDistance = 200;
 
         let mouse = { x: 0, y: 0 };
+        let animationFrameId: number;  // ← store ID for cleanup
 
         class Particle {
             x: number;
@@ -63,7 +64,7 @@ export default function NeuralBackground() {
 
             draw() {
                 if (!ctx) return;
-                ctx.fillStyle = "rgba(37, 99, 235, 0.5)"; // Electric Blue
+                ctx.fillStyle = "rgba(37, 99, 235, 0.5)";
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -86,9 +87,9 @@ export default function NeuralBackground() {
                 particle.draw();
             });
 
-            // Draw connections
+            // Draw connections — j = i + 1 to avoid self-comparison
             for (let i = 0; i < particles.length; i++) {
-                for (let j = i; j < particles.length; j++) {
+                for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -96,7 +97,7 @@ export default function NeuralBackground() {
                     if (distance < connectionDistance) {
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(37, 99, 235, ${1 - distance / connectionDistance})`;
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 0.8;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -104,7 +105,7 @@ export default function NeuralBackground() {
                 }
             }
 
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);  // ← store the ID
         };
 
         const handleResize = () => {
@@ -125,6 +126,7 @@ export default function NeuralBackground() {
         animate();
 
         return () => {
+            cancelAnimationFrame(animationFrameId);  // ← cancel on unmount
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("mousemove", handleMouseMove);
         };
