@@ -96,7 +96,7 @@ export default function Hero() {
                         <Github className="w-6 h-6" />
                         <span className="sr-only">GitHub</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                    <a href="https://www.linkedin.com/in/konda-balaji-rao/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                         <Linkedin className="w-6 h-6" />
                         <span className="sr-only">LinkedIn</span>
                     </a>
