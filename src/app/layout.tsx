@@ -18,21 +18,20 @@ const siteUrl = "https://portfolio-sable-tau-b7ysjwnjns.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Konda Balaji Rao | AI & Full Stack Engineer",
+    default: "Konda Balaji Rao | AI/ML & Cloud Engineer",
     template: "%s | Konda Balaji Rao",
   },
   description:
-    "Portfolio of Konda Balaji Rao — Building Agentic AI Systems & Scalable Full-Stack Architectures. Creator of HeartGuard AI, Aura Bank, and more.",
+    "Portfolio of Konda Balaji Rao — Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
   keywords: [
     "Konda Balaji Rao",
     "AI Engineer",
-    "Full Stack Developer",
+    "Healthcare AI",
     "Agentic AI",
     "Machine Learning",
     "Deep Learning",
     "LangGraph",
-    "Next.js",
-    "React",
+    "DevOps",
     "Python",
     "Portfolio",
     "HeartGuard AI",
@@ -62,23 +61,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Konda Balaji Rao — Portfolio",
-    title: "Konda Balaji Rao | AI & Full Stack Engineer",
+    title: "Konda Balaji Rao | AI/ML & Cloud Engineer",
     description:
-      "Building Agentic AI Systems & Scalable Full-Stack Architectures. Creator of HeartGuard AI, Aura Bank, and more.",
+      "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
     images: [
       {
         url: "/assets/profile.png",
         width: 1200,
         height: 630,
-        alt: "Konda Balaji Rao — AI & Full Stack Engineer",
+        alt: "Konda Balaji Rao — AI/ML & Cloud Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Konda Balaji Rao | AI & Full Stack Engineer",
+    title: "Konda Balaji Rao | AI/ML & Cloud Engineer",
     description:
-      "Building Agentic AI Systems & Scalable Full-Stack Architectures. Creator of HeartGuard AI, Aura Bank, and more.",
+      "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
     images: ["/assets/profile.png"],
   },
 };
@@ -88,24 +87,24 @@ const jsonLd = {
   "@type": "Person",
   name: "Konda Balaji Rao",
   url: siteUrl,
-  jobTitle: "AI & Full Stack Engineer",
+  jobTitle: "AI/ML & Cloud Engineer",
   description:
-    "System Architect & AI Researcher building Agentic AI Systems & Scalable Full-Stack Architectures.",
+    "AI/ML Engineer building Agentic AI Systems & Healthcare AI Solutions with Cloud & DevOps.",
   sameAs: [
     "https://github.com/9046balaji",
-    "https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/",
+    "https://www.linkedin.com/in/konda-balaji-rao/",
     "https://leetcode.com/u/KBalajiRao/",
   ],
   knowsAbout: [
     "Artificial Intelligence",
     "Machine Learning",
     "Deep Learning",
-    "Full Stack Development",
+    "Healthcare AI",
     "LangGraph",
-    "Next.js",
-    "React",
+    "DevOps",
+    "Cloud Architecture",
     "Python",
-    "Node.js",
+    "Docker",
     "PostgreSQL",
   ],
 };

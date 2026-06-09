@@ -23,31 +23,43 @@ html.dark {
   --scrollbar-thumb: rgba(255, 255, 255, 0.1);
   --scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
   --selection: rgba(37, 99, 235, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.02);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+  --overlay-bg: #040404;
+  --timeline-line: rgba(255, 255, 255, 0.2);
   color-scheme: dark;
 }
 
 /* ── Light theme ── */
 html.light {
   --background: #f8fafc;
-  --foreground: #0f172a;
+  --foreground: #020617;
   --primary: #2563eb;
   --secondary: #0d9488;
   --surface: #ffffff;
   --surface-hover: #f1f5f9;
-  --muted: #64748b;
-  --muted-foreground: #475569;
-  --border: rgba(0, 0, 0, 0.1);
+  --muted: #475569;
+  --muted-foreground: #1e293b;
+  --border: rgba(0, 0, 0, 0.15);
   --card-bg: rgba(0, 0, 0, 0.03);
   --card-bg-hover: rgba(0, 0, 0, 0.06);
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-tertiary: #64748b;
-  --text-muted: #94a3b8;
-  --shadow-color: rgba(0, 0, 0, 0.08);
-  --section-alt: rgba(0, 0, 0, 0.02);
-  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
-  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+  --text-primary: #000000;
+  --text-secondary: #0f172a;
+  --text-tertiary: #1e293b;
+  --text-muted: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --section-alt: rgba(0, 0, 0, 0.03);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
   --selection: rgba(37, 99, 235, 0.2);
+  --glass-border: rgba(0, 0, 0, 0.12);
+  --glass-bg: rgba(0, 0, 0, 0.04);
+  --glass-bg-subtle: rgba(0, 0, 0, 0.02);
+  --glass-highlight: rgba(0, 0, 0, 0.06);
+  --overlay-bg: #f8fafc;
+  --timeline-line: rgba(0, 0, 0, 0.2);
   color-scheme: light;
 }
 
@@ -68,6 +80,12 @@ html.light {
   --color-text-tertiary: var(--text-tertiary);
   --color-text-muted: var(--text-muted);
   --color-section-alt: var(--section-alt);
+  --color-glass-border: var(--glass-border);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-bg-subtle: var(--glass-bg-subtle);
+  --color-glass-highlight: var(--glass-highlight);
+  --color-overlay-bg: var(--overlay-bg);
+  --color-timeline-line: var(--timeline-line);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
 }
