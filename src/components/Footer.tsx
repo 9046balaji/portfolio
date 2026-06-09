@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const socialLinks = [
     { icon: Github, href: "https://github.com/9046balaji", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/konda-balaji-rao/", label: "LinkedIn" },
     { icon: Code, href: "https://leetcode.com/u/KBalajiRao/", label: "LeetCode" },
     { icon: Mail, href: "mailto:balajikonda9046@gmail.com", label: "Email" },
 ];
@@ -30,7 +30,7 @@ export default function Footer() {
                             &lt;KBR /&gt;
                         </Link>
                         <p className="text-text-tertiary text-sm">
-                            AI & Full Stack Engineer building intelligent systems that make a difference.
+                            AI/ML & Cloud Engineer building intelligent systems that make a difference.
                         </p>
                         <div className="flex gap-4">
                             {socialLinks.map((social, index) => {

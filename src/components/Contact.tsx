@@ -38,7 +38,7 @@ const socialLinks = [
     {
         icon: Linkedin,
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/konda-balaji-rao-0a93313a0/",
+        href: "https://www.linkedin.com/in/konda-balaji-rao/",
         username: "Konda Balaji Rao",
         color: "hover:bg-blue-700"
     },
