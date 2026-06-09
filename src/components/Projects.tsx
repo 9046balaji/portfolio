@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
+import Link from "next/link";
 
 const projects = [
     {
@@ -138,9 +139,9 @@ export default function Projects() {
                                         <Github className="w-4 h-4" /> Code
                                     </a>
                                     {project.links.demo !== "#" && (
-                                        <a href={project.links.demo} className="flex items-center gap-2 text-sm text-primary hover:text-foreground transition-colors">
+                                        <Link href={project.links.demo} className="flex items-center gap-2 text-sm text-primary hover:text-foreground transition-colors">
                                             <ExternalLink className="w-4 h-4" /> View Case Study
-                                        </a>
+                                        </Link>
                                     )}
                                 </div>
                             </div>
