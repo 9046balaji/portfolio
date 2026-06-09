@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowLeft, Github, CreditCard, Users, Brain, Shield, Database,
@@ -453,6 +454,8 @@ function SecurityTab() {
 export default function AuraBankProject() {
     const [activeTab, setActiveTab] = useState("overview");
 
+    const router = useRouter();
+
     const renderTabContent = () => {
         switch (activeTab) {
             case "overview": return <OverviewTab />;
@@ -472,9 +475,9 @@ export default function AuraBankProject() {
                 <section className="relative py-16 px-4 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
                     <div className="max-w-6xl mx-auto relative z-10">
-                        <Link href="/#projects" className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary mb-8 transition-colors">
+                        <button onClick={() => router.back()} className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary mb-8 transition-colors">
                             <ArrowLeft className="w-4 h-4" /> Back to Projects
-                        </Link>
+                        </button>
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -513,7 +516,7 @@ export default function AuraBankProject() {
                                 href="https://github.com/9046balaji/bank-management-system"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-card-bg-hover hover:bg-white/20 border border-border rounded-lg transition-colors"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-card-bg-hover hover:bg-black/5 dark:hover:bg-white/20 border border-border rounded-lg transition-colors"
                             >
                                 <Github className="w-5 h-5" /> View on GitHub
                             </a>
@@ -533,7 +536,7 @@ export default function AuraBankProject() {
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
                                         activeTab === tab.id
-                                            ? "bg-primary text-text-primary"
+                                            ? "bg-primary text-white"
                                             : "bg-card-bg text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                     }`}
                                 >

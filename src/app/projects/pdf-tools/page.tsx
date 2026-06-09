@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowLeft, Github, FileText, Server, Lock, Zap, Database, Cpu, FolderTree,
@@ -90,7 +91,7 @@ function OverviewTab() {
                                         <span className="text-2xl">{item.emoji}</span>
                                     </div>
                                     <div className="text-xs text-text-tertiary">{item.label}</div>
-                                    <div className={`text-xs text-${item.color}-300`}>{item.sub}</div>
+                                    <div className={`text-xs text-${item.color}-600 dark:text-${item.color}-300`}>{item.sub}</div>
                                 </div>
                                 {idx < 4 && <div className="w-8 h-0.5 bg-border mx-2"></div>}
                             </div>
@@ -584,7 +585,7 @@ function ArchitectureTab() {
                         { step: "5", name: "NOTIFY", desc: "WebSocket", color: "purple" },
                     ].map((flow) => (
                         <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
-                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                            <div className={`text-${flow.color}-600 dark:text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
                             <div className="text-xs text-text-primary font-medium">{flow.name}</div>
                             <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
@@ -721,6 +722,7 @@ function ConfigTab() {
 }
 
 export default function PDFToolsCaseStudy() {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState("overview");
 
     const renderTabContent = () => {
@@ -747,9 +749,9 @@ export default function PDFToolsCaseStudy() {
                         transition={{ duration: 0.5 }}
                         className="mb-12"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
+                        <button onClick={() => router.back()} className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
-                        </Link>
+                        </button>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">PDF Tools</h1>
                         <p className="text-xl md:text-2xl text-secondary font-mono mb-6">High-Throughput Document Processing Engine</p>
@@ -774,7 +776,7 @@ export default function PDFToolsCaseStudy() {
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://github.com/9046balaji/Pdf-Tools" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/Pdf-Tools" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-black/5 dark:hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
@@ -790,7 +792,7 @@ export default function PDFToolsCaseStudy() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                            ? "bg-primary text-text-primary"
+                                            ? "bg-primary text-white"
                                             : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >

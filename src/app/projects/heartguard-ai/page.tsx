@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowLeft, Github, Brain, Activity, ShieldCheck, Layers, Workflow, Server,
@@ -349,7 +350,7 @@ function FeaturesTab() {
                     <div className="p-5 bg-blue-500/5 border border-blue-500/20 rounded-xl">
                         <div className="flex items-center gap-2 mb-3">
                             <Clock className="w-5 h-5 text-blue-500" />
-                            <h3 className="font-bold text-blue-400">Short-Term</h3>
+                            <h3 className="font-bold text-blue-600 dark:text-blue-400">Short-Term</h3>
                         </div>
                         <p className="text-text-tertiary text-sm mb-3">Remembers what you said in the current conversation.</p>
                         <div className="text-xs text-text-muted space-y-1">
@@ -362,7 +363,7 @@ function FeaturesTab() {
                     <div className="p-5 bg-purple-500/5 border border-purple-500/20 rounded-xl">
                         <div className="flex items-center gap-2 mb-3">
                             <Database className="w-5 h-5 text-purple-500" />
-                            <h3 className="font-bold text-purple-400">Long-Term</h3>
+                            <h3 className="font-bold text-purple-600 dark:text-purple-400">Long-Term</h3>
                         </div>
                         <p className="text-text-tertiary text-sm mb-3">Stores your medical profile permanently and securely.</p>
                         <div className="text-xs text-text-muted space-y-1">
@@ -375,7 +376,7 @@ function FeaturesTab() {
                     <div className="p-5 bg-teal-500/5 border border-teal-500/20 rounded-xl">
                         <div className="flex items-center gap-2 mb-3">
                             <Search className="w-5 h-5 text-teal-500" />
-                            <h3 className="font-bold text-teal-400">Smart Recall</h3>
+                            <h3 className="font-bold text-teal-600 dark:text-teal-400">Smart Recall</h3>
                         </div>
                         <p className="text-text-tertiary text-sm mb-3">Automatically pulls relevant memories when you ask something new.</p>
                         <div className="text-xs text-text-muted space-y-1">
@@ -427,10 +428,10 @@ function FeaturesTab() {
                     the inference server — fast, private, and no cloud dependency.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
-                    <span className="px-3 py-1.5 bg-purple-500/10 text-purple-400 rounded-lg text-sm font-medium">MedGemma-4B-IT</span>
-                    <span className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-lg text-sm font-medium">LoRA Fine-Tuning</span>
-                    <span className="px-3 py-1.5 bg-green-500/10 text-green-400 rounded-lg text-sm font-medium">llama.cpp Server</span>
-                    <span className="px-3 py-1.5 bg-orange-500/10 text-orange-400 rounded-lg text-sm font-medium">Runs Locally</span>
+                    <span className="px-3 py-1.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-lg text-sm font-medium">MedGemma-4B-IT</span>
+                    <span className="px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg text-sm font-medium">LoRA Fine-Tuning</span>
+                    <span className="px-3 py-1.5 bg-green-500/10 text-green-600 dark:text-green-400 rounded-lg text-sm font-medium">llama.cpp Server</span>
+                    <span className="px-3 py-1.5 bg-orange-500/10 text-orange-600 dark:text-orange-400 rounded-lg text-sm font-medium">Runs Locally</span>
                 </div>
             </section>
         </div>
@@ -441,10 +442,110 @@ function FeaturesTab() {
 function TechTab() {
     return (
         <div className="space-y-10">
-            {/* System Architecture */}
+            {/* Architecture Diagram */}
             <section className="bg-card-bg border border-border rounded-2xl p-8">
                 <h2 className="text-2xl font-bold text-text-primary mb-3 flex items-center gap-3">
-                    <Layers className="text-primary w-6 h-6" /> System Architecture
+                    <Workflow className="text-primary w-6 h-6" /> Architecture Diagram
+                </h2>
+                <p className="text-text-tertiary mb-6 max-w-3xl">
+                    A visual overview of how all HeartGuard components connect — from user input to verified medical response.
+                </p>
+
+                <div className="flex flex-col items-center space-y-4 font-mono text-sm">
+                    {/* User Input */}
+                    <div className="px-6 py-3 bg-blue-50 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300">
+                        💬 User Question
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* FastAPI */}
+                    <div className="px-6 py-3 bg-purple-50 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/50 rounded-lg text-purple-600 dark:text-purple-300 w-full max-w-md text-center">
+                        <div className="font-bold mb-1">⚡ FastAPI Gateway</div>
+                        <div className="text-xs text-text-tertiary">Auth • Rate Limiting • PII Scrubbing</div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* LangGraph Router */}
+                    <div className="px-6 py-3 bg-orange-50 dark:bg-orange-500/20 border border-orange-300 dark:border-orange-500/50 rounded-lg text-orange-600 dark:text-orange-300 w-full max-w-lg text-center">
+                        <div className="font-bold mb-1">🧠 LangGraph Router</div>
+                        <div className="text-xs text-text-tertiary">Intent classification → selects the right specialist agent</div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* 8 Specialist Agents */}
+                    <div className="w-full max-w-3xl">
+                        <div className="text-center text-xs text-text-tertiary mb-3 font-sans">8 Specialist AI Agents</div>
+                        <div className="grid grid-cols-4 gap-3">
+                            {[
+                                { emoji: "🩺", name: "Medical Analyst", color: "blue" },
+                                { emoji: "💊", name: "Drug Expert", color: "orange" },
+                                { emoji: "❤️", name: "Heart Analyst", color: "red" },
+                                { emoji: "🔬", name: "Researcher", color: "purple" },
+                                { emoji: "🧠", name: "Thinking Agent", color: "teal" },
+                                { emoji: "🚨", name: "Triage Agent", color: "pink" },
+                                { emoji: "📊", name: "Data Analyst", color: "green" },
+                                { emoji: "📋", name: "EHR Agent", color: "cyan" },
+                            ].map((agent) => (
+                                <div key={agent.name} className={`p-2 rounded-lg bg-${agent.color}-50 dark:bg-${agent.color}-500/10 border border-${agent.color}-200 dark:border-${agent.color}-500/30 text-center`}>
+                                    <div className="text-lg">{agent.emoji}</div>
+                                    <div className="text-xs text-text-secondary mt-1">{agent.name}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* RAG + Knowledge */}
+                    <div className="px-6 py-3 bg-teal-50 dark:bg-teal-500/20 border border-teal-300 dark:border-teal-500/50 rounded-lg text-teal-600 dark:text-teal-300 w-full max-w-lg text-center">
+                        <div className="font-bold mb-1">📚 Self-Correcting RAG Pipeline</div>
+                        <div className="text-xs text-text-tertiary">125K+ docs • ChromaDB • MedCPT Embeddings • Hallucination Grader</div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* Data Layer */}
+                    <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-4 bg-blue-500"></div>
+                            <div className="px-4 py-3 bg-blue-50 dark:bg-blue-500/20 border border-blue-300 dark:border-blue-500/50 rounded-lg text-blue-600 dark:text-blue-300 text-center w-full">
+                                <div className="font-bold mb-1">🗄️ PostgreSQL</div>
+                                <div className="text-xs text-text-tertiary">27+ tables • RLS</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-4 bg-purple-500"></div>
+                            <div className="px-4 py-3 bg-purple-50 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/50 rounded-lg text-purple-600 dark:text-purple-300 text-center w-full">
+                                <div className="font-bold mb-1">🔍 ChromaDB</div>
+                                <div className="text-xs text-text-tertiary">Vector Search</div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-0.5 h-4 bg-red-500"></div>
+                            <div className="px-4 py-3 bg-red-50 dark:bg-red-500/20 border border-red-300 dark:border-red-500/50 rounded-lg text-red-600 dark:text-red-300 text-center w-full">
+                                <div className="font-bold mb-1">⚡ Redis</div>
+                                <div className="text-xs text-text-tertiary">Cache • Queue</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* MedGemma */}
+                    <div className="px-6 py-3 bg-green-50 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300 w-full max-w-md text-center">
+                        <div className="font-bold mb-1">🤖 MedGemma-4B-IT (llama.cpp)</div>
+                        <div className="text-xs text-text-tertiary">Fine-tuned for cardiology • LoRA adapters • Runs locally</div>
+                    </div>
+                    <div className="w-0.5 h-6 bg-border"></div>
+
+                    {/* Output */}
+                    <div className="px-6 py-3 bg-green-50 dark:bg-green-500/20 border border-green-300 dark:border-green-500/50 rounded-lg text-green-600 dark:text-green-300">
+                        ✅ Verified Response with Citations
+                    </div>
+                </div>
+            </section>
+
+            {/* System Architecture Layers */}
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-3 flex items-center gap-3">
+                    <Layers className="text-primary w-6 h-6" /> System Layers
                 </h2>
                 <p className="text-text-tertiary mb-6 max-w-3xl">
                     HeartGuard is built in clean layers — each one has a clear job. This makes it easy to maintain, test, and scale.
@@ -460,7 +561,7 @@ function TechTab() {
                     ].map((layer, idx) => (
                         <div key={layer.label} className="flex items-stretch gap-4">
                             <div className="flex flex-col items-center">
-                                <div className={`w-10 h-10 rounded-full bg-${layer.color}-500/20 flex items-center justify-center text-${layer.color}-500 font-bold text-sm flex-shrink-0`}>
+                                <div className={`w-10 h-10 rounded-full bg-${layer.color}-500/20 flex items-center justify-center text-${layer.color}-600 dark:text-${layer.color}-400 font-bold text-sm flex-shrink-0`}>
                                     {idx + 1}
                                 </div>
                                 {idx < 4 && <div className="w-0.5 flex-1 bg-border mt-1"></div>}
@@ -571,11 +672,11 @@ function TechTab() {
                     via <span className="text-primary font-semibold">llama.cpp</span>, and background tasks run via Redis-backed job queues.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-lg text-sm font-medium">FastAPI</span>
-                    <span className="px-3 py-1.5 bg-purple-500/10 text-purple-400 rounded-lg text-sm font-medium">LangGraph</span>
-                    <span className="px-3 py-1.5 bg-teal-500/10 text-teal-400 rounded-lg text-sm font-medium">Docker Compose</span>
-                    <span className="px-3 py-1.5 bg-green-500/10 text-green-400 rounded-lg text-sm font-medium">llama.cpp</span>
-                    <span className="px-3 py-1.5 bg-orange-500/10 text-orange-400 rounded-lg text-sm font-medium">Redis Job Queue</span>
+                    <span className="px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg text-sm font-medium">FastAPI</span>
+                    <span className="px-3 py-1.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-lg text-sm font-medium">LangGraph</span>
+                    <span className="px-3 py-1.5 bg-teal-500/10 text-teal-600 dark:text-teal-400 rounded-lg text-sm font-medium">Docker Compose</span>
+                    <span className="px-3 py-1.5 bg-green-500/10 text-green-600 dark:text-green-400 rounded-lg text-sm font-medium">llama.cpp</span>
+                    <span className="px-3 py-1.5 bg-orange-500/10 text-orange-600 dark:text-orange-400 rounded-lg text-sm font-medium">Redis Job Queue</span>
                 </div>
             </section>
         </div>
@@ -583,6 +684,7 @@ function TechTab() {
 }
 
 export default function HeartGuardCaseStudy() {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState("overview");
 
     const renderTabContent = () => {
@@ -613,9 +715,9 @@ export default function HeartGuardCaseStudy() {
                         transition={{ duration: 0.5 }}
                         className="mb-12"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
+                        <button onClick={() => router.back()} className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
-                        </Link>
+                        </button>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">
                             HeartGuard <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI</span>
@@ -644,7 +746,7 @@ export default function HeartGuardCaseStudy() {
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/Heart" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-black/5 dark:hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
@@ -660,7 +762,7 @@ export default function HeartGuardCaseStudy() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                            ? "bg-primary text-text-primary"
+                                            ? "bg-primary text-white"
                                             : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >

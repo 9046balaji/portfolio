@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowLeft, Github, ExternalLink, Brain, Eye, Cpu, BarChart3, Heart,
@@ -278,6 +279,7 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function MLShowcase() {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState("all");
 
     const filteredProjects = activeTab === "all"
@@ -299,9 +301,9 @@ export default function MLShowcase() {
                         transition={{ duration: 0.5 }}
                         className="mb-12 text-center"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
+                        <button onClick={() => router.back()} className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
-                        </Link>
+                        </button>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">ML & Deep Learning Showcase</h1>
                         <p className="text-xl text-text-tertiary mb-6">
@@ -330,10 +332,10 @@ export default function MLShowcase() {
                         </div>
 
                         <div className="flex justify-center gap-4">
-                            <a href="https://github.com/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-black/5 dark:hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Repository
                             </a>
-                            <a href="https://colab.research.google.com/github/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-primary hover:bg-blue-700 text-text-primary rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://colab.research.google.com/github/9046balaji/collage-projects" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <ExternalLink className="w-5 h-5" /> Open in Colab
                             </a>
                         </div>
@@ -394,7 +396,7 @@ export default function MLShowcase() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                            ? "bg-primary text-text-primary"
+                                            ? "bg-primary text-white"
                                             : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >

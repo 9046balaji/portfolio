@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowLeft, Github, Calendar, Users, UserCheck, Building2, Shield, Database,
@@ -416,6 +417,7 @@ function SecurityTab() {
 }
 
 export default function HospitalManagementCaseStudy() {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState("overview");
 
     const renderTabContent = () => {
@@ -442,9 +444,9 @@ export default function HospitalManagementCaseStudy() {
                         transition={{ duration: 0.5 }}
                         className="mb-12"
                     >
-                        <Link href="/#projects" className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
+                        <button onClick={() => router.back()} className="inline-flex items-center text-text-tertiary hover:text-primary mb-6 transition-colors">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
-                        </Link>
+                        </button>
 
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">Hospital Management System</h1>
                         <p className="text-xl md:text-2xl text-secondary font-mono mb-6">Enterprise Resource Planning for Healthcare</p>
@@ -469,7 +471,7 @@ export default function HospitalManagementCaseStudy() {
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://github.com/9046balaji" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
+                            <a href="https://github.com/9046balaji/Hospital-Management-System" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-card-bg-hover hover:bg-black/5 dark:hover:bg-white/20 rounded-lg font-medium flex items-center gap-2 transition-colors">
                                 <Github className="w-5 h-5" /> View Code
                             </a>
                         </div>
@@ -485,7 +487,7 @@ export default function HospitalManagementCaseStudy() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                                        ? "bg-primary text-text-primary"
+                                        ? "bg-primary text-white"
                                         : "text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
                                         }`}
                                 >
