@@ -4,8 +4,13 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
+let hasShownPreloader = false;
+
 export default function Preloader() {
-  const [phase, setPhase] = useState<"loading" | "reveal" | "done">("loading");
+  const [phase, setPhase] = useState<"loading" | "reveal" | "done">(() => {
+    if (hasShownPreloader) return "done";
+    return "loading";
+  });
   const [count, setCount] = useState(0);
   const [shutterOpen, setShutterOpen] = useState(false);
 
@@ -15,6 +20,13 @@ export default function Preloader() {
   const reduceMotion = useReducedMotion() ?? false;
 
   useEffect(() => {
+    // Skip preloader if user has already seen it this session or in this navigation
+    if (hasShownPreloader || sessionStorage.getItem("preloader-shown")) {
+      setPhase("done");
+      hasShownPreloader = true;
+      return;
+    }
+
     let current = 0;
 
     intervalRef.current = setInterval(() => {
@@ -35,7 +47,11 @@ export default function Preloader() {
             }
           }, reduceMotion ? 0 : 180),
           setTimeout(() => setPhase("reveal"), reduceMotion ? 220 : 820),
-          setTimeout(() => setPhase("done"), reduceMotion ? 900 : 1800),
+          setTimeout(() => {
+            setPhase("done");
+            sessionStorage.setItem("preloader-shown", "true");
+            hasShownPreloader = true;
+          }, reduceMotion ? 900 : 1800),
         );
       }
     }, reduceMotion ? 34 : 24);
@@ -81,7 +97,7 @@ export default function Preloader() {
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
-          className="fixed inset-0 z-[9999] overflow-hidden bg-[#040404] pointer-events-none"
+          className="fixed inset-0 z-[9999] overflow-hidden bg-overlay-bg pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -118,7 +134,7 @@ export default function Preloader() {
 
           {/* Top Curtain */}
           <motion.div
-            className="absolute top-0 left-0 h-1/2 w-full border-b border-white/5 bg-[#040404]"
+            className="absolute top-0 left-0 h-1/2 w-full border-b border-glass-border/50 bg-overlay-bg"
             animate={phase === "reveal" ? { y: "-100%" } : { y: 0 }}
             transition={curtainTransition}
           >
@@ -131,13 +147,13 @@ export default function Preloader() {
                 ease: [0.76, 0, 0.24, 1],
                 delay: 0.1,
               }}
-              className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-white/10 to-transparent"
+              className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-glass-border to-transparent"
             />
           </motion.div>
 
           {/* Bottom Curtain */}
           <motion.div
-            className="absolute bottom-0 left-0 h-1/2 w-full border-t border-white/5 bg-[#040404]"
+            className="absolute bottom-0 left-0 h-1/2 w-full border-t border-glass-border/50 bg-overlay-bg"
             animate={phase === "reveal" ? { y: "100%" } : { y: 0 }}
             transition={curtainTransition}
           >
@@ -156,7 +172,7 @@ export default function Preloader() {
           >
             {/* Shutter Circle / Iris */}
             <div className="relative flex flex-col items-center">
-              <div className="absolute h-28 w-28 rounded-full border border-white/8 bg-white/[0.01] shadow-[0_0_30px_rgba(37,99,235,0.05)]" />
+              <div className="absolute h-28 w-28 rounded-full border border-glass-border bg-glass-bg shadow-[0_0_30px_rgba(37,99,235,0.05)]" />
               <div className="absolute h-24 w-24 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.18)_0%,transparent_70%)] blur-2xl animate-pulse" />
 
               <svg viewBox="0 0 120 120" className="relative z-10 h-28 w-28">
@@ -225,7 +241,7 @@ export default function Preloader() {
 
             {/* Dynamic Progress Percentage */}
             <motion.div
-              className="mt-6 font-mono text-[3.2rem] font-extralight tracking-[0.22em] text-white/90 pl-3 tabular-nums select-none"
+              className="mt-6 font-mono text-[3.2rem] font-extralight tracking-[0.22em] text-foreground/90 pl-3 tabular-nums select-none"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.4 }}
@@ -237,7 +253,7 @@ export default function Preloader() {
             <motion.div
               animate={{ opacity: [0.42, 1, 0.42] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              className="mt-4 font-mono text-[10px] uppercase tracking-[0.45em] text-blue-400/80 select-none"
+              className="mt-4 font-mono text-[10px] uppercase tracking-[0.45em] text-primary/80 select-none"
             >
               {statusText}
             </motion.div>
