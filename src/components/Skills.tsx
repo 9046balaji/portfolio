@@ -6,7 +6,6 @@ import {
     Cloud,
     Cpu,
     Database,
-    LayoutGrid,
     Server,
     Sparkles,
     TrendingUp,
@@ -18,28 +17,28 @@ const skills = [
         category: "AI Agents & LLMs",
         icon: Cpu,
         featured: true,
-        items: ["LangGraph", "LangChain", "RAG Pipelines", "MedGemma", "Fine-tuning (LoRA/QLoRA)", "llama.cpp", "ChromaDB", "Ollama"],
+        items: ["LangGraph", "LangChain", "RAG Pipelines", "MedGemma", "Fine-tuning (LoRA/QLoRA)", "ChromaDB", "Ollama"],
     },
     {
         category: "Deep Learning & CV",
         icon: BrainCircuit,
         featured: true,
-        items: ["Keras", "PyTorch", "TensorFlow", "OpenCV", "Transfer Learning", "CNN", "LSTM", "VGG16 / ResNet"],
+        items: ["Keras", "PyTorch", "OpenCV", "Transfer Learning", "CNN", "LSTM", "VGG16 / ResNet"],
     },
     {
         category: "Machine Learning",
         icon: TrendingUp,
-        items: ["Scikit-learn", "XGBoost", "LightGBM", "SHAP", "Optuna", "Pandas", "NumPy", "spaCy"],
+        items: ["Scikit-learn", "XGBoost", "LightGBM", "SHAP", "Optuna", "Pandas", "NumPy"],
     },
     {
         category: "Backend Engineering",
         icon: Server,
-        items: ["Python (FastAPI)", "Python (Flask)", "Node.js (Express)", "REST APIs", "WebSockets", "Celery", "JWT Auth"],
+        items: ["Python (FastAPI)", "Python (Flask)", "REST APIs", "WebSockets"],
     },
     {
         category: "Databases & Storage",
         icon: Database,
-        items: ["PostgreSQL", "Redis", "Supabase", "SQLite"],
+        items: ["PostgreSQL", "Redis", "SQLite"],
     },
     {
         category: "Cloud & DevOps",
@@ -47,14 +46,9 @@ const skills = [
         items: ["AWS (EC2, S3)", "GitHub Actions", "CI/CD", "Linux", "Docker", "Docker Compose", "Terraform", "VPC / Networking"],
     },
     {
-        category: "Frontend",
-        icon: LayoutGrid,
-        items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Three.js", "Framer Motion"],
-    },
-    {
         category: "Tools & Practices",
         icon: Wrench,
-        items: ["Git", "Jupyter", "Google Colab", "VS Code", "MLflow", "Alembic", "Tesseract OCR"],
+        items: ["Git", "Jupyter", "Google Colab", "VS Code", "MLflow"],
     },
 ] as const;
 
@@ -74,13 +68,13 @@ export default function Skills() {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-14"
                 >
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs uppercase tracking-[0.26em] text-text-tertiary backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-bg px-4 py-2 text-xs uppercase tracking-[0.26em] text-text-tertiary backdrop-blur-md">
                         <Sparkles className="h-4 w-4 text-secondary" />
                         Technical Arsenal
                     </div>
                     <h2 className="mt-5 text-3xl md:text-4xl font-bold text-text-primary">A focused stack for intelligent systems</h2>
                     <p className="mt-4 mx-auto max-w-2xl text-text-tertiary">
-                        My strongest areas are AI systems, deep learning, and MLOps, with supporting tooling across cloud, backend, and frontend delivery.
+                        My strongest areas are AI systems, deep learning, and MLOps, with supporting tooling across cloud, backend, and DevOps delivery.
                     </p>
                 </motion.div>
 
@@ -98,11 +92,11 @@ export default function Skills() {
                                 viewport={{ once: true, amount: 0.22 }}
                                 transition={{ duration: 0.5, delay: index * 0.06 }}
                                 whileHover={{ y: -5, scale: 1.01 }}
-                                className={`${spanClass} relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-2xl backdrop-blur-md transition-colors hover:border-primary/40`}
+                                className={`${spanClass} relative overflow-hidden rounded-[1.75rem] border border-glass-border bg-glass-bg p-6 shadow-2xl backdrop-blur-md transition-colors hover:border-primary/40`}
                             >
                                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_55%)] opacity-80" />
                                 <div className="relative flex items-start gap-4">
-                                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-primary/10 shadow-inner">
+                                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-glass-border bg-primary/10 shadow-inner">
                                         <Icon className="h-6 w-6 text-primary" />
                                     </div>
 
@@ -123,14 +117,14 @@ export default function Skills() {
                                                     ? "Model design and training for image understanding, experimentation, and high-signal feature learning."
                                                     : skillGroup.category === "Cloud & DevOps"
                                                         ? "Deployment, automation, and infrastructure patterns that keep ML systems stable and reproducible."
-                                                        : "Supporting capabilities that help ship the full stack with speed, clarity, and maintainability."}
+                                                        : "Supporting capabilities that help ship reliable systems with speed, clarity, and maintainability."}
                                         </p>
 
                                         <div className="mt-5 flex flex-wrap gap-2">
                                             {skillGroup.items.map((item) => (
                                                 <span
                                                     key={item}
-                                                    className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 text-sm text-text-secondary transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary"
+                                                    className="inline-flex items-center rounded-full border border-glass-border bg-glass-bg-subtle px-3 py-1 text-sm text-text-secondary transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary"
                                                 >
                                                     {item}
                                                 </span>
