@@ -314,7 +314,7 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={onClose}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
+          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-colors border border-glass-border"
           aria-label="Close"
         >
           <X className="w-4 h-4" />
@@ -561,8 +561,8 @@ export default function Certifications() {
                 whileTap={{ scale: 0.95 }}
                 className="relative px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 border overflow-hidden font-mono"
                 style={{
-                  background: isActive ? color : "rgba(255,255,255,0.04)",
-                  borderColor: isActive ? color : "rgba(255,255,255,0.08)",
+                  background: isActive ? color : "var(--glass-bg)",
+                  borderColor: isActive ? color : "var(--glass-border)",
                   color: isActive ? "#fff" : "var(--text-secondary)",
                 }}
               >
@@ -572,7 +572,7 @@ export default function Certifications() {
                   <span
                     className="text-[10px] px-1.5 py-0.5 rounded-sm font-bold"
                     style={{
-                      background: isActive ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.06)",
+                      background: isActive ? "rgba(255,255,255,0.2)" : "var(--glass-bg)",
                     }}
                   >
                     {counts[cat.id]}
