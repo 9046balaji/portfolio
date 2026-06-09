@@ -93,7 +93,7 @@ export default function About() {
                         <motion.div
                             whileHover={{ y: -5, scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                            className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-md"
+                            className="group relative overflow-hidden rounded-[2rem] border border-glass-border bg-glass-bg shadow-2xl backdrop-blur-md"
                         >
                             <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-background/25 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-55" />
 
@@ -108,7 +108,7 @@ export default function About() {
                             </div>
 
                             <div className="absolute inset-x-4 bottom-4 z-20">
-                                <div className="rounded-2xl border border-white/10 bg-background/55 px-4 py-3 backdrop-blur-xl shadow-xl">
+                                <div className="rounded-2xl border border-glass-border bg-background/55 px-4 py-3 backdrop-blur-xl shadow-xl">
                                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
                                         Software Engineer
                                     </p>
@@ -131,9 +131,9 @@ export default function About() {
                     >
                         <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)]" />
 
-                        <div className="relative space-y-6 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8 shadow-2xl backdrop-blur-md">
+                        <div className="relative space-y-6 rounded-[2rem] border border-glass-border bg-glass-bg p-6 md:p-8 shadow-2xl backdrop-blur-md">
                             <div className="space-y-4">
-                                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-text-tertiary backdrop-blur-md">
+                                <div className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-bg px-3 py-1 text-xs text-text-tertiary backdrop-blur-md">
                                     <Sparkles className="h-4 w-4 text-secondary" />
                                     Engineering curiosity into reliable AI products
                                 </div>
@@ -161,7 +161,7 @@ export default function About() {
                                         viewport={{ once: true, amount: 0.3 }}
                                         transition={{ duration: 0.35, delay: index * 0.06 }}
                                         whileHover={{ y: -3 }}
-                                        className="rounded-2xl border border-white/10 bg-card-bg/70 p-4 backdrop-blur-md"
+                                        className="rounded-2xl border border-glass-border bg-card-bg/70 p-4 backdrop-blur-md"
                                     >
                                         <div className="text-xs uppercase tracking-[0.24em] text-text-tertiary">{item.label}</div>
                                         <div className="mt-1 text-sm font-medium text-text-primary">{item.value}</div>
@@ -184,7 +184,7 @@ export default function About() {
                                             viewport={{ once: true, amount: 0.3 }}
                                             transition={{ duration: 0.25, delay: index * 0.04 }}
                                             whileHover={{ y: -2 }}
-                                            className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-text-secondary transition-colors hover:border-primary/40 hover:text-primary"
+                                            className="rounded-full border border-glass-border bg-glass-bg px-3 py-1 text-sm text-text-secondary transition-colors hover:border-primary/40 hover:text-primary"
                                         >
                                             {interest}
                                         </motion.span>
@@ -193,7 +193,7 @@ export default function About() {
                             </div>
                         </div>
 
-                        <div className="relative mt-6 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-2xl backdrop-blur-md">
+                        <div className="relative mt-6 overflow-hidden rounded-[2rem] border border-glass-border bg-glass-bg p-6 shadow-2xl backdrop-blur-md">
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.10),transparent_55%)]" />
                             <div className="relative mb-5 flex items-center gap-2">
                                 <Target className="h-5 w-5 text-secondary" />
@@ -211,9 +211,9 @@ export default function About() {
                                             viewport={{ once: true, amount: 0.25 }}
                                             transition={{ duration: 0.45, delay: index * 0.08 }}
                                             whileHover={{ y: -5, scale: 1.01 }}
-                                            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-md transition-colors hover:border-primary/40"
+                                            className="group rounded-2xl border border-glass-border bg-glass-bg-subtle p-5 backdrop-blur-md transition-colors hover:border-primary/40"
                                         >
-                                            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-primary/10 transition-colors group-hover:bg-primary/20">
+                                            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-glass-border bg-primary/10 transition-colors group-hover:bg-primary/20">
                                                 <Icon className="h-5 w-5 text-primary" />
                                             </div>
                                             <h4 className="mb-2 font-semibold text-text-primary">{item.title}</h4>
@@ -234,7 +234,7 @@ export default function About() {
                     transition={{ duration: 0.5, delay: 0.15 }}
                     className="mt-16 text-center"
                 >
-                    <div className="inline-block max-w-4xl rounded-[2rem] border border-white/10 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 px-6 py-8 shadow-2xl backdrop-blur-md md:px-10">
+                    <div className="inline-block max-w-4xl rounded-[2rem] border border-glass-border bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 px-6 py-8 shadow-2xl backdrop-blur-md md:px-10">
                         <Target className="mx-auto mb-4 h-8 w-8 text-secondary" />
                         <blockquote className="text-xl md:text-2xl font-medium leading-relaxed text-text-primary">
                             &quot;My mission is to build AI systems that are not just intelligent, but also{' '}
