@@ -52,7 +52,7 @@ npm start
 ## 👤 Author
 
 **Konda Balaji Rao**
-
+**balajikonda9046@gmail.com**
 - B.Tech in Computer Science (AIML)
 - Vignan's Foundation for Science, Technology and Research
 
