@@ -15,9 +15,9 @@ html.dark {
   --card-bg: rgba(255, 255, 255, 0.05);
   --card-bg-hover: rgba(255, 255, 255, 0.08);
   --text-primary: #ffffff;
-  --text-secondary: #d1d5db;
-  --text-tertiary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-secondary: #e2e8f0;
+  --text-tertiary: #cbd5e1;
+  --text-muted: #94a3b8;
   --shadow-color: rgba(0, 0, 0, 0.3);
   --section-alt: rgba(0, 0, 0, 0.3);
   --scrollbar-thumb: rgba(255, 255, 255, 0.1);
@@ -45,10 +45,10 @@ html.light {
   --border: rgba(0, 0, 0, 0.15);
   --card-bg: rgba(0, 0, 0, 0.03);
   --card-bg-hover: rgba(0, 0, 0, 0.06);
-  --text-primary: #000000;
+  --text-primary: #020617;
   --text-secondary: #0f172a;
-  --text-tertiary: #1e293b;
-  --text-muted: #334155;
+  --text-tertiary: #334155;
+  --text-muted: #475569;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --section-alt: rgba(0, 0, 0, 0.03);
   --scrollbar-thumb: rgba(0, 0, 0, 0.2);
