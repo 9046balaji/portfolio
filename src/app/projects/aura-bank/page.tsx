@@ -45,9 +45,9 @@ function OverviewTab() {
                     <Banknote className="text-primary" /> The Vision
                 </h2>
                 <p className="text-text-secondary leading-relaxed text-lg">
-                    Aura Bank is a comprehensive, full-stack banking management system that brings together 
-                    modern web technologies and AI-powered features. Designed for both customers and administrators, 
-                    it provides a seamless digital banking experience with real-time transactions, intelligent 
+                    Aura Bank is a comprehensive, full-stack banking management system that brings together
+                    modern web technologies and AI-powered features. Designed for both customers and administrators,
+                    it provides a seamless digital banking experience with real-time transactions, intelligent
                     loan analysis, fraud detection, and much more.
                 </p>
             </section>
@@ -181,7 +181,7 @@ function ArchitectureTab() {
                     <Server className="text-secondary" /> System Architecture Flow
                 </h2>
                 <p className="text-text-tertiary mb-6">
-                    A full-stack banking architecture with React frontend, Node.js API layer, 
+                    A full-stack banking architecture with React frontend, Node.js API layer,
                     PostgreSQL database, and Python ML microservice for intelligent features.
                 </p>
 
@@ -267,12 +267,24 @@ function ArchitectureTab() {
                         { name: "Analytics Service", desc: "Spending Insights", color: "teal" },
                         { name: "Support Service", desc: "Tickets + AI Chat", color: "pink" },
                         { name: "Admin Service", desc: "User & Loan Mgmt", color: "cyan" },
-                    ].map((service) => (
-                        <div key={service.name} className={`p-4 rounded-xl bg-${service.color}-500/10 border border-${service.color}-500/30`}>
-                            <div className="font-mono text-sm text-text-primary font-semibold mb-1">{service.name}</div>
-                            <div className="text-xs text-text-tertiary">{service.desc}</div>
-                        </div>
-                    ))}
+                    ].map((service) => {
+                        const styleMap: Record<string, string> = {
+                            blue: "bg-blue-500/10 border-blue-500/30",
+                            purple: "bg-purple-500/10 border-purple-500/30",
+                            green: "bg-green-500/10 border-green-500/30",
+                            orange: "bg-orange-500/10 border-orange-500/30",
+                            red: "bg-red-500/10 border-red-500/30",
+                            teal: "bg-teal-500/10 border-teal-500/30",
+                            pink: "bg-pink-500/10 border-pink-500/30",
+                            cyan: "bg-cyan-500/10 border-cyan-500/30",
+                        };
+                        return (
+                            <div key={service.name} className={`p-4 rounded-xl ${styleMap[service.color] || "bg-card-bg border-border"} border`}>
+                                <div className="font-mono text-sm text-text-primary font-semibold mb-1">{service.name}</div>
+                                <div className="text-xs text-text-tertiary">{service.desc}</div>
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
 
@@ -283,14 +295,14 @@ function ArchitectureTab() {
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
                     {[
-                        { step: "1", name: "REQUEST", desc: "User Action", color: "blue" },
-                        { step: "2", name: "VALIDATE", desc: "Auth + Input", color: "purple" },
-                        { step: "3", name: "PROCESS", desc: "Business Logic", color: "yellow" },
-                        { step: "4", name: "LEDGER", desc: "Double-Entry", color: "green" },
-                        { step: "5", name: "RESPONSE", desc: "Return Result", color: "teal" },
+                        { step: "1", name: "REQUEST", desc: "User Action", colorStyle: "bg-blue-500/20 border-blue-500/30 text-blue-600 dark:text-blue-400" },
+                        { step: "2", name: "VALIDATE", desc: "Auth + Input", colorStyle: "bg-purple-500/20 border-purple-500/30 text-purple-600 dark:text-purple-400" },
+                        { step: "3", name: "PROCESS", desc: "Business Logic", colorStyle: "bg-yellow-500/20 border-yellow-500/30 text-yellow-600 dark:text-yellow-400" },
+                        { step: "4", name: "LEDGER", desc: "Double-Entry", colorStyle: "bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400" },
+                        { step: "5", name: "RESPONSE", desc: "Return Result", colorStyle: "bg-teal-500/20 border-teal-500/30 text-teal-600 dark:text-teal-400" },
                     ].map((flow) => (
-                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
-                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                        <div key={flow.step} className={`p-3 rounded-lg ${flow.colorStyle} border text-center`}>
+                            <div className="font-bold text-lg">{flow.step}</div>
                             <div className="text-xs text-text-primary font-medium">{flow.name}</div>
                             <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
@@ -349,7 +361,7 @@ function MLTab() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
+                        className="bg-card-bg border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
                     >
                         <feature.icon className="w-10 h-10 text-primary mb-4" />
                         <h3 className="text-lg font-bold text-text-primary mb-2">{feature.title}</h3>
@@ -534,11 +546,10 @@ export default function AuraBankProject() {
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
-                                        activeTab === tab.id
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${activeTab === tab.id
                                             ? "bg-primary text-white"
                                             : "bg-card-bg text-text-tertiary hover:text-text-primary hover:bg-card-bg-hover"
-                                    }`}
+                                        }`}
                                 >
                                     <tab.icon className="w-4 h-4" />
                                     {tab.label}

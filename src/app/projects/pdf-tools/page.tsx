@@ -79,19 +79,19 @@ function OverviewTab() {
                 <div className="overflow-x-auto">
                     <div className="min-w-[600px] flex items-center justify-between font-mono text-sm">
                         {[
-                            { emoji: "🌐", label: "Browser", sub: "Upload", color: "blue" },
-                            { emoji: "⚡", label: "FastAPI", sub: "REST API", color: "purple" },
-                            { emoji: "📬", label: "Redis", sub: "Task Queue", color: "red" },
-                            { emoji: "🔄", label: "Celery", sub: "Workers", color: "green" },
-                            { emoji: "🗄️", label: "PostgreSQL", sub: "Storage", color: "teal" },
+                            { emoji: "🌐", label: "Browser", sub: "Upload", boxStyle: "bg-blue-500/20 border-blue-500/50", subStyle: "text-blue-600 dark:text-blue-300" },
+                            { emoji: "⚡", label: "FastAPI", sub: "REST API", boxStyle: "bg-purple-500/20 border-purple-500/50", subStyle: "text-purple-600 dark:text-purple-300" },
+                            { emoji: "📬", label: "Redis", sub: "Task Queue", boxStyle: "bg-red-500/20 border-red-500/50", subStyle: "text-red-600 dark:text-red-300" },
+                            { emoji: "🔄", label: "Celery", sub: "Workers", boxStyle: "bg-green-500/20 border-green-500/50", subStyle: "text-green-600 dark:text-green-300" },
+                            { emoji: "🗄️", label: "PostgreSQL", sub: "Storage", boxStyle: "bg-teal-500/20 border-teal-500/50", subStyle: "text-teal-600 dark:text-teal-300" },
                         ].map((item, idx) => (
                             <div key={idx} className="flex items-center">
                                 <div className="text-center">
-                                    <div className={`w-20 h-20 rounded-lg bg-${item.color}-500/20 border border-${item.color}-500/50 flex items-center justify-center mb-2`}>
+                                    <div className={`w-20 h-20 rounded-lg ${item.boxStyle} border flex items-center justify-center mb-2`}>
                                         <span className="text-2xl">{item.emoji}</span>
                                     </div>
                                     <div className="text-xs text-text-tertiary">{item.label}</div>
-                                    <div className={`text-xs text-${item.color}-600 dark:text-${item.color}-300`}>{item.sub}</div>
+                                    <div className={`text-xs ${item.subStyle}`}>{item.sub}</div>
                                 </div>
                                 {idx < 4 && <div className="w-8 h-0.5 bg-border mx-2"></div>}
                             </div>
@@ -317,7 +317,7 @@ function APITab() {
                     </thead>
                     <tbody>
                         {endpoints.map((api, idx) => (
-                            <tr key={idx} className="border-b border-white/5 hover:bg-card-bg">
+                            <tr key={idx} className="border-b border-border hover:bg-card-bg">
                                 <td className="py-2 px-3">
                                     <span className={`px-2 py-0.5 rounded text-xs font-mono ${api.method === "GET" ? "bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-300" :
                                             api.method === "POST" ? "bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300" :
@@ -554,16 +554,16 @@ function ArchitectureTab() {
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {[
-                        { name: "pdf_convert", desc: "Format Conversions", color: "blue" },
-                        { name: "pdf_edit", desc: "Merge, Split, Extract", color: "purple" },
-                        { name: "pdf_transform", desc: "Rotate, Compress", color: "green" },
-                        { name: "pdf_security", desc: "Passwords, Watermarks", color: "orange" },
-                        { name: "pdf_validation", desc: "File Validation", color: "red" },
-                        { name: "pdf_repair", desc: "Fix Corrupted Files", color: "teal" },
-                        { name: "pdf_ocr", desc: "Text Recognition", color: "pink" },
-                        { name: "pdf_compare", desc: "Diff Two PDFs", color: "cyan" },
+                        { name: "pdf_convert", desc: "Format Conversions", style: "bg-blue-500/10 border-blue-500/30" },
+                        { name: "pdf_edit", desc: "Merge, Split, Extract", style: "bg-purple-500/10 border-purple-500/30" },
+                        { name: "pdf_transform", desc: "Rotate, Compress", style: "bg-green-500/10 border-green-500/30" },
+                        { name: "pdf_security", desc: "Passwords, Watermarks", style: "bg-orange-500/10 border-orange-500/30" },
+                        { name: "pdf_validation", desc: "File Validation", style: "bg-red-500/10 border-red-500/30" },
+                        { name: "pdf_repair", desc: "Fix Corrupted Files", style: "bg-teal-500/10 border-teal-500/30" },
+                        { name: "pdf_ocr", desc: "Text Recognition", style: "bg-pink-500/10 border-pink-500/30" },
+                        { name: "pdf_compare", desc: "Diff Two PDFs", style: "bg-cyan-500/10 border-cyan-500/30" },
                     ].map((module) => (
-                        <div key={module.name} className={`p-4 rounded-xl bg-${module.color}-500/10 border border-${module.color}-500/30`}>
+                        <div key={module.name} className={`p-4 rounded-xl ${module.style} border`}>
                             <div className="font-mono text-sm text-text-primary font-semibold mb-1">{module.name}</div>
                             <div className="text-xs text-text-tertiary">{module.desc}</div>
                         </div>
@@ -578,14 +578,14 @@ function ArchitectureTab() {
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
                     {[
-                        { step: "1", name: "UPLOAD", desc: "File Received", color: "blue" },
-                        { step: "2", name: "QUEUE", desc: "Redis Task", color: "red" },
-                        { step: "3", name: "PROCESS", desc: "Celery Worker", color: "yellow" },
-                        { step: "4", name: "STORE", desc: "Save Output", color: "green" },
-                        { step: "5", name: "NOTIFY", desc: "WebSocket", color: "purple" },
+                        { step: "1", name: "UPLOAD", desc: "File Received", style: "bg-blue-500/20 border-blue-500/30 text-blue-600 dark:text-blue-400" },
+                        { step: "2", name: "QUEUE", desc: "Redis Task", style: "bg-red-500/20 border-red-500/30 text-red-600 dark:text-red-400" },
+                        { step: "3", name: "PROCESS", desc: "Celery Worker", style: "bg-yellow-500/20 border-yellow-500/30 text-yellow-600 dark:text-yellow-400" },
+                        { step: "4", name: "STORE", desc: "Save Output", style: "bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400" },
+                        { step: "5", name: "NOTIFY", desc: "WebSocket", style: "bg-purple-500/20 border-purple-500/30 text-purple-600 dark:text-purple-400" },
                     ].map((flow) => (
-                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
-                            <div className={`text-${flow.color}-600 dark:text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                        <div key={flow.step} className={`p-3 rounded-lg ${flow.style} border text-center`}>
+                            <div className="font-bold text-lg">{flow.step}</div>
                             <div className="text-xs text-text-primary font-medium">{flow.name}</div>
                             <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
@@ -707,7 +707,7 @@ function ConfigTab() {
                                 { component: "RAM", min: "2 GB", rec: "4 GB+" },
                                 { component: "Disk Space", min: "500 MB", rec: "2 GB+" },
                             ].map((row) => (
-                                <tr key={row.component} className="border-b border-white/5">
+                                <tr key={row.component} className="border-b border-border">
                                     <td className="py-2 px-4 text-text-primary font-medium">{row.component}</td>
                                     <td className="py-2 px-4 text-text-tertiary">{row.min}</td>
                                     <td className="py-2 px-4 text-green-600 dark:text-green-400">{row.rec}</td>

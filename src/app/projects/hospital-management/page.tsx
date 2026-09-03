@@ -141,14 +141,14 @@ function OverviewTab() {
                 </h2>
                 <div className="grid grid-cols-5 gap-3">
                     {[
-                        { step: "1", name: "USER", desc: "Browser", color: "blue" },
-                        { step: "2", name: "FRONTEND", desc: "HTML/JS", color: "purple" },
-                        { step: "3", name: "ROUTES", desc: "API Handlers", color: "yellow" },
-                        { step: "4", name: "MODELS", desc: "Query Builder", color: "orange" },
-                        { step: "5", name: "DATABASE", desc: "PostgreSQL", color: "green" },
+                        { step: "1", name: "USER", desc: "Browser", style: "bg-blue-500/20 border-blue-500/30 text-blue-600 dark:text-blue-400" },
+                        { step: "2", name: "FRONTEND", desc: "HTML/JS", style: "bg-purple-500/20 border-purple-500/30 text-purple-600 dark:text-purple-400" },
+                        { step: "3", name: "ROUTES", desc: "API Handlers", style: "bg-yellow-500/20 border-yellow-500/30 text-yellow-600 dark:text-yellow-400" },
+                        { step: "4", name: "MODELS", desc: "Query Builder", style: "bg-orange-500/20 border-orange-500/30 text-orange-600 dark:text-orange-400" },
+                        { step: "5", name: "DATABASE", desc: "PostgreSQL", style: "bg-green-500/20 border-green-500/30 text-green-600 dark:text-green-400" },
                     ].map((flow) => (
-                        <div key={flow.step} className={`p-3 rounded-lg bg-${flow.color}-500/20 border border-${flow.color}-500/30 text-center`}>
-                            <div className={`text-${flow.color}-400 font-bold text-lg`}>{flow.step}</div>
+                        <div key={flow.step} className={`p-3 rounded-lg ${flow.style} border text-center`}>
+                            <div className="font-bold text-lg">{flow.step}</div>
                             <div className="text-xs text-text-primary font-medium">{flow.name}</div>
                             <div className="text-xs text-text-tertiary">{flow.desc}</div>
                         </div>
@@ -296,7 +296,7 @@ function APITab() {
                         </thead>
                         <tbody>
                             {endpoints.map((api, index) => (
-                                <tr key={index} className="border-b border-white/5 hover:bg-card-bg">
+                                <tr key={index} className="border-b border-border hover:bg-card-bg">
                                     <td className="py-3 px-4">
                                         <span className={`px-2 py-1 rounded text-xs font-mono font-bold ${api.method === "GET" ? "bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-300" :
                                             api.method === "POST" ? "bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300" :
@@ -356,7 +356,7 @@ function DatabaseTab() {
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {tables.map((table, idx) => (
-                        <div key={idx} className="p-4 bg-surface/50 border border-white/5 rounded-xl">
+                        <div key={idx} className="p-4 bg-card-bg border border-border rounded-xl">
                             <div className="flex items-center gap-2 mb-2">
                                 <Database className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                                 <span className="font-mono text-primary font-semibold">{table.name}</span>
@@ -364,7 +364,7 @@ function DatabaseTab() {
                             <p className="text-xs text-text-tertiary mb-3">{table.purpose}</p>
                             <div className="space-y-1">
                                 {table.cols.map((col) => (
-                                    <div key={col} className="text-xs text-text-muted font-mono pl-2 border-l border-gray-700">
+                                    <div key={col} className="text-xs text-text-muted font-mono pl-2 border-l border-border">
                                         {col}
                                     </div>
                                 ))}
