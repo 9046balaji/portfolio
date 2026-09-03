@@ -30,6 +30,19 @@ const keyStats = [
 
 const techStack = ["Python", "FastAPI", "LangGraph", "MedGemma", "PostgreSQL", "Redis", "ChromaDB", "Docker"];
 
+const COLOR_STYLES: Record<string, { bg: string; border: string; text: string; hoverBorder: string }> = {
+    blue: { bg: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-600 dark:text-blue-400", hoverBorder: "hover:border-blue-500/40" },
+    red: { bg: "bg-red-500/10", border: "border-red-500/20", text: "text-red-600 dark:text-red-400", hoverBorder: "hover:border-red-500/40" },
+    orange: { bg: "bg-orange-500/10", border: "border-orange-500/20", text: "text-orange-600 dark:text-orange-400", hoverBorder: "hover:border-orange-500/40" },
+    purple: { bg: "bg-purple-500/10", border: "border-purple-500/20", text: "text-purple-600 dark:text-purple-400", hoverBorder: "hover:border-purple-500/40" },
+    pink: { bg: "bg-pink-500/10", border: "border-pink-500/20", text: "text-pink-600 dark:text-pink-400", hoverBorder: "hover:border-pink-500/40" },
+    green: { bg: "bg-green-500/10", border: "border-green-500/20", text: "text-green-600 dark:text-green-400", hoverBorder: "hover:border-green-500/40" },
+    teal: { bg: "bg-teal-500/10", border: "border-teal-500/20", text: "text-teal-600 dark:text-teal-400", hoverBorder: "hover:border-teal-500/40" },
+    cyan: { bg: "bg-cyan-500/10", border: "border-cyan-500/20", text: "text-cyan-600 dark:text-cyan-400", hoverBorder: "hover:border-cyan-500/40" },
+    yellow: { bg: "bg-yellow-500/10", border: "border-yellow-500/20", text: "text-yellow-600 dark:text-yellow-400", hoverBorder: "hover:border-yellow-500/40" },
+    primary: { bg: "bg-primary/10", border: "border-primary/20", text: "text-primary", hoverBorder: "hover:border-primary/40" },
+};
+
 const capabilities = [
     { icon: MessageSquare, title: "Smart Medical Chat", description: "Ask any heart-health question and get a well-researched, cited answer — not a guess.", color: "blue" },
     { icon: Heart, title: "Heart Risk Prediction", description: "Enter your vitals and get an AI-powered risk assessment with explainable results.", color: "red" },
@@ -103,16 +116,17 @@ function OverviewTab() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {capabilities.map((cap, index) => {
                         const Icon = cap.icon;
+                        const style = COLOR_STYLES[cap.color] || COLOR_STYLES.primary;
                         return (
                             <motion.div
                                 key={cap.title}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                                className={`p-5 rounded-2xl bg-card-bg border border-border hover:border-${cap.color}-500/40 hover:shadow-lg hover:shadow-${cap.color}-500/5 transition-all duration-300 group`}
+                                className={`p-5 rounded-2xl bg-card-bg border border-border ${style.hoverBorder} hover:shadow-lg transition-all duration-300 group`}
                             >
-                                <div className={`w-11 h-11 rounded-xl bg-${cap.color}-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                    <Icon className={`w-5 h-5 text-${cap.color}-500`} />
+                                <div className={`w-11 h-11 rounded-xl ${style.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                                    <Icon className={`w-5 h-5 ${style.text}`} />
                                 </div>
                                 <h3 className="font-bold text-text-primary mb-2">{cap.title}</h3>
                                 <p className="text-sm text-text-tertiary leading-relaxed">{cap.description}</p>
@@ -179,6 +193,7 @@ function HowItWorksTab() {
                         { step: "You get a cited answer", desc: "Clear response with sources, warnings, and confidence level", icon: Sparkles, color: "primary" },
                     ].map((item, idx) => {
                         const Icon = item.icon;
+                        const style = COLOR_STYLES[item.color] || COLOR_STYLES.primary;
                         return (
                             <motion.div
                                 key={item.step}
@@ -188,8 +203,8 @@ function HowItWorksTab() {
                                 className="w-full"
                             >
                                 <div className="flex items-start gap-4 p-5 rounded-xl bg-card-bg border border-border hover:border-primary/30 transition-colors">
-                                    <div className={`w-10 h-10 rounded-full bg-${item.color}-500/15 flex items-center justify-center flex-shrink-0 mt-0.5`}>
-                                        <Icon className={`w-5 h-5 text-${item.color}-500`} />
+                                    <div className={`w-10 h-10 rounded-full ${style.bg} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                                        <Icon className={`w-5 h-5 ${style.text}`} />
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
@@ -223,15 +238,16 @@ function HowItWorksTab() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {agents.map((agent, index) => {
                         const Icon = agent.icon;
+                        const style = COLOR_STYLES[agent.color] || COLOR_STYLES.primary;
                         return (
                             <motion.div
                                 key={agent.name}
                                 initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.06, duration: 0.4 }}
-                                className={`p-4 rounded-xl bg-${agent.color}-500/5 border border-${agent.color}-500/20 hover:border-${agent.color}-500/40 transition-all`}
+                                className={`p-4 rounded-xl ${style.bg} border ${style.border} ${style.hoverBorder} transition-all`}
                             >
-                                <Icon className={`w-6 h-6 text-${agent.color}-500 mb-3`} />
+                                <Icon className={`w-6 h-6 ${style.text} mb-3`} />
                                 <h3 className="font-bold text-text-primary text-sm mb-1">{agent.name}</h3>
                                 <p className="text-xs text-text-tertiary leading-relaxed">{agent.role}</p>
                             </motion.div>
@@ -255,13 +271,16 @@ function HowItWorksTab() {
                         { level: "3", name: "Urgent", color: "yellow", example: "Needs labs + ECG" },
                         { level: "4", name: "Less Urgent", color: "green", example: "Minor issue" },
                         { level: "5", name: "Non-Urgent", color: "blue", example: "Routine checkup" },
-                    ].map((esi) => (
-                        <div key={esi.level} className={`p-3 rounded-xl bg-${esi.color}-500/10 border border-${esi.color}-500/20 text-center`}>
-                            <div className={`text-${esi.color}-500 font-extrabold text-lg`}>ESI-{esi.level}</div>
-                            <div className="text-xs font-semibold text-text-primary mt-1">{esi.name}</div>
-                            <div className="text-xs text-text-tertiary mt-1">{esi.example}</div>
-                        </div>
-                    ))}
+                    ].map((esi) => {
+                        const style = COLOR_STYLES[esi.color] || COLOR_STYLES.primary;
+                        return (
+                            <div key={esi.level} className={`p-3 rounded-xl ${style.bg} border ${style.border} text-center`}>
+                                <div className={`${style.text} font-extrabold text-lg`}>ESI-{esi.level}</div>
+                                <div className="text-xs font-semibold text-text-primary mt-1">{esi.name}</div>
+                                <div className="text-xs text-text-tertiary mt-1">{esi.example}</div>
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
         </div>
@@ -485,12 +504,15 @@ function TechTab() {
                                 { emoji: "🚨", name: "Triage Agent", color: "pink" },
                                 { emoji: "📊", name: "Data Analyst", color: "green" },
                                 { emoji: "📋", name: "EHR Agent", color: "cyan" },
-                            ].map((agent) => (
-                                <div key={agent.name} className={`p-2 rounded-lg bg-${agent.color}-50 dark:bg-${agent.color}-500/10 border border-${agent.color}-200 dark:border-${agent.color}-500/30 text-center`}>
-                                    <div className="text-lg">{agent.emoji}</div>
-                                    <div className="text-xs text-text-secondary mt-1">{agent.name}</div>
-                                </div>
-                            ))}
+                            ].map((agent) => {
+                                const style = COLOR_STYLES[agent.color] || COLOR_STYLES.primary;
+                                return (
+                                    <div key={agent.name} className={`p-2 rounded-lg ${style.bg} border ${style.border} text-center`}>
+                                        <div className="text-lg">{agent.emoji}</div>
+                                        <div className="text-xs text-text-secondary mt-1">{agent.name}</div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                     <div className="w-0.5 h-6 bg-border"></div>
@@ -558,20 +580,23 @@ function TechTab() {
                         { label: "Intelligence", desc: "8 AI agents + MedGemma model work together to answer questions", color: "pink" },
                         { label: "Knowledge", desc: "RAG pipeline searches 125K+ docs and patient memory for accurate answers", color: "teal" },
                         { label: "Data & Security", desc: "PostgreSQL + ChromaDB + Redis — all encrypted, all HIPAA-ready", color: "green" },
-                    ].map((layer, idx) => (
-                        <div key={layer.label} className="flex items-stretch gap-4">
-                            <div className="flex flex-col items-center">
-                                <div className={`w-10 h-10 rounded-full bg-${layer.color}-500/20 flex items-center justify-center text-${layer.color}-600 dark:text-${layer.color}-400 font-bold text-sm flex-shrink-0`}>
-                                    {idx + 1}
+                    ].map((layer, idx) => {
+                        const style = COLOR_STYLES[layer.color] || COLOR_STYLES.primary;
+                        return (
+                            <div key={layer.label} className="flex items-stretch gap-4">
+                                <div className="flex flex-col items-center">
+                                    <div className={`w-10 h-10 rounded-full ${style.bg} border ${style.border} flex items-center justify-center ${style.text} font-bold text-sm flex-shrink-0`}>
+                                        {idx + 1}
+                                    </div>
+                                    {idx < 4 && <div className="w-0.5 flex-1 bg-border mt-1"></div>}
                                 </div>
-                                {idx < 4 && <div className="w-0.5 flex-1 bg-border mt-1"></div>}
+                                <div className="pb-4 flex-1">
+                                    <h3 className="font-bold text-text-primary">{layer.label}</h3>
+                                    <p className="text-sm text-text-tertiary">{layer.desc}</p>
+                                </div>
                             </div>
-                            <div className="pb-4 flex-1">
-                                <h3 className="font-bold text-text-primary">{layer.label}</h3>
-                                <p className="text-sm text-text-tertiary">{layer.desc}</p>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
 
@@ -649,9 +674,10 @@ function TechTab() {
                         { name: "Safe Calculator", desc: "Performs medical calculations securely without code injection risks", icon: Cpu, color: "pink" },
                     ].map((tool) => {
                         const Icon = tool.icon;
+                        const style = COLOR_STYLES[tool.color] || COLOR_STYLES.primary;
                         return (
-                            <div key={tool.name} className={`p-4 bg-${tool.color}-500/5 border border-${tool.color}-500/20 rounded-xl`}>
-                                <Icon className={`w-5 h-5 text-${tool.color}-500 mb-3`} />
+                            <div key={tool.name} className={`p-4 ${style.bg} border ${style.border} rounded-xl`}>
+                                <Icon className={`w-5 h-5 ${style.text} mb-3`} />
                                 <h3 className="font-bold text-text-primary text-sm mb-1">{tool.name}</h3>
                                 <p className="text-xs text-text-tertiary leading-relaxed">{tool.desc}</p>
                             </div>
