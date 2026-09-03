@@ -300,9 +300,9 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
               <p className="font-bold text-[#1a1a1a] text-sm" style={{ fontFamily: "'Georgia', serif" }}>
                 {cert.title}
               </p>
-              <p className="text-[11px] text-[#5a5a5a] mt-0.5">{cert.issuer} · {cert.date}</p>
+              <p className="text-[11px] text-[#374151] font-medium mt-0.5">{cert.issuer} · {cert.date}</p>
               {cert.score && (
-                <p className="text-[11px] font-bold text-[#2563eb] mt-1">{cert.score}</p>
+                <p className="text-[11px] font-bold text-[#1d4ed8] mt-1">{cert.score}</p>
               )}
             </div>
             <span className="text-2xl">{cert.icon}</span>
@@ -449,18 +449,18 @@ function PolaroidCard({
               >
                 {cert.title}
               </p>
-              <p className="text-[10px] text-[#7a7a7a] mt-0.5 truncate">{cert.issuer}</p>
+              <p className="text-[10px] text-[#374151] font-medium mt-0.5 truncate">{cert.issuer}</p>
             </div>
             <span className="text-lg shrink-0">{cert.icon}</span>
           </div>
 
           {cert.score && (
-            <p className="text-[10px] font-bold text-[#2563eb] mt-1.5">{cert.score}</p>
+            <p className="text-[10px] font-bold text-[#1d4ed8] mt-1.5">{cert.score}</p>
           )}
 
           <div className="flex items-center gap-1 mt-2">
-            <Calendar className="w-2.5 h-2.5 text-[#aaa]" />
-            <span className="text-[9px] text-[#aaa] font-mono">{cert.date}</span>
+            <Calendar className="w-2.5 h-2.5 text-[#4b5563]" />
+            <span className="text-[9px] text-[#4b5563] font-mono font-medium">{cert.date}</span>
           </div>
         </div>
       </motion.div>
@@ -563,16 +563,16 @@ export default function Certifications() {
                 style={{
                   background: isActive ? color : "var(--glass-bg)",
                   borderColor: isActive ? color : "var(--glass-border)",
-                  color: isActive ? "#fff" : "var(--text-secondary)",
+                  color: isActive ? (cat.id === "hackathon" ? "#0f172a" : "#ffffff") : "var(--text-secondary)",
                 }}
               >
                 <span className="flex items-center gap-2">
-                  <span className="text-[10px] opacity-60">{cat.aperture}</span>
+                  <span className="text-[10px] opacity-75">{cat.aperture}</span>
                   {cat.label}
                   <span
                     className="text-[10px] px-1.5 py-0.5 rounded-sm font-bold"
                     style={{
-                      background: isActive ? "rgba(255,255,255,0.2)" : "var(--glass-bg)",
+                      background: isActive ? (cat.id === "hackathon" ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.25)") : "var(--glass-bg)",
                     }}
                   >
                     {counts[cat.id]}

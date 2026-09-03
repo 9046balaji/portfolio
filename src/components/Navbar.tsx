@@ -47,7 +47,7 @@ export default function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-gray-900 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                    className="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                                 >
                                     {link.name}
                                 </Link>
@@ -62,7 +62,7 @@ export default function Navbar() {
                         <ThemeToggle />
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-900 dark:text-gray-300 hover:text-foreground focus:outline-none"
+                            className="text-text-secondary hover:text-primary focus:outline-none"
                         >
                             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                         </button>
@@ -84,7 +84,7 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-gray-900 dark:text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                                    className="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
                                 >
                                     {link.name}
                                 </Link>

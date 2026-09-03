@@ -33,21 +33,18 @@ const socialLinks = [
         label: "GitHub",
         href: "https://github.com/9046balaji",
         username: "@9046balaji",
-        color: "hover:bg-gray-700"
     },
     {
         icon: Linkedin,
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/konda-balaji-rao/",
         username: "Konda Balaji Rao",
-        color: "hover:bg-blue-700"
     },
     {
         icon: Code,
         label: "LeetCode",
         href: "https://leetcode.com/u/KBalajiRao/",
         username: "@KBalajiRao",
-        color: "hover:bg-orange-600"
     }
 ];
 
@@ -124,12 +121,12 @@ export default function Contact() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`flex items-center gap-3 px-6 py-3 bg-card-bg border border-border rounded-xl ${social.color} transition-all duration-300 group`}
+                                    className="flex items-center gap-3 px-6 py-3 bg-card-bg border border-border rounded-xl hover:border-primary/50 hover:bg-card-bg-hover transition-all duration-300 group"
                                 >
-                                    <Icon className="w-5 h-5 text-text-tertiary group-hover:text-foreground transition-colors" />
+                                    <Icon className="w-5 h-5 text-text-tertiary group-hover:text-primary transition-colors" />
                                     <div className="text-left">
-                                        <div className="text-sm font-medium text-text-primary">{social.label}</div>
-                                        <div className="text-xs text-text-muted">{social.username}</div>
+                                        <div className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors">{social.label}</div>
+                                        <div className="text-xs text-text-tertiary">{social.username}</div>
                                     </div>
                                 </a>
                             );
