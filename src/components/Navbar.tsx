@@ -58,13 +58,14 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    <div className="md:hidden flex items-center gap-3">
+                    <div className="md:hidden flex items-center gap-2.5">
                         <ThemeToggle />
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-text-secondary hover:text-primary focus:outline-none"
+                            className="p-2.5 rounded-xl border border-border bg-card-bg/60 text-text-secondary hover:text-primary hover:bg-card-bg active:scale-95 transition-all flex items-center justify-center min-w-[44px] min-h-[44px] focus:outline-none"
+                            aria-label="Toggle Navigation Menu"
                         >
-                            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                         </button>
                     </div>
                 </div>
@@ -76,15 +77,16 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden"
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden shadow-2xl"
                     >
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <div className="px-4 pt-3 pb-4 space-y-1">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                                    className="text-text-secondary hover:text-primary hover:bg-card-bg active:bg-primary/10 block px-3 py-2.5 rounded-xl text-sm font-medium transition-colors"
                                 >
                                     {link.name}
                                 </Link>

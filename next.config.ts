@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     qualities: [75, 80, 95],
   },
+  devIndicators: false,
 };
 
 export default nextConfig;

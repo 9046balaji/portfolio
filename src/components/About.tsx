@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     Cloud,
@@ -17,7 +18,8 @@ import {
     Boxes,
     Award,
     Activity,
-    CheckCircle2
+    CheckCircle2,
+    ChevronDown
 } from "lucide-react";
 import Image from "next/image";
 
@@ -87,6 +89,7 @@ const stats = [
 ];
 
 export default function About() {
+    const [showFullBio, setShowFullBio] = useState(false);
     return (
         <section id="about" className="relative overflow-hidden pt-10 md:pt-14 pb-16 md:pb-20 px-4 bg-section-alt transition-colors duration-300">
             {/* Ambient Background Glows */}
@@ -149,66 +152,66 @@ export default function About() {
                         </div>
 
                         {/* High-Impact Proof Highlights Grid (Fills space cleanly) */}
-                        <div className="grid grid-cols-2 gap-2.5 pt-1">
-                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2.5 flex items-center gap-2.5">
-                                <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
-                                    <Award className="w-4 h-4" />
+                        <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">
+                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
+                                    <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
-                                <div className="min-w-0">
-                                    <div className="text-[10px] uppercase font-mono text-text-muted font-bold">Certification</div>
-                                    <div className="text-xs font-bold text-text-primary truncate">AWS Cloud Prac.</div>
-                                </div>
-                            </div>
-
-                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2.5 flex items-center gap-2.5">
-                                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                                    <Activity className="w-4 h-4" />
-                                </div>
-                                <div className="min-w-0">
-                                    <div className="text-[10px] uppercase font-mono text-text-muted font-bold">Contributions</div>
-                                    <div className="text-xs font-bold text-text-primary truncate">2,000+ GitHub</div>
+                                <div className="min-w-0 flex-1">
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Certification</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">AWS Certified</div>
                                 </div>
                             </div>
 
-                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2.5 flex items-center gap-2.5">
-                                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
-                                    <Terminal className="w-4 h-4" />
+                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
-                                <div className="min-w-0">
-                                    <div className="text-[10px] uppercase font-mono text-text-muted font-bold">CI/CD Pipeline</div>
-                                    <div className="text-xs font-bold text-text-primary truncate">7-Stage Jenkins</div>
+                                <div className="min-w-0 flex-1">
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Contributions</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">2,000+ GitHub</div>
                                 </div>
                             </div>
 
-                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2.5 flex items-center gap-2.5">
-                                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
-                                    <Shield className="w-4 h-4" />
+                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
+                                    <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
-                                <div className="min-w-0">
-                                    <div className="text-[10px] uppercase font-mono text-text-muted font-bold">Observability</div>
-                                    <div className="text-xs font-bold text-text-primary truncate">Prometheus &amp; Grafana</div>
+                                <div className="min-w-0 flex-1">
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">CI/CD Pipeline</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">7-Stage Jenkins</div>
+                                </div>
+                            </div>
+
+                            <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
+                                    <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Observability</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">Prometheus</div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Live Availability Status */}
-                        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 flex items-center justify-between text-xs font-mono">
+                        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono">
                             <div className="flex items-center gap-2 text-emerald-400">
                                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                                 <span className="font-semibold">Open to Work</span>
                             </div>
-                            <span className="text-text-secondary text-[11px]">Full-Time &amp; Internships · Ready to Deploy</span>
+                            <span className="text-text-secondary text-[10px] sm:text-[11px]">Full-Time &amp; Internships · Ready to Deploy</span>
                         </div>
 
                         {/* Metadata Footer Under Image */}
-                        <div className="pt-3 border-t border-glass-border grid grid-cols-2 gap-2 text-xs font-mono text-text-tertiary">
-                            <div className="flex items-center gap-1.5 truncate">
+                        <div className="pt-3 border-t border-glass-border flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-text-tertiary">
+                            <div className="flex items-center gap-1.5 min-w-0">
                                 <GraduationCap className="w-3.5 h-3.5 text-primary shrink-0" />
-                                <span className="truncate">B.Tech AI &amp; ML (2027)</span>
+                                <span className="text-[11px] sm:text-xs">B.Tech AI &amp; ML (2027)</span>
                             </div>
-                            <div className="flex items-center gap-1.5 truncate">
+                            <div className="flex items-center gap-1.5 min-w-0">
                                 <MapPin className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                <span className="truncate">VFSTR, Andhra Pradesh</span>
+                                <span className="text-[11px] sm:text-xs">VFSTR, Andhra Pradesh</span>
                             </div>
                         </div>
                     </motion.div>
@@ -232,12 +235,22 @@ export default function About() {
                                     I&apos;m <span className="font-bold text-primary">Konda Balaji Rao</span>, an aspiring{' '}
                                     <span className="font-semibold text-secondary">Cloud &amp; DevOps Engineer</span> dedicated to turning software delivery into reliable, automated, and code-defined systems. Pursuing my B.Tech in CSE (Artificial Intelligence &amp; Machine Learning) at VFSTR, Guntur (CGPA: 7.4), I combine hands-on infrastructure engineering with strong computing fundamentals.
                                 </p>
-                                <p>
-                                    My engineering focus is centered on <strong>reliable automation and scalable cloud deployments</strong>: crafting declarative 7-stage Jenkins and GitHub Actions CI/CD pipelines, containerizing multi-tier microservices with Docker, provisioning modular AWS environments with Terraform IaC, and configuring proactive monitoring with Prometheus, Grafana, and Node Exporter.
-                                </p>
-                                <p>
-                                    With my academic specialization in AI &amp; Machine Learning, I bring the added ability to deploy modern intelligent workloads — serving FastAPI inference endpoints, managing vector search indices, and containerizing data pipelines. Holding the <strong>AWS Certified Cloud Practitioner</strong> credential with <strong>2,000+ GitHub contributions</strong>, I am eager to join a high-impact engineering team where I can contribute to high availability and developer velocity from day one.
-                                </p>
+                                <div className={`space-y-3.5 ${showFullBio ? "block" : "hidden md:block"}`}>
+                                    <p>
+                                        My engineering focus is centered on <strong>reliable automation and scalable cloud deployments</strong>: crafting declarative 7-stage Jenkins and GitHub Actions CI/CD pipelines, containerizing multi-tier microservices with Docker, provisioning modular AWS environments with Terraform IaC, and configuring proactive monitoring with Prometheus, Grafana, and Node Exporter.
+                                    </p>
+                                    <p>
+                                        With my academic specialization in AI &amp; Machine Learning, I bring the added ability to deploy modern intelligent workloads — serving FastAPI inference endpoints, managing vector search indices, and containerizing data pipelines. Holding the <strong>AWS Certified Cloud Practitioner</strong> credential with <strong>2,000+ GitHub contributions</strong>, I am eager to join a high-impact engineering team where I can contribute to high availability and developer velocity from day one.
+                                    </p>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowFullBio(!showFullBio)}
+                                    className="md:hidden text-xs font-mono text-primary hover:underline inline-flex items-center gap-1.5 py-1 cursor-pointer font-medium"
+                                >
+                                    <span>{showFullBio ? "Hide Full Bio" : "Read Full Background"}</span>
+                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${showFullBio ? "rotate-180" : ""}`} />
+                                </button>
                             </div>
                         </div>
 

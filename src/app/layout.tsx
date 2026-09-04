@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -15,14 +15,25 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = "https://portfolio-sable-tau-b7ysjwnjns.vercel.app";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf8f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#060913" },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Konda Balaji Rao | AI/ML & Cloud Engineer",
+    default: "Konda Balaji Rao | Cloud & DevOps Engineer | Systems & AI",
     template: "%s | Konda Balaji Rao",
   },
   description:
-    "Portfolio of Konda Balaji Rao — Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
+    "Portfolio of Konda Balaji Rao — Cloud & DevOps Engineer specializing in automated CI/CD pipelines, containerized microservices, and observable systems.",
   keywords: [
     "Konda Balaji Rao",
     "AI Engineer",
@@ -61,23 +72,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Konda Balaji Rao — Portfolio",
-    title: "Konda Balaji Rao | AI/ML & Cloud Engineer",
+    title: "Konda Balaji Rao | Cloud & DevOps Engineer | Systems & AI",
     description:
-      "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
+      "Cloud & DevOps Engineer specializing in automated CI/CD pipelines, containerized microservices, and observable systems.",
     images: [
       {
         url: "/assets/profile.jpg",
         width: 1200,
         height: 630,
-        alt: "Konda Balaji Rao — AI/ML & Cloud Engineer",
+        alt: "Konda Balaji Rao — Cloud & DevOps Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Konda Balaji Rao | AI/ML & Cloud Engineer",
+    title: "Konda Balaji Rao | Cloud & DevOps Engineer | Systems & AI",
     description:
-      "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
+      "Cloud & DevOps Engineer specializing in automated CI/CD pipelines, containerized microservices, and observable systems.",
     images: ["/assets/profile.jpg"],
   },
 };
@@ -87,9 +98,9 @@ const jsonLd = {
   "@type": "Person",
   name: "Konda Balaji Rao",
   url: siteUrl,
-  jobTitle: "AI/ML & Cloud Engineer",
+  jobTitle: "Cloud & DevOps Engineer",
   description:
-    "AI/ML Engineer building Agentic AI Systems & Healthcare AI Solutions with Cloud & DevOps.",
+    "Cloud & DevOps Engineer building automated CI/CD pipelines, containerized microservices, and observable systems.",
   sameAs: [
     "https://github.com/9046balaji",
     "https://www.linkedin.com/in/konda-balaji-rao/",

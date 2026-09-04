@@ -114,16 +114,16 @@ export default function PortfolioWelcome() {
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[9999] flex flex-col justify-between p-4 md:p-8 bg-background text-foreground select-none overflow-hidden"
+          className="fixed inset-0 z-[9999] flex flex-col justify-between p-3.5 sm:p-6 md:p-8 bg-background text-foreground select-none overflow-y-auto sm:overflow-hidden min-h-[100dvh] h-[100dvh]"
         >
           {/* ── Top Navigation Bar ── */}
-          <div className="flex items-center justify-between w-full max-w-6xl mx-auto z-10">
-            <div className="flex items-center gap-3 font-mono text-xs text-text-tertiary">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
+          <div className="flex items-center justify-between w-full max-w-6xl mx-auto z-10 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 font-mono text-[11px] sm:text-xs text-text-tertiary">
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
               <span className="font-bold text-text-primary hidden sm:inline">KONDA BALAJI RAO</span>
-              <span className="text-text-muted">•</span>
+              <span className="text-text-muted hidden sm:inline">•</span>
               <span className="flex items-center gap-1 text-text-tertiary">
-                <MapPin className="w-3.5 h-3.5 text-primary" /> Andhra Pradesh, India
+                <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" /> Andhra Pradesh, India
               </span>
             </div>
 
@@ -133,16 +133,16 @@ export default function PortfolioWelcome() {
               </span>
               <button
                 onClick={handleSkip}
-                className="text-xs font-mono text-text-tertiary hover:text-primary transition-colors px-4 py-2 rounded-full border border-border bg-card-bg hover:bg-card-bg-hover cursor-pointer flex items-center gap-1.5 shadow-sm"
+                className="text-[11px] sm:text-xs font-mono text-text-tertiary hover:text-primary transition-colors px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border bg-card-bg hover:bg-card-bg-hover cursor-pointer flex items-center gap-1.5 shadow-sm active:scale-95"
               >
-                <span>Skip Intro (Esc)</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Skip (Esc)</span>
+                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               </button>
             </div>
           </div>
 
           {/* ── Center Content: Developer Name, Expertise & Live Terminal ── */}
-          <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-5">
+          <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-3 sm:space-y-4 md:space-y-5 py-2">
             {/* Monogram Badge */}
             <motion.div
               initial={{ scale: 0.7, opacity: 0 }}
@@ -150,49 +150,49 @@ export default function PortfolioWelcome() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-2xl relative z-10 backdrop-blur-md">
-                <Code2 className="w-9 h-9 sm:w-10 sm:h-10" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-2xl relative z-10 backdrop-blur-md">
+                <Code2 className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />
               </div>
-              <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-2xl animate-pulse" />
+              <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-xl animate-pulse" />
             </motion.div>
 
             {/* Main Title & Role */}
             <div>
               <motion.h1
-                initial={{ y: 25, opacity: 0, filter: "blur(12px)" }}
+                initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-text-primary"
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-text-primary"
               >
                 Konda Balaji Rao
               </motion.h1>
 
               <motion.p
-                initial={{ y: 15, opacity: 0 }}
+                initial={{ y: 12, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="mt-3 text-xs sm:text-base text-primary font-mono font-semibold tracking-wider uppercase flex items-center justify-center gap-2"
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="mt-2 sm:mt-3 text-[11px] sm:text-sm md:text-base text-primary font-mono font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 px-2"
               >
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Cloud &amp; DevOps Engineer · Full-Time Roles &amp; Internships</span>
+                <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Cloud &amp; DevOps Engineer · Roles &amp; Internships</span>
               </motion.p>
             </div>
 
             {/* Expertise Badges Pill Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap justify-center gap-2 pt-1"
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1 max-w-xl"
             >
               {EXPERTISE_TAGS.map((tag) => {
                 const Icon = tag.icon;
                 return (
                   <span
                     key={tag.label}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card-bg border border-border text-xs font-mono text-text-secondary shadow-sm"
+                    className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-card-bg border border-border text-[10px] sm:text-xs font-mono text-text-secondary shadow-sm"
                   >
-                    <Icon className="w-3.5 h-3.5 text-primary" />
+                    <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
                     {tag.label}
                   </span>
                 );
@@ -203,24 +203,24 @@ export default function PortfolioWelcome() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="w-full max-w-lg rounded-xl border border-slate-700/60 bg-gray-950/95 dark:bg-card-bg/95 p-4 text-left font-mono text-xs shadow-2xl backdrop-blur-md text-slate-200"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="w-full max-w-lg rounded-xl border border-slate-700/60 bg-gray-950/95 dark:bg-card-bg/95 p-3 sm:p-4 text-left font-mono text-[10px] sm:text-xs shadow-2xl backdrop-blur-md text-slate-200"
             >
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 text-slate-300">
+              <div className="flex items-center justify-between pb-1.5 sm:pb-2 mb-1.5 sm:mb-2 border-b border-white/10 text-slate-300">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                  <span className="text-[10px] ml-2 text-slate-400">devops-deploy.log</span>
+                  <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/80" />
+                  <span className="text-[9px] sm:text-[10px] ml-1.5 text-slate-400">devops-deploy.log</span>
                 </div>
-                <span className="text-[10px] text-cyan-400 font-bold">AWS / SRE</span>
+                <span className="text-[9px] sm:text-[10px] text-cyan-400 font-bold">AWS / SRE</span>
               </div>
 
-              <div className="space-y-1.5 min-h-[50px]">
+              <div className="space-y-1 sm:space-y-1.5 max-h-[105px] sm:max-h-none overflow-hidden">
                 {TERMINAL_LOGS.slice(0, currentLogIndex + 1).map((log, idx) => (
-                  <div key={idx} className="flex items-center gap-2 animate-fadeIn">
-                    <span className="text-slate-500 text-[10px]">[{log.time}]</span>
-                    <span className={`${log.color}`}>{log.text}</span>
+                  <div key={idx} className="flex items-center gap-1.5 sm:gap-2 animate-fadeIn truncate">
+                    <span className="text-slate-500 text-[9px] sm:text-[10px] shrink-0">[{log.time}]</span>
+                    <span className={`${log.color} truncate`}>{log.text}</span>
                   </div>
                 ))}
               </div>
@@ -228,16 +228,17 @@ export default function PortfolioWelcome() {
           </div>
 
           {/* ── Bottom Progress Bar & Counter ── */}
-          <div className="relative z-10 w-full max-w-xl mx-auto space-y-2.5">
-            <div className="flex items-center justify-between font-mono text-xs text-text-tertiary">
-              <span className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-primary shrink-0 animate-pulse" /> {statusText}
+          <div className="relative z-10 w-full max-w-xl mx-auto space-y-2 sm:space-y-2.5 shrink-0">
+            <div className="flex items-center justify-between font-mono text-[11px] sm:text-xs text-text-tertiary">
+              <span className="flex items-center gap-1.5 sm:gap-2 truncate pr-2">
+                <Terminal className="w-3.5 h-3.5 text-primary shrink-0 animate-pulse" />
+                <span className="truncate">{statusText}</span>
               </span>
-              <span className="font-bold text-text-primary text-base tabular-nums">{progress}%</span>
+              <span className="font-bold text-text-primary text-sm sm:text-base tabular-nums shrink-0">{progress}%</span>
             </div>
 
             {/* Glowing Line Loader */}
-            <div className="relative h-2 w-full bg-card-bg rounded-full overflow-hidden border border-border shadow-inner">
+            <div className="relative h-1.5 sm:h-2 w-full bg-card-bg rounded-full overflow-hidden border border-border shadow-inner">
               <motion.div
                 className="h-full bg-gradient-to-r from-primary via-blue-500 to-indigo-500 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.6)]"
                 style={{ width: `${progress}%` }}
@@ -246,15 +247,15 @@ export default function PortfolioWelcome() {
             </div>
 
             {/* Live Metrics Row */}
-            <div className="flex justify-between items-center text-[10px] font-mono text-text-tertiary pt-0.5">
+            <div className="flex justify-between items-center text-[9px] sm:text-[10px] font-mono text-text-tertiary pt-0.5">
               <span className="flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" /> AWS Cloud Practitioner
+                <CheckCircle2 className="w-3 h-3 text-emerald-500 shrink-0" /> AWS Cloud Practitioner
               </span>
               <span className="flex items-center gap-1">
-                <Server className="w-3 h-3 text-blue-500" /> Docker &amp; Kubernetes
+                <Server className="w-3 h-3 text-blue-500 shrink-0" /> Docker &amp; Kubernetes
               </span>
-              <span className="flex items-center gap-1">
-                <Shield className="w-3 h-3 text-purple-500" /> 7-Stage CI/CD
+              <span className="hidden xs:flex sm:flex items-center gap-1">
+                <Shield className="w-3 h-3 text-purple-500 shrink-0" /> 7-Stage CI/CD
               </span>
             </div>
           </div>

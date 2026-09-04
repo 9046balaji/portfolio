@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ExternalLink,
@@ -332,6 +332,19 @@ const categories = [
 export default function Projects() {
     const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const [expandedCardIds, setExpandedCardIds] = useState<Record<string, boolean>>({});
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    const toggleCardExpand = (id: string) => {
+        setExpandedCardIds((prev) => ({ ...prev, [id]: !prev[id] }));
+    };
 
     // Filter projects according to category
     const categoryProjects =
@@ -339,13 +352,14 @@ export default function Projects() {
             ? projects
             : projects.filter((project) => project.category === activeCategory);
 
-    // Limit displayed projects unless expanded or in core (which is only 5 items)
-    const shouldLimit = activeCategory !== "core" && !isExpanded && categoryProjects.length > INITIAL_DISPLAY_COUNT;
+    // Responsive initial count: 3 on mobile to avoid scroll fatigue, 6 on desktop
+    const initialCount = isMobile ? 3 : INITIAL_DISPLAY_COUNT;
+    const shouldLimit = activeCategory !== "core" && !isExpanded && categoryProjects.length > initialCount;
     const displayedProjects = shouldLimit
-        ? categoryProjects.slice(0, INITIAL_DISPLAY_COUNT)
+        ? categoryProjects.slice(0, initialCount)
         : categoryProjects;
 
-    const remainingCount = categoryProjects.length - INITIAL_DISPLAY_COUNT;
+    const remainingCount = categoryProjects.length - initialCount;
 
     const handleCategoryChange = (cat: ProjectCategory) => {
         setActiveCategory(cat);
@@ -382,14 +396,14 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Filter Tabs */}
-                <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+                <div className="flex items-center justify-start sm:justify-center gap-2 mb-8 md:mb-10 overflow-x-auto no-scrollbar py-1 px-1 -mx-2 px-2 sm:mx-0 sm:px-0">
                     {categories.map((cat) => {
                         const isActive = activeCategory === cat.id;
                         return (
                             <button
                                 key={cat.id}
                                 onClick={() => handleCategoryChange(cat.id as ProjectCategory)}
-                                className={`relative px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                                className={`relative shrink-0 px-3.5 sm:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
                                     isActive
                                         ? "text-white shadow-lg shadow-primary/25"
                                         : "text-text-secondary hover:text-text-primary bg-card-bg border border-border hover:border-primary/40"
@@ -435,10 +449,10 @@ export default function Projects() {
                                     transition={{ duration: 0.3, delay: index * 0.04 }}
                                     className="bg-card-bg border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 group flex flex-col hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 backdrop-blur-md"
                                 >
-                                    <div className="p-5 flex-grow flex flex-col">
+                                    <div className="p-4 sm:p-5 flex-grow flex flex-col">
                                         {/* Top Badge & Category */}
-                                        <div className="flex items-center justify-between gap-2 mb-3">
-                                            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                                        <div className="flex items-center justify-between gap-2 mb-2.5 sm:mb-3">
+                                            <span className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
                                                 <IconComponent className="w-3.5 h-3.5" />
                                                 {project.badge}
                                             </span>
@@ -447,47 +461,67 @@ export default function Projects() {
                                             </span>
                                         </div>
 
-                                        <h3 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors text-text-primary">
+                                        <h3 className="text-base sm:text-lg font-bold mb-1 group-hover:text-primary transition-colors text-text-primary">
                                             {project.title}
                                         </h3>
-                                        <p className="text-[11px] text-secondary font-mono mb-3">
+                                        <p className="text-[11px] text-secondary font-mono mb-2.5 sm:mb-3">
                                             {project.tagline}
                                         </p>
 
                                         {/* Metric Pill */}
-                                        <div className="mb-3.5 p-2 rounded-lg bg-card-bg-hover border border-border-subtle flex items-center gap-2">
+                                        <div className="mb-3 p-2 rounded-lg bg-card-bg-hover border border-border-subtle flex items-center gap-2">
                                             <Gauge className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                            <span className="text-[11px] font-mono font-medium text-text-secondary leading-none">
+                                            <span className="text-[10.5px] sm:text-[11px] font-mono font-medium text-text-secondary leading-none">
                                                 {project.metric}
                                             </span>
                                         </div>
 
-                                        <div className="space-y-3 mb-4 flex-grow">
-                                            <p className="text-text-secondary text-xs leading-relaxed line-clamp-3">
+                                        <div className="space-y-2.5 mb-3.5 flex-grow">
+                                            <p className="text-text-secondary text-xs leading-relaxed line-clamp-2 sm:line-clamp-3">
                                                 {project.description}
                                             </p>
                                             <ul className="space-y-1.5 text-[11px] text-text-muted">
-                                                {project.points.map((point, i) => (
-                                                    <li key={i} className="flex items-start gap-1.5 leading-snug">
-                                                        <span className="text-primary shrink-0 font-bold">›</span>
-                                                        <span>{point}</span>
-                                                    </li>
-                                                ))}
+                                                {project.points
+                                                    .slice(0, isMobile && !expandedCardIds[project.id] ? 1 : project.points.length)
+                                                    .map((point, i) => (
+                                                        <li key={i} className="flex items-start gap-1.5 leading-snug">
+                                                            <span className="text-primary shrink-0 font-bold">›</span>
+                                                            <span>{point}</span>
+                                                        </li>
+                                                    ))}
                                             </ul>
+                                            {project.points.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => toggleCardExpand(project.id)}
+                                                    className="md:hidden text-[10px] font-mono text-primary hover:underline flex items-center gap-1 pt-0.5 cursor-pointer"
+                                                >
+                                                    <span>
+                                                        {expandedCardIds[project.id]
+                                                            ? "Hide Architecture Specs"
+                                                            : "View Architecture Specs"}
+                                                    </span>
+                                                    <ChevronDown
+                                                        className={`w-3 h-3 transition-transform duration-200 ${
+                                                            expandedCardIds[project.id] ? "rotate-180" : ""
+                                                        }`}
+                                                    />
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
 
                                     {/* Footer Section with Separate Infra & AI Tags */}
-                                    <div className="p-5 pt-0 mt-auto border-t border-border/40">
+                                    <div className="p-4 sm:p-5 pt-0 mt-auto border-t border-border/40">
                                         {/* Infra Tags */}
-                                        <div className="pt-3 mb-2 flex items-center gap-1.5 flex-wrap">
-                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-1">
+                                        <div className="pt-2.5 mb-2 flex items-center gap-1.5 flex-wrap">
+                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-0.5">
                                                 Infra:
                                             </span>
                                             {project.infraTags.map((t) => (
                                                 <span
                                                     key={t}
-                                                    className="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-md border border-blue-500/20 font-mono"
+                                                    className="text-[9.5px] sm:text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-md border border-blue-500/20 font-mono"
                                                 >
                                                     {t}
                                                 </span>
@@ -495,14 +529,14 @@ export default function Projects() {
                                         </div>
 
                                         {/* AI / Core Tags */}
-                                        <div className="mb-4 flex items-center gap-1.5 flex-wrap">
-                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-1">
+                                        <div className="mb-3.5 flex items-center gap-1.5 flex-wrap">
+                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-0.5">
                                                 AI/Core:
                                             </span>
                                             {project.aiCoreTags.map((t) => (
                                                 <span
                                                     key={t}
-                                                    className="text-[10px] px-2 py-0.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-md border border-purple-500/20 font-mono"
+                                                    className="text-[9.5px] sm:text-[10px] px-2 py-0.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-md border border-purple-500/20 font-mono"
                                                 >
                                                     {t}
                                                 </span>
@@ -535,7 +569,7 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Show More / Show Less Button */}
-                {categoryProjects.length > INITIAL_DISPLAY_COUNT && activeCategory !== "core" && (
+                {categoryProjects.length > initialCount && activeCategory !== "core" && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}

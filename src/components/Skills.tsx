@@ -382,8 +382,8 @@ export default function Skills() {
                 {/* ── 2. COMPACT DOMAIN BENTO GRID (SINGLE ROW ON DESKTOP, ZERO VERTICAL BLOAT) ── */}
                 <div className="space-y-3.5 pt-1">
                     {/* Category Selector Tabs */}
-                    <div className="flex justify-center">
-                        <div className="inline-flex p-1 rounded-xl bg-card-bg border border-border shadow-sm backdrop-blur-md gap-1">
+                    <div className="flex justify-start sm:justify-center overflow-x-auto no-scrollbar py-1">
+                        <div className="inline-flex p-1 rounded-xl bg-card-bg border border-border shadow-sm backdrop-blur-md gap-1 shrink-0 mx-auto">
                             {(Object.keys(domainCategories) as CategoryTab[]).map((tabKey) => {
                                 const tab = domainCategories[tabKey];
                                 const Icon = tab.icon;
@@ -392,12 +392,12 @@ export default function Skills() {
                                     <button
                                         key={tabKey}
                                         onClick={() => setActiveTab(tabKey)}
-                                        className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 ${isSelected
+                                        className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 shrink-0 whitespace-nowrap min-h-[38px] ${isSelected
                                             ? "bg-primary text-white shadow-md shadow-primary/25"
                                             : "text-text-secondary hover:text-text-primary hover:bg-card-bg-hover"
                                             }`}
                                     >
-                                        <Icon className="w-3.5 h-3.5" />
+                                        <Icon className="w-3.5 h-3.5 shrink-0" />
                                         <span>{tab.label}</span>
                                         <span className={`text-[10px] px-1.5 py-0.2 rounded ${isSelected ? "bg-white/20 text-white" : "bg-card-bg-hover text-text-tertiary"}`}>
                                             {tab.toolCount}

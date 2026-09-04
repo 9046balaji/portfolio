@@ -257,12 +257,12 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.25, duration: 0.4 }}
-      className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3.5 px-4 rounded-2xl bg-card-bg/90 border border-border/80 backdrop-blur-md shadow-sm"
+      className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 p-3 sm:p-3.5 sm:px-4 rounded-2xl bg-card-bg/90 border border-border/80 backdrop-blur-md shadow-sm"
     >
       {/* Left: View Counter & Star Rating */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-2.5 sm:gap-4">
         {/* View Counter */}
-        <div className="flex items-center gap-2 text-text-tertiary text-xs md:text-sm font-mono">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-text-tertiary text-xs md:text-sm font-mono">
           <Eye className="w-4 h-4 text-primary shrink-0" />
           <span>
             <strong className="text-text-primary font-bold">{views.toLocaleString()}</strong> views
@@ -283,11 +283,11 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
                   type="button"
                   onClick={() => handleRate(star)}
                   onMouseEnter={() => setHoveredStar(star)}
-                  className={`transition-all duration-150 p-0.5 rounded focus:outline-none ${
+                  className={`transition-all duration-150 p-1 sm:p-0.5 rounded focus:outline-none min-w-[28px] min-h-[28px] sm:min-w-0 sm:min-h-0 flex items-center justify-center ${
                     isFilled
                       ? "text-amber-400 scale-110"
                       : "text-text-muted/40 hover:text-amber-400/60"
-                  } hover:scale-125 transform`}
+                  } hover:scale-125 transform active:scale-95`}
                   aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
                   title={`Rate ${star} star${star > 1 ? "s" : ""}`}
                 >
@@ -308,25 +308,25 @@ export default function ProjectStats({ slug }: ProjectStatsProps) {
       </div>
 
       {/* Right: 1-Click Emoji Reactions Pill Group */}
-      <div className="flex items-center gap-1.5 flex-wrap pt-2 sm:pt-0 border-t sm:border-t-0 border-border/60">
+      <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap pt-2 sm:pt-0 border-t sm:border-t-0 border-border/60">
         {REACTION_CONFIG.map((item) => {
           const count = reactions[item.type] || 0;
           const isSelected = !!userReactions[item.type];
           return (
             <motion.button
               key={item.type}
-              whileTap={{ scale: 1.25 }}
+              whileTap={{ scale: 1.15 }}
               onClick={() => handleReaction(item.type)}
               type="button"
               title={`${item.label} (${count})`}
-              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono transition-all duration-200 border ${
+              className={`inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-mono transition-all duration-200 border min-h-[30px] ${
                 isSelected
                   ? "bg-primary/15 border-primary/40 text-primary font-bold shadow-sm"
                   : "bg-card-bg/60 border-border/70 text-text-secondary hover:border-primary/30 hover:bg-card-bg-hover"
               }`}
             >
               <span className="text-sm">{item.emoji}</span>
-              <span className="text-[11px]">{count}</span>
+              <span className="text-[10px] sm:text-[11px]">{count}</span>
             </motion.button>
           );
         })}

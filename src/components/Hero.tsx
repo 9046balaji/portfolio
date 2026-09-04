@@ -65,9 +65,12 @@ export default function Hero() {
 
                 {/* Headline */}
                 <div className="space-y-3 md:space-y-3.5">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary">
+                    <h1
+                        className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary"
+                        style={{ textWrap: "balance" }}
+                    >
                         Automating{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent-violet">
+                        <span className="inline-block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent-violet">
                             Cloud-Native Infrastructure
                         </span>
                         , <br className="hidden md:block" />
@@ -80,10 +83,10 @@ export default function Hero() {
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-3.5 justify-center items-center pt-1">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-3.5 justify-center items-center pt-1 w-full max-w-md sm:max-w-none mx-auto">
                     <Link
                         href="#projects"
-                        className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-primary via-indigo-600 to-accent-violet shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 group text-sm md:text-base"
+                        className="w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-primary via-indigo-600 to-accent-violet shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group text-sm md:text-base min-h-[44px]"
                     >
                         <span>Explore Projects &amp; CI/CD</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -92,7 +95,7 @@ export default function Hero() {
                     <a
                         href="/assets/Konda_Balaji_Rao_Resume.pdf"
                         download="Konda_Balaji_Rao_Resume.pdf"
-                        className="px-6 py-3 border border-border hover:border-primary/40 bg-card-bg hover:bg-card-bg-hover text-text-primary rounded-xl font-medium transition-all duration-300 flex items-center gap-2 backdrop-blur-md hover:-translate-y-0.5 shadow-sm text-sm md:text-base"
+                        className="w-full sm:w-auto px-6 py-3 border border-border hover:border-primary/40 bg-card-bg hover:bg-card-bg-hover text-text-primary rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-md hover:-translate-y-0.5 active:scale-[0.98] shadow-sm text-sm md:text-base min-h-[44px]"
                     >
                         <FileText className="w-4 h-4 text-primary" />
                         <span>Download Resume</span>
@@ -100,7 +103,7 @@ export default function Hero() {
                 </div>
 
                 {/* Stats / Credentials Metric Badges */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto pt-3 md:pt-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 max-w-4xl mx-auto pt-3 md:pt-4">
                     {metrics.map((m, idx) => {
                         const Icon = m.icon;
                         return (
@@ -110,15 +113,15 @@ export default function Hero() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.25 + idx * 0.06, duration: 0.45 }}
                                 whileHover={{ y: -2 }}
-                                className="p-3.5 rounded-2xl bg-card-bg border border-border hover:border-primary/30 backdrop-blur-md transition-all duration-300 flex flex-col items-center justify-center text-center shadow-sm"
+                                className="p-3 sm:p-3.5 rounded-2xl bg-card-bg border border-border hover:border-primary/30 backdrop-blur-md transition-all duration-300 flex flex-col items-center justify-center text-center shadow-sm"
                             >
                                 <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-1.5">
                                     <Icon className="w-3.5 h-3.5" />
                                 </div>
-                                <div className="text-base md:text-lg font-bold font-mono text-text-primary tracking-tight">
+                                <div className="text-sm sm:text-base md:text-lg font-bold font-mono text-text-primary tracking-tight">
                                     {m.value}
                                 </div>
-                                <div className="text-[10px] md:text-[11px] text-text-tertiary mt-0.5 font-medium">
+                                <div className="text-[9px] sm:text-[10px] md:text-[11px] text-text-tertiary mt-0.5 font-medium">
                                     {m.label}
                                 </div>
                             </motion.div>

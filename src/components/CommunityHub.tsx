@@ -429,7 +429,7 @@ export default function CommunityHub() {
   const totalVotes = Object.values(pollVotes).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="w-full max-w-5xl mx-auto rounded-3xl border border-glass-border bg-card-bg/85 backdrop-blur-xl shadow-2xl p-6 md:p-8 space-y-6">
+    <div className="w-full max-w-5xl mx-auto rounded-3xl border border-glass-border bg-card-bg/85 backdrop-blur-xl shadow-2xl p-4 sm:p-6 md:p-8 space-y-6">
       {/* Interactive Tabs Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 pb-5">
         <div>
@@ -443,14 +443,14 @@ export default function CommunityHub() {
         </div>
 
         {/* Tab Switcher Pills */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-section-alt border border-border/80 text-xs font-mono flex-wrap">
+        <div className="w-full sm:w-auto overflow-x-auto no-scrollbar flex items-center gap-1.5 p-1 rounded-2xl bg-section-alt border border-border/80 text-xs font-mono">
           <button
             type="button"
             onClick={() => setActiveTab("inquiry")}
-            className={`px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95 min-h-[36px] ${
               activeTab === "inquiry"
                 ? "bg-primary text-white font-bold shadow-md shadow-primary/25"
-                : "text-text-tertiary hover:text-text-primary"
+                : "text-text-tertiary hover:text-text-primary hover:bg-card-bg"
             }`}
           >
             <Mail className="w-3.5 h-3.5" />
@@ -460,10 +460,10 @@ export default function CommunityHub() {
           <button
             type="button"
             onClick={() => setActiveTab("endorsements")}
-            className={`px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95 min-h-[36px] ${
               activeTab === "endorsements"
                 ? "bg-primary text-white font-bold shadow-md shadow-primary/25"
-                : "text-text-tertiary hover:text-text-primary"
+                : "text-text-tertiary hover:text-text-primary hover:bg-card-bg"
             }`}
           >
             <Award className="w-3.5 h-3.5" />
@@ -473,10 +473,10 @@ export default function CommunityHub() {
           <button
             type="button"
             onClick={() => setActiveTab("guestbook")}
-            className={`px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95 min-h-[36px] ${
               activeTab === "guestbook"
                 ? "bg-primary text-white font-bold shadow-md shadow-primary/25"
-                : "text-text-tertiary hover:text-text-primary"
+                : "text-text-tertiary hover:text-text-primary hover:bg-card-bg"
             }`}
           >
             <MessageSquare className="w-3.5 h-3.5" />
@@ -486,10 +486,10 @@ export default function CommunityHub() {
           <button
             type="button"
             onClick={() => setActiveTab("poll")}
-            className={`px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap active:scale-95 min-h-[36px] ${
               activeTab === "poll"
                 ? "bg-primary text-white font-bold shadow-md shadow-primary/25"
-                : "text-text-tertiary hover:text-text-primary"
+                : "text-text-tertiary hover:text-text-primary hover:bg-card-bg"
             }`}
           >
             <Vote className="w-3.5 h-3.5" />
@@ -758,7 +758,7 @@ export default function CommunityHub() {
                 value={gbName}
                 onChange={(e) => setGbName(e.target.value)}
                 placeholder="Your Name (or @handle)"
-                className="w-full px-3 py-2 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary font-sans"
+                className="w-full px-3 py-2.5 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary font-sans min-h-[40px]"
               />
 
               <input
@@ -766,13 +766,13 @@ export default function CommunityHub() {
                 value={gbRole}
                 onChange={(e) => setGbRole(e.target.value)}
                 placeholder="Role (e.g., Recruiter, Senior DevOps, Peer)"
-                className="w-full px-3 py-2 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary font-sans"
+                className="w-full px-3 py-2.5 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary font-sans min-h-[40px]"
               />
 
               <button
                 type="submit"
                 disabled={gbSubmitting}
-                className="px-4 py-2 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-all text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                className="px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-all text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer min-h-[40px] active:scale-95"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{gbSubmitting ? "Signing..." : "Sign Guestbook"}</span>

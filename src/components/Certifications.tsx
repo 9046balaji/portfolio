@@ -270,7 +270,7 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8 overflow-y-auto"
       onClick={onClose}
     >
       {/* Darkroom backdrop */}
@@ -295,14 +295,14 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
       {/* Panel */}
       <motion.div
         layoutId={`cert-${cert.title}`}
-        className="relative w-full max-w-3xl rounded-none overflow-hidden z-10"
+        className="relative w-full max-w-3xl rounded-none overflow-hidden z-10 max-h-[90vh] flex flex-col my-auto"
         onClick={(e) => e.stopPropagation()}
         transition={{ type: "spring", stiffness: 260, damping: 26 }}
       >
         {/* Polaroid-style white frame */}
-        <div className="bg-[#f5f0e8] p-3 pb-14 shadow-[0_40px_120px_rgba(0,0,0,0.8)]">
+        <div className="bg-[#f5f0e8] p-2.5 sm:p-3 pb-8 sm:pb-12 shadow-[0_40px_120px_rgba(0,0,0,0.8)] overflow-y-auto max-h-[90vh]">
           {/* Image container */}
-          <div className="relative bg-[#1a0a00] overflow-hidden min-h-[300px] flex items-center justify-center">
+          <div className="relative bg-[#1a0a00] overflow-hidden min-h-[220px] sm:min-h-[300px] flex items-center justify-center">
             {!imgLoaded && <DevelopingSkeleton />}
 
             <motion.div
@@ -310,14 +310,14 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
                 filter: imgLoaded ? "saturate(1) brightness(1)" : "saturate(0) brightness(0.3)",
               }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="w-full"
+              className="w-full flex items-center justify-center"
             >
               <Image
                 src={cert.certificateImage}
                 alt={`${cert.title} certificate`}
                 width={1200}
                 height={900}
-                className="w-full h-auto max-h-[70vh] object-contain"
+                className="w-full h-auto max-h-[58vh] sm:max-h-[65vh] object-contain"
                 quality={95}
                 priority
                 onLoad={() => setImgLoaded(true)}
@@ -335,7 +335,7 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
                   <motion.p
                     animate={{ opacity: [0.3, 0.7, 0.3] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-[11px] tracking-[0.4em] text-orange-400/60 uppercase font-mono"
+                    className="text-[10px] sm:text-[11px] tracking-[0.4em] text-orange-400/60 uppercase font-mono"
                   >
                     Developing…
                   </motion.p>
@@ -345,29 +345,29 @@ function DarkroomModal({ cert, onClose }: { cert: Certificate; onClose: () => vo
           </div>
 
           {/* Polaroid caption */}
-          <div className="flex items-end justify-between pt-3 px-1">
-            <div>
-              <p className="font-bold text-[#1a1a1a] text-sm" style={{ fontFamily: "'Georgia', serif" }}>
+          <div className="flex items-end justify-between pt-2.5 sm:pt-3 px-1">
+            <div className="min-w-0 pr-2">
+              <p className="font-bold text-[#1a1a1a] text-xs sm:text-sm truncate" style={{ fontFamily: "'Georgia', serif" }}>
                 {cert.title}
               </p>
-              <p className="text-[11px] text-[#374151] font-medium mt-0.5">{cert.issuer} · {cert.date}</p>
+              <p className="text-[10px] sm:text-[11px] text-[#374151] font-medium mt-0.5 truncate">{cert.issuer} · {cert.date}</p>
               {cert.score && (
-                <p className="text-[11px] font-bold text-[#1d4ed8] mt-1">{cert.score}</p>
+                <p className="text-[10px] sm:text-[11px] font-bold text-[#1d4ed8] mt-0.5 truncate">{cert.score}</p>
               )}
             </div>
-            <span className="text-2xl">{cert.icon}</span>
+            <span className="text-xl sm:text-2xl shrink-0">{cert.icon}</span>
           </div>
         </div>
 
-        {/* Close button */}
+        {/* Close button with 44px tap target */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={onClose}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 transition-colors border border-glass-border"
+          className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-10 h-10 rounded-full bg-black/70 backdrop-blur-sm flex items-center justify-center text-white/90 hover:text-white hover:bg-black transition-colors border border-glass-border shadow-md active:scale-95"
           aria-label="Close"
         >
-          <X className="w-4 h-4" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </motion.button>
       </motion.div>
     </motion.div>
@@ -604,7 +604,7 @@ export default function Certifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="flex flex-wrap gap-2 justify-center mb-14"
+          className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-10 md:mb-14 px-1"
         >
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.id;
@@ -618,18 +618,18 @@ export default function Certifications() {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 border overflow-hidden font-mono"
+                className="relative px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-sm text-xs sm:text-sm font-medium transition-all duration-300 border overflow-hidden font-mono active:scale-95"
                 style={{
                   background: isActive ? color : "var(--glass-bg)",
                   borderColor: isActive ? color : "var(--glass-border)",
                   color: isActive ? (cat.id === "hackathon" ? "#0f172a" : "#ffffff") : "var(--text-secondary)",
                 }}
               >
-                <span className="flex items-center gap-2">
-                  <span className="text-[10px] opacity-75">{cat.aperture}</span>
-                  {cat.label}
+                <span className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-[9px] sm:text-[10px] opacity-75">{cat.aperture}</span>
+                  <span>{cat.label}</span>
                   <span
-                    className="text-[10px] px-1.5 py-0.5 rounded-sm font-bold"
+                    className="text-[9px] sm:text-[10px] px-1.5 py-0.2 rounded-sm font-bold"
                     style={{
                       background: isActive ? (cat.id === "hackathon" ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.25)") : "var(--glass-bg)",
                     }}
