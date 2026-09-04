@@ -8,4 +8,5 @@ export const PROJECT_IDS: Record<string, number> = {
   "pdf-tools": 3,
   "hospital-management": 4,
   "ml-showcase": 5,
+  "smart-attendance": 6,
 };
