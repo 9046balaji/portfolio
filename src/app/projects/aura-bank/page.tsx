@@ -7,7 +7,7 @@ import {
     ArrowLeft, Github, CreditCard, Users, Brain, Shield, Database,
     Server, Lock, LayoutDashboard, Terminal, Cpu, Globe, Wallet,
     PieChart, MessageSquare, Bell, Banknote, QrCode, Building2,
-    TrendingUp, Bot, Search, Layers, CheckCircle
+    TrendingUp, Bot, Search, Layers, CheckCircle, GitBranch, Activity, Workflow
 } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -18,15 +18,16 @@ const tabs = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "features", label: "Features", icon: Layers },
     { id: "architecture", label: "Architecture", icon: Server },
+    { id: "devops", label: "DevOps & CI/CD", icon: GitBranch },
     { id: "ml", label: "AI & ML", icon: Brain },
     { id: "security", label: "Security", icon: Shield },
 ];
 
 const keyStats = [
     { value: "Full-Stack", label: "React + Node.js", icon: Globe },
+    { value: "CI/CD", label: "7-Stage Jenkins", icon: GitBranch },
+    { value: "DevOps", label: "Terraform + K8s", icon: Server },
     { value: "AI/ML", label: "Fraud Detection", icon: Brain },
-    { value: "3D", label: "Three.js Auth", icon: Cpu },
-    { value: "Secure", label: "JWT + Ledger", icon: Lock },
 ];
 
 const techStack = {
@@ -313,6 +314,110 @@ function ArchitectureTab() {
     );
 }
 
+// DevOps & CI/CD Tab
+function DevOpsTab() {
+    return (
+        <div className="space-y-8">
+            {/* Jenkins 7-Stage Pipeline */}
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 className="text-2xl font-bold text-text-primary flex items-center gap-2">
+                            <GitBranch className="text-primary" /> Enterprise 7-Stage Jenkins Pipeline
+                        </h2>
+                        <p className="text-text-tertiary text-sm mt-1">
+                            Automated declarative CI/CD workflow executing tests, lint gates, multi-arch containerization, and canary deployment.
+                        </p>
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-mono font-bold">
+                        Pipeline: PASS (40% Faster)
+                    </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-7 gap-2.5">
+                    {[
+                        { step: "01", name: "Checkout", tool: "Git SCM", desc: "Commit hash verification" },
+                        { step: "02", name: "Node Tests", tool: "Jest / Vitest", desc: "Frontend & API suites" },
+                        { step: "03", name: "ML Tests", tool: "Pytest", desc: "Fraud model contract" },
+                        { step: "04", name: "Buf Lint", tool: "Protobuf", desc: "API schema gate" },
+                        { step: "05", name: "Docker Build", tool: "Buildx Multi-Arch", desc: "amd64 + arm64 images" },
+                        { step: "06", name: "Terraform", tool: "AWS IaC", desc: "State plan validation" },
+                        { step: "07", name: "Helm Deploy", tool: "Kubernetes", desc: "Rolling health check" },
+                    ].map((stage) => (
+                        <div key={stage.step} className="p-3 rounded-xl bg-card-bg-hover border border-border text-center flex flex-col justify-between">
+                            <div>
+                                <span className="text-[10px] font-mono font-bold text-primary">STAGE {stage.step}</span>
+                                <div className="text-xs font-bold text-text-primary mt-1">{stage.name}</div>
+                                <div className="text-[10px] font-mono text-secondary mt-0.5">{stage.tool}</div>
+                            </div>
+                            <div className="text-[10px] text-text-tertiary mt-2 border-t border-border/50 pt-1.5">{stage.desc}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Infrastructure as Code (Terraform) */}
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Server className="text-secondary" /> Infrastructure as Code (Terraform & AWS)
+                </h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="p-5 rounded-xl bg-card-bg-hover border border-border space-y-2">
+                        <div className="text-xs font-mono uppercase tracking-wider text-primary font-bold">VPC & Networking</div>
+                        <h3 className="font-bold text-text-primary text-base">Multi-AZ Subnets</h3>
+                        <p className="text-xs text-text-tertiary leading-relaxed">
+                            Isolated public and private subnets across 2 Availability Zones with NAT Gateways and strict security group ingress/egress boundaries.
+                        </p>
+                    </div>
+                    <div className="p-5 rounded-xl bg-card-bg-hover border border-border space-y-2">
+                        <div className="text-xs font-mono uppercase tracking-wider text-secondary font-bold">Container Registry</div>
+                        <h3 className="font-bold text-text-primary text-base">AWS ECR & Multi-Arch</h3>
+                        <p className="text-xs text-text-tertiary leading-relaxed">
+                            Container images compiled for multi-architecture environments with automated vulnerability scanning on push.
+                        </p>
+                    </div>
+                    <div className="p-5 rounded-xl bg-card-bg-hover border border-border space-y-2">
+                        <div className="text-xs font-mono uppercase tracking-wider text-emerald-500 font-bold">Database Architecture</div>
+                        <h3 className="font-bold text-text-primary text-base">PostgreSQL RDS</h3>
+                        <p className="text-xs text-text-tertiary leading-relaxed">
+                            Automated snapshot policies, multi-AZ standby failover, and zero ledger drift guarantee for financial records.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* SRE Observability & Monitoring */}
+            <section className="bg-card-bg border border-border rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-2">
+                    <Activity className="text-emerald-500" /> SRE Observability & Telemetry
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="p-4 rounded-xl bg-card-bg-hover border border-border text-center">
+                        <div className="text-[10px] font-mono text-text-muted">UPTIME SLA</div>
+                        <div className="text-lg font-mono font-bold text-emerald-500 mt-1">99.9% Online</div>
+                        <div className="text-[11px] text-text-tertiary mt-1">Zero downtime rolling updates</div>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card-bg-hover border border-border text-center">
+                        <div className="text-[10px] font-mono text-text-muted">CI/CD VELOCITY</div>
+                        <div className="text-lg font-mono font-bold text-primary mt-1">40% Faster</div>
+                        <div className="text-[11px] text-text-tertiary mt-1">Parallel test & build stages</div>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card-bg-hover border border-border text-center">
+                        <div className="text-[10px] font-mono text-text-muted">METRICS SCRAPING</div>
+                        <div className="text-lg font-mono font-bold text-secondary mt-1">Prometheus</div>
+                        <div className="text-[11px] text-text-tertiary mt-1">Custom API & DB latency scrapers</div>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card-bg-hover border border-border text-center">
+                        <div className="text-[10px] font-mono text-text-muted">DASHBOARDS</div>
+                        <div className="text-lg font-mono font-bold text-amber-500 mt-1">Grafana Live</div>
+                        <div className="text-[11px] text-text-tertiary mt-1">Real-time financial traffic panels</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+}
+
 // ML Tab
 function MLTab() {
     const mlFeatures = [
@@ -473,6 +578,7 @@ export default function AuraBankProject() {
             case "overview": return <OverviewTab />;
             case "features": return <FeaturesTab />;
             case "architecture": return <ArchitectureTab />;
+            case "devops": return <DevOpsTab />;
             case "ml": return <MLTab />;
             case "security": return <SecurityTab />;
             default: return <OverviewTab />;
