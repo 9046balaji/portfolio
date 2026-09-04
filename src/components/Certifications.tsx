@@ -2,12 +2,12 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Award, Calendar, X, Trophy, ZoomIn } from "lucide-react";
+import { Award, Calendar, X, Trophy, ZoomIn, ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Category = "all" | "hackathon" | "competitive" | "academic" | "other";
+type Category = "all" | "cloud" | "hackathon" | "competitive" | "academic" | "other";
 
 interface Certificate {
   title: string;
@@ -27,6 +27,75 @@ interface Certificate {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const certifications: Certificate[] = [
+  // ─── TOP 6 PREMIER HIGHLIGHTS (DISPLAYED INITIALLY) ───────────────
+  {
+    title: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services (AWS)",
+    date: "June 2026",
+    icon: "☁️",
+    certificateImage: "/certificates/AWS Certified Cloud Practitioner certificate_page-0001.jpg",
+    category: "cloud",
+    featured: true,
+    tilt: -1.2,
+    description: "Industry-recognized credential validating overall understanding of the AWS Cloud platform, architecture, security, and global infrastructure",
+    score: "Active Credential",
+    grade: "ID: 4c6743076c134cbabbe0ec9c90b7e628",
+    details: ["Cloud Concepts & Architecture", "AWS Security & Compliance", "Cloud Billing & Economics", "Core AWS Cloud Services"],
+  },
+  {
+    title: "Cloud Computing — NPTEL Elite",
+    issuer: "IIT Kharagpur / NPTEL (SWAYAM)",
+    date: "Jan–Apr 2026",
+    icon: "☁️",
+    certificateImage: "/certificates/Cloud_page-0001.jpg",
+    category: "cloud",
+    featured: true,
+    tilt: 1.1,
+    description: "Elite certification awarded by IIT Kharagpur with a consolidated score of 79% (Assignments: 25/25, Exam: 54.26/75)",
+    score: "Elite Tag (Score: 79%)",
+    grade: "Roll No: NPTEL26CS55S1350802130",
+    details: ["Distributed Cloud Architecture", "Virtualization & Security", "Cloud Storage & Elasticity", "IIT Kharagpur 12-Week Rigorous Course"],
+  },
+  {
+    title: "PwC Advisory Launchpad",
+    issuer: "PwC AC India",
+    date: "August 2026",
+    icon: "🏢",
+    certificateImage: "/certificates/PWC_Lanchpad_page-0001.jpg",
+    category: "cloud",
+    featured: true,
+    tilt: -1.5,
+    description: "Certificate of Participation for completing the prestigious Advisory Launchpad Program by PwC AC India",
+    score: "Launchpad Graduate",
+    details: ["Enterprise Advisory Strategy", "Consulting Problem Solving", "Industry Readiness"],
+  },
+  {
+    title: "Cambridge English PET",
+    issuer: "Cambridge University",
+    date: "May 2024",
+    icon: "🇬🇧",
+    certificateImage: "/certificates/pet_exam.webp",
+    category: "academic",
+    featured: true,
+    tilt: 2.1,
+    description: "International B1 Vantage qualification validating professional English reading, writing, listening, and speaking proficiency",
+    grade: "Grade C — B1 Level",
+    score: "Score: 141 (CEFR B1)",
+    details: ["Reading: 137", "Writing: 148", "Listening: 132", "Speaking: 147"],
+  },
+  {
+    title: "Generative AI",
+    issuer: "Professional Certification",
+    date: "2024",
+    icon: "✨",
+    certificateImage: "/certificates/generative_ai_certificate.webp",
+    category: "academic",
+    featured: true,
+    tilt: -1.7,
+    description: "Comprehensive certification covering LLM architectures, prompt engineering, diffusion models, and generative AI pipelines",
+    score: "Certified Practitioner",
+    details: ["LLM Fundamentals & Attention Mechanisms", "Prompt Engineering & Few-Shot Learning", "Generative Image & Multimodal Models"],
+  },
   {
     title: "Agentic AI Hackathon",
     issuer: "Hackathon Competition",
@@ -38,6 +107,8 @@ const certifications: Certificate[] = [
     tilt: -1.5,
     description: "Individual recognition for building autonomous AI systems in a competitive Agentic AI hackathon",
   },
+
+  // ─── ADDITIONAL CREDENTIALS (SHOWN IN VIEW ALL & TABS) ─────────────
   {
     title: "Agentic AI Hackathon — Team",
     issuer: "Hackathon Competition",
@@ -45,61 +116,28 @@ const certifications: Certificate[] = [
     icon: "🏆",
     certificateImage: "/certificates/agentic ai hackthon team.webp",
     category: "hackathon",
-    featured: true,
     tilt: 1.2,
     description: "Team award for collaborative design and deployment of an Agentic AI solution",
   },
   {
-    title: "ML Neurothon",
-    issuer: "Neurothon ML Competition",
-    date: "May 2026",
-    icon: "🧠",
-    tilt: -2.1,
-    certificateImage: "/certificates/Ml-neurothon.webp",
-    category: "competitive",
-    description: "Machine learning competition focused on neural network design and real-world problem-solving",
-  },
-  {
-    title: "HackerRank Hackathon",
-    issuer: "HackerRank",
-    date: "May 2026",
-    icon: "💻",
-    tilt: 1.8,
-    certificateImage: "/certificates/Hackerrank-Hackthon.webp",
-    category: "competitive",
-    description: "Competitive programming hackathon recognition for algorithmic problem-solving performance",
-  },
-  {
-    title: "HackerRank Leaderboard",
-    issuer: "HackerRank",
-    date: "May 2026",
-    icon: "📊",
-    tilt: -1.0,
-    certificateImage: "/certificates/hacker rank leaderboard.webp",
-    category: "competitive",
-    description: "Top leaderboard ranking recognition for consistent competitive coding performance",
-  },
-  {
-    title: "Cambridge English PET",
-    issuer: "Cambridge University",
-    date: "May 2024",
-    icon: "🇬🇧",
-    tilt: 2.3,
-    certificateImage: "/certificates/pet_exam.webp",
-    category: "academic",
-    grade: "Grade C — B1 Level",
-    score: "Score: 141",
-    details: ["Reading: 137", "Writing: 148", "Listening: 132", "Speaking: 147"],
-  },
-  {
-    title: "Generative AI",
-    issuer: "Professional Certification",
+    title: "Full Stack Hackathon",
+    issuer: "Dept. of ACSE, Vignan's Foundation",
     date: "2024",
-    icon: "✨",
-    tilt: -1.7,
-    certificateImage: "/certificates/generative_ai_certificate.webp",
-    category: "academic",
-    description: "Comprehensive Generative AI technologies & applications",
+    icon: "🚀",
+    tilt: -0.8,
+    certificateImage: "/certificates/hackton.webp",
+    category: "hackathon",
+    description: "Consolation position — Full Stack Development hackathon showcasing creativity and teamwork",
+  },
+  {
+    title: "Full Stack Hackathon — Team",
+    issuer: "Dept. of ACSE, Vignan's Foundation",
+    date: "2024",
+    icon: "🤝",
+    tilt: 2.0,
+    certificateImage: "/certificates/hackton_team.webp",
+    category: "hackathon",
+    description: "Team certificate for collaborative Full Stack Development hackathon delivery",
   },
   {
     title: "E-Business",
@@ -132,24 +170,34 @@ const certifications: Certificate[] = [
     description: "Organizational dynamics, leadership, and management behaviour",
   },
   {
-    title: "Full Stack Hackathon",
-    issuer: "Dept. of ACSE, Vignan's Foundation",
-    date: "2024",
-    icon: "🚀",
-    tilt: -0.8,
-    certificateImage: "/certificates/hackton.webp",
-    category: "hackathon",
-    description: "Consolation position — Full Stack Development hackathon showcasing creativity and teamwork",
+    title: "ML Neurothon",
+    issuer: "Neurothon ML Competition",
+    date: "May 2026",
+    icon: "🧠",
+    tilt: -2.1,
+    certificateImage: "/certificates/Ml-neurothon.webp",
+    category: "competitive",
+    description: "Machine learning competition focused on neural network design and real-world problem-solving",
   },
   {
-    title: "Full Stack Hackathon — Team",
-    issuer: "Dept. of ACSE, Vignan's Foundation",
-    date: "2024",
-    icon: "🤝",
-    tilt: 2.0,
-    certificateImage: "/certificates/hackton_team.webp",
-    category: "hackathon",
-    description: "Team certificate for collaborative Full Stack Development hackathon delivery",
+    title: "HackerRank Hackathon",
+    issuer: "HackerRank",
+    date: "May 2026",
+    icon: "💻",
+    tilt: 1.8,
+    certificateImage: "/certificates/Hackerrank-Hackthon.webp",
+    category: "competitive",
+    description: "Competitive programming hackathon recognition for algorithmic problem-solving performance",
+  },
+  {
+    title: "HackerRank Leaderboard",
+    issuer: "HackerRank",
+    date: "May 2026",
+    icon: "📊",
+    tilt: -1.0,
+    certificateImage: "/certificates/hacker rank leaderboard.webp",
+    category: "competitive",
+    description: "Top leaderboard ranking recognition for consistent competitive coding performance",
   },
   {
     title: "UEAC Volunteering",
@@ -165,6 +213,7 @@ const certifications: Certificate[] = [
 
 const CATEGORIES: { id: Category; label: string; icon: string; aperture: string }[] = [
   { id: "all",         label: "All",         icon: "⬤", aperture: "f/∞" },
+  { id: "cloud",       label: "Cloud & Industry", icon: "☁️", aperture: "f/1.4" },
   { id: "hackathon",   label: "Hackathons",  icon: "⚡", aperture: "f/1.2" },
   { id: "competitive", label: "Competitive", icon: "🏅", aperture: "f/1.8" },
   { id: "academic",    label: "Academic",    icon: "🎓", aperture: "f/2.8" },
@@ -173,6 +222,7 @@ const CATEGORIES: { id: Category; label: string; icon: string; aperture: string 
 
 const CAT_COLOR: Record<Category, string> = {
   all:         "#2563eb",
+  cloud:       "#f97316",
   hackathon:   "#f59e0b",
   competitive: "#06b6d4",
   academic:    "#8b5cf6",
@@ -355,7 +405,7 @@ function PolaroidCard({
           ? { type: "spring", stiffness: 400, damping: 20 }
           : { duration: 0.5, delay: index * 0.06 },
       }}
-      className={`cursor-pointer origin-bottom ${cert.featured ? "md:col-span-2" : ""}`}
+      className="cursor-pointer origin-bottom"
       onClick={onClick}
       onHoverStart={() => setIsHover(true)}
       onHoverEnd={() => setIsHover(false)}
@@ -369,11 +419,11 @@ function PolaroidCard({
             : "0 8px 24px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15)",
         }}
         transition={{ type: "spring", stiffness: 380, damping: 22 }}
-        className="bg-[#f5f0e8] p-3 pb-12"
+        className="bg-[#f5f0e8] p-3 pb-12 rounded-sm"
       >
         {/* Photo area */}
         <div
-          className={`relative overflow-hidden bg-[#1a0a00] ${cert.featured ? "h-52 sm:h-60" : "h-40 sm:h-44"}`}
+          className="relative overflow-hidden bg-[#1a0a00] h-44 sm:h-48"
         >
           {/* Skeleton developing effect */}
           {!imgLoaded && (
@@ -473,6 +523,7 @@ function PolaroidCard({
 export default function Certifications() {
   const [activeCategory, setActiveCategory] = useState<Category>("all");
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const reducedMotion = useReducedMotion() ?? false;
 
   const counts = CATEGORIES.reduce<Record<Category, number>>(
@@ -486,9 +537,14 @@ export default function Certifications() {
     {} as Record<Category, number>
   );
 
-  const visible = certifications
+  const allFiltered = certifications
     .filter((c) => activeCategory === "all" || c.category === activeCategory)
     .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+
+  const INITIAL_CERT_COUNT = 6;
+  const shouldLimit = activeCategory === "all" && !isExpanded && allFiltered.length > INITIAL_CERT_COUNT;
+  const visible = shouldLimit ? allFiltered.slice(0, INITIAL_CERT_COUNT) : allFiltered;
+  const remainingCount = allFiltered.length - INITIAL_CERT_COUNT;
 
   const accentColor = CAT_COLOR[activeCategory];
 
@@ -556,7 +612,10 @@ export default function Certifications() {
             return (
               <motion.button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => {
+                  setActiveCategory(cat.id);
+                  setIsExpanded(false);
+                }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="relative px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 border overflow-hidden font-mono"
@@ -600,6 +659,31 @@ export default function Certifications() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* ── Show More / Show Less Button ─────────────────────── */}
+        {allFiltered.length > INITIAL_CERT_COUNT && activeCategory === "all" && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-12 text-center"
+          >
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 bg-card-bg border border-border hover:border-primary text-text-primary hover:text-primary shadow-lg hover:shadow-primary/15 cursor-pointer backdrop-blur-md group font-mono"
+            >
+              <span>
+                {isExpanded
+                  ? "Show Less Certifications"
+                  : `View All ${allFiltered.length} Certifications (+${remainingCount} more)`}
+              </span>
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+              ) : (
+                <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
+              )}
+            </button>
+          </motion.div>
+        )}
 
         {/* Empty state */}
         <AnimatePresence>
