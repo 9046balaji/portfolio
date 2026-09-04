@@ -204,22 +204,22 @@ export default function PortfolioWelcome() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="w-full max-w-lg rounded-xl border border-border bg-black/80 dark:bg-card-bg/90 p-4 text-left font-mono text-xs shadow-2xl backdrop-blur-md"
+              className="w-full max-w-lg rounded-xl border border-slate-700/60 bg-gray-950/95 dark:bg-card-bg/95 p-4 text-left font-mono text-xs shadow-2xl backdrop-blur-md text-slate-200"
             >
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 text-text-tertiary">
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 text-slate-300">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                  <span className="text-[10px] ml-2 text-text-muted">devops-deploy.log</span>
+                  <span className="text-[10px] ml-2 text-slate-400">devops-deploy.log</span>
                 </div>
-                <span className="text-[10px] text-primary font-bold">AWS / SRE</span>
+                <span className="text-[10px] text-cyan-400 font-bold">AWS / SRE</span>
               </div>
 
               <div className="space-y-1.5 min-h-[50px]">
                 {TERMINAL_LOGS.slice(0, currentLogIndex + 1).map((log, idx) => (
                   <div key={idx} className="flex items-center gap-2 animate-fadeIn">
-                    <span className="text-text-muted text-[10px]">[{log.time}]</span>
+                    <span className="text-slate-500 text-[10px]">[{log.time}]</span>
                     <span className={`${log.color}`}>{log.text}</span>
                   </div>
                 ))}
