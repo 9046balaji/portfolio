@@ -2,70 +2,106 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Terminal, Code2, ArrowRight, MapPin, CheckCircle2, Cpu, Shield, Database, Server, Cloud, Workflow } from "lucide-react";
+import { Sparkles, Terminal, Code2, ArrowRight, MapPin, CheckCircle2, Cpu, Shield, Database, Server, Cloud, Workflow, Award } from "lucide-react";
 
 const TERMINAL_LOGS = [
-  { time: "0.1s", text: "import { LangGraph, MedGemma } from '@ai/core';", color: "text-blue-400" },
-  { time: "0.8s", text: "kubectl.apply({ cluster: 'k8s-prod', namespace: 'mlops' });", color: "text-purple-400" },
-  { time: "1.6s", text: "Docker.build({ image: 'fastapi-llm:latest', cache: true });", color: "text-amber-400" },
-  { time: "2.4s", text: "Terraform.apply({ provider: 'AWS', state: 'synced' });", color: "text-emerald-400" },
-  { time: "3.1s", text: "MLOps & CI/CD Pipeline Online // 100% Ready", color: "text-cyan-400 font-bold" },
+  { time: "0.1s", text: "docker compose up -d --build (postgres, redis, api)", color: "text-blue-400" },
+  { time: "0.8s", text: "jenkins.pipeline({ stages: 7, status: 'PASSED' });", color: "text-purple-400" },
+  { time: "1.6s", text: "terraform.apply({ provider: 'AWS', vpc: 'active' });", color: "text-amber-400" },
+  { time: "2.4s", text: "helm.deploy({ charts: 11, namespace: 'aurabank' });", color: "text-emerald-400" },
+  { time: "3.1s", text: "Cloud-Native Infrastructure Online // 100% Ready", color: "text-cyan-400 font-bold" },
 ];
 
 const EXPERTISE_TAGS = [
-  { icon: Cpu, label: "AI/ML & LangGraph Agents" },
-  { icon: Cloud, label: "DevOps & Cloud Architecture" },
-  { icon: Server, label: "Docker, K8s & CI/CD" },
-  { icon: Database, label: "Vector RAG & FinTech Ledgers" },
+  { icon: Cloud, label: "AWS Cloud Infrastructure" },
+  { icon: Server, label: "Docker & Kubernetes" },
+  { icon: Workflow, label: "7-Stage CI/CD & Jenkins" },
+  { icon: Terminal, label: "Bash & Linux Sysadmin" },
 ];
 
 export default function PortfolioWelcome() {
   const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("INITIALIZING DEVOPS & MLOPS CORE...");
+  const [statusText, setStatusText] = useState("INITIALIZING CLOUD-NATIVE STACK...");
   const [currentLogIndex, setCurrentLogIndex] = useState(0);
+  const [isRefresh, setIsRefresh] = useState(false);
 
   useEffect(() => {
-    let current = 0;
-    // 3.5 seconds load duration
+    const isReload =
+      (typeof window !== "undefined" &&
+        ((window.performance?.getEntriesByType?.("navigation")?.[0] as any)?.type === "reload" ||
+          (window.performance as any)?.navigation?.type === 1)) ||
+      (typeof window !== "undefined" && sessionStorage.getItem("portfolio_welcome_viewed") === "true");
+
+    setIsRefresh(isReload);
+
+    // EXACT TIMING:
+    // First load: 5000ms total (4400ms progress + 200ms hold + 400ms exit = 5000ms / 5.0s)
+    // Refresh: 3000ms total (2400ms progress + 200ms hold + 400ms exit = 3000ms / 3.0s)
+    const totalDuration = isReload ? 2000 : 4000;
+    const exitDuration = 400;
+    const holdDuration = 200;
+    const fillDuration = totalDuration - exitDuration - holdDuration;
+
+    const startTime = Date.now();
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 3) + 1;
-      if (current >= 100) {
-        current = 100;
+      const elapsed = Date.now() - startTime;
+      const pct = Math.min(100, Math.round((elapsed / fillDuration) * 100));
+      setProgress(pct);
+
+      if (elapsed >= fillDuration) {
         setProgress(100);
-        setStatusText("WELCOME TO MY PORTFOLIO");
+        setStatusText("SYSTEM ONLINE // WELCOME TO MY PORTFOLIO");
         setCurrentLogIndex(4);
         clearInterval(interval);
 
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("portfolio_welcome_viewed", "true");
+        }
+
         setTimeout(() => {
           setVisible(false);
-        }, 600);
+        }, holdDuration);
       } else {
-        setProgress(current);
-
-        if (current < 20) {
-          setStatusText("INITIALIZING DEVOPS & MLOPS CORE...");
+        if (pct < 20) {
+          setStatusText("INITIALIZING CLOUD-NATIVE STACK...");
           setCurrentLogIndex(0);
-        } else if (current < 45) {
-          setStatusText("LOADING KUBERNETES & CONTAINER REGISTRY...");
+        } else if (pct < 45) {
+          setStatusText("VERIFYING DOCKER & KUBERNETES CONFIGS...");
           setCurrentLogIndex(1);
-        } else if (current < 70) {
-          setStatusText("BUILDING DOCKER IMAGES & CI/CD PIPELINES...");
+        } else if (pct < 70) {
+          setStatusText("INITIALIZING 7-STAGE JENKINS CI/CD...");
           setCurrentLogIndex(2);
-        } else if (current < 90) {
+        } else if (pct < 90) {
           setStatusText("PROVISIONING TERRAFORM AWS INFRASTRUCTURE...");
           setCurrentLogIndex(3);
         } else {
-          setStatusText("PREPARING HIGH-PERFORMANCE INTERFACE...");
+          setStatusText("FINALIZING HEALTHCHECKS & METRICS...");
           setCurrentLogIndex(4);
         }
       }
-    }, 32);
+    }, 25);
 
-    return () => clearInterval(interval);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === " " || e.key === "Enter") {
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("portfolio_welcome_viewed", "true");
+        }
+        setVisible(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const handleSkip = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("portfolio_welcome_viewed", "true");
+    }
     setVisible(false);
   };
 
@@ -77,7 +113,7 @@ export default function PortfolioWelcome() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[9999] flex flex-col justify-between p-4 md:p-8 bg-background text-foreground select-none overflow-hidden"
         >
           {/* ── Top Navigation Bar ── */}
@@ -87,21 +123,26 @@ export default function PortfolioWelcome() {
               <span className="font-bold text-text-primary hidden sm:inline">KONDA BALAJI RAO</span>
               <span className="text-text-muted">•</span>
               <span className="flex items-center gap-1 text-text-tertiary">
-                <MapPin className="w-3.5 h-3.5 text-primary" /> Hyderabad, India
+                <MapPin className="w-3.5 h-3.5 text-primary" /> Andhra Pradesh, India
               </span>
             </div>
 
-            <button
-              onClick={handleSkip}
-              className="text-xs font-mono text-text-tertiary hover:text-primary transition-colors px-4 py-2 rounded-full border border-border bg-card-bg hover:bg-card-bg-hover cursor-pointer flex items-center gap-1.5 shadow-sm"
-            >
-              <span>Skip Intro</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-block px-2.5 py-1 rounded-full text-[11px] font-mono border border-border bg-card-bg/60 text-text-tertiary">
+                {isRefresh ? "⚡ Fast Mode (3s)" : "🚀 Boot Sequence (5s)"}
+              </span>
+              <button
+                onClick={handleSkip}
+                className="text-xs font-mono text-text-tertiary hover:text-primary transition-colors px-4 py-2 rounded-full border border-border bg-card-bg hover:bg-card-bg-hover cursor-pointer flex items-center gap-1.5 shadow-sm"
+              >
+                <span>Skip Intro (Esc)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
           {/* ── Center Content: Developer Name, Expertise & Live Terminal ── */}
-          <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-6">
+          <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-5">
             {/* Monogram Badge */}
             <motion.div
               initial={{ scale: 0.7, opacity: 0 }}
@@ -109,8 +150,8 @@ export default function PortfolioWelcome() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-2xl relative z-10 backdrop-blur-md">
-                <Code2 className="w-10 h-10" />
+              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-2xl relative z-10 backdrop-blur-md">
+                <Code2 className="w-9 h-9 sm:w-10 sm:h-10" />
               </div>
               <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-2xl animate-pulse" />
             </motion.div>
@@ -130,10 +171,10 @@ export default function PortfolioWelcome() {
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="mt-3 text-base sm:text-xl text-primary font-mono font-semibold tracking-widest uppercase flex items-center justify-center gap-2"
+                className="mt-3 text-xs sm:text-base text-primary font-mono font-semibold tracking-wider uppercase flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-                <span>AI/ML &amp; DevOps Systems Engineer</span>
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Cloud &amp; DevOps Engineer · Full-Time Roles &amp; Internships</span>
               </motion.p>
             </div>
 
@@ -142,14 +183,14 @@ export default function PortfolioWelcome() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap justify-center gap-2 pt-2"
+              className="flex flex-wrap justify-center gap-2 pt-1"
             >
               {EXPERTISE_TAGS.map((tag) => {
                 const Icon = tag.icon;
                 return (
                   <span
                     key={tag.label}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card-bg border border-border text-xs font-mono text-text-secondary shadow-sm"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card-bg border border-border text-xs font-mono text-text-secondary shadow-sm"
                   >
                     <Icon className="w-3.5 h-3.5 text-primary" />
                     {tag.label}
@@ -170,9 +211,9 @@ export default function PortfolioWelcome() {
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                  <span className="text-[10px] ml-2 text-text-muted">devops-boot.log</span>
+                  <span className="text-[10px] ml-2 text-text-muted">devops-deploy.log</span>
                 </div>
-                <span className="text-[10px] text-primary font-bold">K8S / MLOPS</span>
+                <span className="text-[10px] text-primary font-bold">AWS / SRE</span>
               </div>
 
               <div className="space-y-1.5 min-h-[50px]">
@@ -187,7 +228,7 @@ export default function PortfolioWelcome() {
           </div>
 
           {/* ── Bottom Progress Bar & Counter ── */}
-          <div className="relative z-10 w-full max-w-xl mx-auto space-y-3">
+          <div className="relative z-10 w-full max-w-xl mx-auto space-y-2.5">
             <div className="flex items-center justify-between font-mono text-xs text-text-tertiary">
               <span className="flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-primary shrink-0 animate-pulse" /> {statusText}
@@ -205,15 +246,15 @@ export default function PortfolioWelcome() {
             </div>
 
             {/* Live Metrics Row */}
-            <div className="flex justify-between items-center text-[10px] font-mono text-text-tertiary pt-1">
+            <div className="flex justify-between items-center text-[10px] font-mono text-text-tertiary pt-0.5">
               <span className="flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" /> MLOps &amp; CI/CD
+                <CheckCircle2 className="w-3 h-3 text-emerald-500" /> AWS Cloud Practitioner
               </span>
               <span className="flex items-center gap-1">
                 <Server className="w-3 h-3 text-blue-500" /> Docker &amp; Kubernetes
               </span>
               <span className="flex items-center gap-1">
-                <Shield className="w-3 h-3 text-purple-500" /> AWS Cloud Infra
+                <Shield className="w-3 h-3 text-purple-500" /> 7-Stage CI/CD
               </span>
             </div>
           </div>
