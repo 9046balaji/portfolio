@@ -30,7 +30,7 @@ export default function Footer() {
                             &lt;KBR /&gt;
                         </Link>
                         <p className="text-text-tertiary text-sm">
-                            AI/ML & Cloud Engineer building intelligent systems that make a difference.
+                            DevOps &amp; MLOps Engineer bridging cloud-native infrastructure, automation, and applied AI systems.
                         </p>
                         <div className="flex gap-4">
                             {socialLinks.map((social, index) => {
