@@ -66,7 +66,7 @@ export const metadata: Metadata = {
       "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
     images: [
       {
-        url: "/assets/profile.png",
+        url: "/assets/profile.jpg",
         width: 1200,
         height: 630,
         alt: "Konda Balaji Rao — AI/ML & Cloud Engineer",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     title: "Konda Balaji Rao | AI/ML & Cloud Engineer",
     description:
       "Building Agentic AI Systems & Healthcare AI Solutions. Creator of HeartGuard AI, Aura Bank, and more.",
-    images: ["/assets/profile.png"],
+    images: ["/assets/profile.jpg"],
   },
 };
 
