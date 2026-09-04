@@ -18,6 +18,7 @@ import {
   Award,
   ArrowUpRight,
   Trash2,
+  ChevronDown,
 } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
 
@@ -591,18 +592,19 @@ export default function CommunityHub() {
                   Opportunity Type
                 </label>
                 <div className="relative">
-                  <Briefcase className="w-4 h-4 text-text-tertiary absolute left-3 top-3 pointer-events-none" />
+                  <Briefcase className="w-4 h-4 text-text-tertiary absolute left-3 top-2.5 pointer-events-none" />
                   <select
                     value={inquiryRole}
                     onChange={(e) => setInquiryRole(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary transition-colors font-sans appearance-none"
+                    className="w-full pl-9 pr-8 py-2 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary transition-colors font-sans appearance-none cursor-pointer"
                   >
                     {ROLE_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt} className="bg-background text-text-primary">
+                      <option key={opt} value={opt} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                         {opt}
                       </option>
                     ))}
                   </select>
+                  <ChevronDown className="w-4 h-4 text-text-tertiary absolute right-3 top-2.5 pointer-events-none" />
                 </div>
               </div>
             </div>
@@ -617,7 +619,7 @@ export default function CommunityHub() {
                 value={inquiryMessage}
                 onChange={(e) => setInquiryMessage(e.target.value)}
                 placeholder="Discuss an open role, internship opportunity, or technical question..."
-                className="w-full p-3 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary transition-colors font-sans resize-none"
+                className="w-full p-3 text-xs rounded-xl bg-background border border-border focus:border-primary focus:outline-none text-text-primary transition-colors font-sans resize-none placeholder:text-text-muted"
               />
             </div>
 
