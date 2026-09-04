@@ -84,7 +84,7 @@ export default function Footer() {
                             </li>
                             <li className="text-text-tertiary">
                                 <span className="text-text-muted">Status:</span>{" "}
-                                <span className="text-green-400">Open to opportunities</span>
+                                <span className="text-emerald-600 dark:text-emerald-400 font-medium">Open to opportunities</span>
                             </li>
                         </ul>
                     </div>
