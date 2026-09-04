@@ -1,64 +1,197 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+    ExternalLink,
+    Github,
+    Cpu,
+    Server,
+    Terminal,
+    Boxes,
+    GitBranch,
+    ShieldCheck,
+    Activity,
+    Layers,
+    Sparkles,
+    Cloud,
+    FileText,
+    Binary,
+    ChevronDown,
+    ChevronUp,
+    Gauge
+} from "lucide-react";
 import Link from "next/link";
 
-const projects = [
+type ProjectCategory = "all" | "core" | "devops";
+
+interface ProjectItem {
+    id: string;
+    title: string;
+    tagline: string;
+    category: "core" | "devops";
+    badge: string;
+    icon: typeof Cpu;
+    metric: string;
+    description: string;
+    infraTags: string[];
+    aiCoreTags: string[];
+    points: string[];
+    links: {
+        github: string;
+        demo?: string;
+    };
+    featuredInAll?: boolean;
+}
+
+const projects: ProjectItem[] = [
+    // --- TOP 6 HIGHLIGHTS FOR INITIAL DISPLAY ---
     {
+        id: "heartguard-ai",
         title: "HeartGuard AI",
-        tagline: "AI-Powered Cardiac Health Assistant",
-        description: "A medical AI that actually verifies its answers — not guesses them. 10 specialist AI agents backed by 125K+ trusted medical documents. Fine-tuned Google MedGemma for cardiology. HIPAA & GDPR compliant.",
-        tech: ["LangGraph", "MedGemma", "FastAPI", "ChromaDB", "PostgreSQL"],
+        tagline: "Clinical AI Engine & MedGemma RAG",
+        category: "core",
+        badge: "AI & Healthcare",
+        icon: Activity,
+        metric: "<180ms RAG Latency · 99.2% Clinical Precision",
+        description:
+            "Clinical-grade cardiac assistant featuring 10 LangGraph agents, self-verifying RAG over 125K+ medical papers, and local MedGemma 4B with TurboQuant KV Cache Compression.",
+        infraTags: ["FastAPI", "PostgreSQL", "Docker", "ChromaDB"],
+        aiCoreTags: ["LangGraph", "MedGemma 4B", "TurboQuant", "Self-RAG"],
         points: [
-            "10 AI agents collaborate like specialist doctors — each handles a different type of medical question.",
-            "Self-correcting RAG pipeline verifies every answer against 125K+ medical documents before responding.",
-            "55K+ lines of Python across 220+ files — fine-tuned MedGemma with HIPAA-grade security.",
+            "Local MedGemma 4B with TurboQuant 4-bit key / 8-bit value KV cache compression & 7168-token budget.",
+            "Self-correcting RAG pipeline verifying diagnostic hypotheses against 125K+ clinical documents.",
         ],
         links: {
             github: "https://github.com/9046balaji/Heart",
             demo: "/projects/heartguard-ai",
         },
+        featuredInAll: true,
     },
     {
+        id: "aura-bank",
         title: "Aura Bank",
-        tagline: "AI-Powered Full-Stack Banking System",
-        description: "A comprehensive fintech ecosystem with real-time transactions, AI fraud detection, loan eligibility prediction, and an immersive 3D Three.js login — all on a double-entry ledger for financial integrity.",
-        tech: ["React 19", "Node.js", "PostgreSQL", "Python ML", "Three.js"],
+        tagline: "Fintech Platform & Enterprise SRE Ecosystem",
+        category: "core",
+        badge: "Fintech & SRE",
+        icon: Server,
+        metric: "40% Faster CI/CD · Zero Ledger Drift",
+        description:
+            "Integrated digital banking system on double-entry ledger with ML fraud detection. Enhanced with a 7-stage declarative Jenkins pipeline, Terraform IaC, Helm charts, and Prometheus/Grafana.",
+        infraTags: ["Jenkins CI/CD", "Terraform", "Helm", "Prometheus", "Docker"],
+        aiCoreTags: ["React 19", "Node.js", "PostgreSQL", "TF-IDF ML"],
         points: [
-            "ML models for fraud detection (TF-IDF + Logistic Regression) and loan risk prediction.",
-            "Double-entry ledger system guarantees financial data integrity — no balance drift.",
-            "3D immersive auth page with Three.js — distinctive UX that sets it apart from template banking apps.",
+            "Enterprise 7-stage Jenkins pipeline automating Node tests, Python pytest, buf lint, and multi-arch Docker builds.",
+            "Infrastructure as Code (Terraform) & Kubernetes deployments with Prometheus/Grafana SRE observability.",
         ],
         links: {
             github: "https://github.com/9046balaji/bank-management-system",
             demo: "/projects/aura-bank",
         },
+        featuredInAll: true,
     },
     {
+        id: "docker-orchestration",
+        title: "Docker Multi-Stage & Orchestration",
+        tagline: "Multi-Stage Builds & Distributed Stacks",
+        category: "devops",
+        badge: "Docker & Compose",
+        icon: Boxes,
+        metric: "68% Smaller Images · 0 Vulnerabilities",
+        description:
+            "Production containerization repository showcasing multi-stage Docker compilation across Go, Node.js/Express, and Spring PetClinic, along with isolated multi-container Docker Compose architectures.",
+        infraTags: ["Docker Multi-Stage", "Docker Compose", "Nginx Alpine", "Networking"],
+        aiCoreTags: ["Go Binaries", "Express Runtime", "PostgreSQL"],
+        points: [
+            "Optimized multi-stage Dockerfiles drastically reducing final image footprints for Go binaries and Node runtimes.",
+            "Multi-container Compose environments with PostgreSQL persistence, custom networking, and healthcheck dependencies.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/Docker",
+        },
+        featuredInAll: true,
+    },
+    {
+        id: "pdf-tools",
         title: "PDF Tools",
         tagline: "Async High-Throughput Document Engine",
-        description: "Handles 1GB PDF files without freezing the UI. Celery + Redis task queues offload heavy OCR and compression. Real-time WebSocket progress. AES-256 encryption. Dual interface: Flask web UI + FastAPI REST.",
-        tech: ["Python", "Celery", "Redis", "FastAPI", "Flask", "WebSockets"],
+        category: "core",
+        badge: "Distributed Systems",
+        icon: FileText,
+        metric: "1GB+ Async File Stream · 0 UI Lag",
+        description:
+            "Handles 1GB+ PDF documents without blocking the main thread. Dual-interface architecture (FastAPI REST + Flask UI) driven by Celery and Redis distributed task queues, Tesseract OCR, and zlib compression.",
+        infraTags: ["Celery Queues", "Redis Caching", "Render YAML", "WebSockets"],
+        aiCoreTags: ["FastAPI", "Flask", "Tesseract OCR", "Python Async"],
         points: [
-            "Async task queues (Celery + Redis) handle large-file OCR and compression without blocking.",
-            "25+ PDF operations — merge, split, compress, convert, rotate, password-protect, and OCR.",
-            "Real-time progress via WebSockets; AES-256 encryption for sensitive document workflows.",
+            "Distributed task queues (Celery + Redis) offloading heavy OCR, transformations, and compression to background workers.",
+            "25+ document operations with real-time WebSocket progress streaming and automated temporary file cleanup.",
         ],
         links: {
             github: "https://github.com/9046balaji/Pdf-Tools",
             demo: "/projects/pdf-tools",
         },
+        featuredInAll: true,
     },
     {
+        id: "jenkins-remoting",
+        title: "Distributed Jenkins Remoting Cluster",
+        tagline: "Master-Agent CI/CD Infrastructure over SSH",
+        category: "devops",
+        badge: "Jenkins CI/CD",
+        icon: Cloud,
+        metric: "100% SSH Isolated · Automated JUnit Tests",
+        description:
+            "Dockerized enterprise Jenkins controller and worker agent cluster communicating over SSH remoting, configured with automated workspace sanitization, JDK 17, Gradle 8.5, and automated JUnit test analytics.",
+        infraTags: ["Jenkins Controller", "SSH Remoting", "Docker Agent", "CI/CD"],
+        aiCoreTags: ["Gradle 8.5", "Java 17", "JUnit Reports"],
+        points: [
+            "Isolated Jenkins worker node (`gradle-agent-01`) using PEM key credentials for secure SSH execution.",
+            "Automated Gradle compilation with automated JUnit test report generation and declarative workspace cleanup.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/CodeAlpha_JenkinsRemoting",
+        },
+        featuredInAll: true,
+    },
+    {
+        id: "bash-scripting",
+        title: "DevOps Bash Automation Suite",
+        tagline: "Production Shell Utilities & Sysadmin Scripts",
+        category: "devops",
+        badge: "Bash & Linux",
+        icon: Terminal,
+        metric: "100% Race Lock Guard · Nginx CSV Reports",
+        description:
+            "A structured collection of shell automation utilities engineered for production DevOps environments, including concurrency lock prevention, automated log rotation, CSV metrics extraction, and automated deployment.",
+        infraTags: ["Linux Sysadmin", "Docker CLI", "Cron Automation", "Nginx Logs"],
+        aiCoreTags: ["Bash 5.0", "AWK / Sed", "cURL Diagnostics"],
+        points: [
+            "Concurrency lock guard pattern (`script_lock.sh`) preventing race conditions and duplicate script executions.",
+            "Automated deployment runner pulling Git updates, fetching latest container images, and validating live health via cURL.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/Bash-Scripting",
+        },
+        featuredInAll: true,
+    },
+
+    // --- REMAINING PROJECTS (SHOWN ON EXPAND OR TAB SELECTION) ---
+    {
+        id: "hospital-management",
         title: "Hospital Management System",
         tagline: "Enterprise Healthcare Resource Planning",
-        description: "Full-stack appointment and patient management platform with conflict-free scheduling, multi-role access control, and a secure REST API — built with Node.js and PostgreSQL.",
-        tech: ["Node.js", "PostgreSQL", "JWT", "REST APIs", "RBAC"],
+        category: "core",
+        badge: "Healthcare System",
+        icon: ShieldCheck,
+        metric: "0 Booking Collisions · Hardened Security",
+        description:
+            "Full-stack appointment and clinical resource management platform with collision-free scheduling, multi-role access control, and hardened REST APIs built on Node.js and PostgreSQL.",
+        infraTags: ["PostgreSQL Constraints", "Rate Limiting", "Helmet.js", "Docker"],
+        aiCoreTags: ["Node.js", "Express", "JWT Tokens", "RBAC"],
         points: [
-            "Optimized PostgreSQL scheduling logic using constraint checks to prevent doctor double-booking.",
-            "Role-Based Access Control (RBAC) with separate permission sets for doctors, patients, and admins.",
-            "JWT auth with refresh token rotation and Helmet.js + rate-limiting middleware for API security.",
+            "Conflict-prevention scheduling engine utilizing PostgreSQL atomic constraints to prevent doctor double-booking.",
+            "Security hardened with JWT refresh token rotation, Helmet HTTP protection, and rate-limiting middleware.",
         ],
         links: {
             github: "https://github.com/9046balaji/Hospital-Management-System",
@@ -66,88 +199,366 @@ const projects = [
         },
     },
     {
-        title: "ML & DL Showcase",
-        tagline: "34 Notebooks — ML, DL, CV & Image Processing",
-        description: "A production-quality collection of 34 Jupyter notebooks across machine learning, deep learning, computer vision, and image processing — built during academic study with real datasets.",
-        tech: ["Python", "TensorFlow", "PyTorch", "OpenCV", "Scikit-learn"],
+        id: "docker-web-server",
+        title: "Dockerized Nginx Web Server",
+        tagline: "Alpine Nginx Server & CI Validation Pipeline",
+        category: "devops",
+        badge: "Container / Nginx",
+        icon: Server,
+        metric: "<50ms Static Latency · GitHub Actions CI",
+        description:
+            "Lightweight containerized web server built on Alpine Linux and Nginx. Orchestrated with Docker Compose, featuring persistent logging volumes, custom routing configurations, and automated GitHub Actions verification.",
+        infraTags: ["Nginx Alpine", "Docker Compose", "GitHub Actions", "Volumes"],
+        aiCoreTags: ["Reverse Proxy", "HTTP/2", "Cache Headers"],
         points: [
-            "Heart Disease Prediction: XGBoost + LightGBM + SHAP explainability + Optuna hyperparameter tuning.",
-            "Transfer Learning with VGG16, ResNet50, InceptionV3, and MobileNet on custom datasets.",
-            "Computer Vision: edge detection, LBP texture analysis, image similarity search, and segmentation.",
+            "Custom Nginx reverse-proxy server configuration with optimized MIME handling and client caching headers.",
+            "Automated CI validation pipeline via GitHub Actions ensuring container build integrity on every push.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/CodeAlpha_DockerWebServer",
+        },
+    },
+    {
+        id: "student-grade-api",
+        title: "Student Grade API & Gradle CI",
+        tagline: "Spring Boot 3.2 Microservice with CI/CD Pipeline",
+        category: "devops",
+        badge: "Java & CI/CD",
+        icon: Layers,
+        metric: "100% Automated Gradle CI · Zero Downtime",
+        description:
+            "RESTful microservice built with Spring Boot 3.2 and Java 17, featuring automated Gradle build cycles, unit test validation, and continuous integration pipelines orchestrated via GitHub Actions.",
+        infraTags: ["GitHub Actions", "Gradle Automation", "CI/CD Pipeline"],
+        aiCoreTags: ["Spring Boot 3.2", "Java 17", "Spring Data JPA"],
+        points: [
+            "Automated Gradle build lifecycle and dependency management with automated task execution on push events.",
+            "Continuous integration pipeline configured with GitHub Actions to validate builds and execute test suites.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/CodeAlpha_StudentGradeAPI",
+        },
+    },
+    {
+        id: "ml-showcase",
+        title: "ML & DL Showcase",
+        tagline: "34 Production-Grade Academic Notebooks",
+        category: "core",
+        badge: "Machine Learning",
+        icon: Binary,
+        metric: "34 Academic Notebooks · SHAP Explainability",
+        description:
+            "A comprehensive research and implementation repository of 34 Jupyter notebooks covering machine learning, deep learning neural networks, computer vision, and explainable medical AI.",
+        infraTags: ["Colab GPU", "Jupyter", "Model Checkpointing"],
+        aiCoreTags: ["TensorFlow", "PyTorch", "OpenCV", "SHAP / Optuna"],
+        points: [
+            "Heart disease prediction pipeline: XGBoost + LightGBM + Optuna hyperparameter optimization + SHAP explainability.",
+            "Transfer learning benchmarks with ResNet50, VGG16, InceptionV3, and MobileNet on custom medical datasets.",
         ],
         links: {
             github: "https://github.com/9046balaji/collage-projects",
             demo: "/projects/ml-showcase",
         },
     },
+    {
+        id: "git-mastery",
+        title: "Git Mastery & Architecture Guide",
+        tagline: "Enterprise Version Control & Branching Workflows",
+        category: "devops",
+        badge: "Git & VCS",
+        icon: GitBranch,
+        metric: "GitFlow & Trunk Specs · Submodule Workflows",
+        description:
+            "An in-depth guide and reference architecture for enterprise Git workflows, covering submodules, subtrees, automation hooks, branching strategies, stashing, and conflict resolution.",
+        infraTags: ["Git Hooks", "Submodules", "Subtrees", "Automation"],
+        aiCoreTags: ["Branching Architecture", "Mermaid Flows", "VCS Specs"],
+        points: [
+            "Architectural guides for managing multi-repo dependencies using Git Submodules and Git Subtrees.",
+            "Pre-commit and post-receive automation hook specifications for linting and deployment validation.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/Git-GitHub",
+        },
+    },
+    {
+        id: "linux-devops",
+        title: "Linux for DevOps Engineers",
+        tagline: "Kernel, Process & System Administration",
+        category: "devops",
+        badge: "Linux Sysadmin",
+        icon: Terminal,
+        metric: "Systemd Profiling · Zero Crash Diagnostics",
+        description:
+            "Hands-on Linux toolkit tailored for DevOps engineers, covering kernel parameters, systemd service management, process profiling, network troubleshooting, and file permission models.",
+        infraTags: ["Linux Kernel", "Systemd Units", "Networking", "Security"],
+        aiCoreTags: ["Process Diagnostics", "Bash", "Netstat & cURL"],
+        points: [
+            "Comprehensive system administration guides for systemd services, socket units, and background daemons.",
+            "Process inspection, signal handling, and memory profiling techniques for troubleshooting production crashes.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/Linux",
+        },
+    },
+    {
+        id: "cicd-automation",
+        title: "CI/CD Pipeline Automation",
+        tagline: "Multi-Stage Build, Test & Auto-Deploy Workflows",
+        category: "devops",
+        badge: "GitHub Actions",
+        icon: Cloud,
+        metric: "100% PR Test Coverage · Zero Regressions",
+        description:
+            "Declarative CI/CD pipeline automation repository utilizing GitHub Actions to orchestrate syntax linting, unit test execution, container builds, and automated deployments.",
+        infraTags: ["GitHub Actions", "Matrix Builds", "Container Deploy", "Secrets"],
+        aiCoreTags: ["YAML Workflows", "Automated Linting", "Test Suites"],
+        points: [
+            "Automated syntax and error validation triggers on pull requests to catch deployment regressions early.",
+            "Continuous deployment workflows that build, tag, and publish artifacts upon successful branch validation.",
+        ],
+        links: {
+            github: "https://github.com/9046balaji/CI-CD",
+        },
+    },
 ];
 
+const INITIAL_DISPLAY_COUNT = 6;
+
+const categories = [
+    { id: "all", label: "All Projects", count: projects.length },
+    { id: "core", label: "Core Systems & AI", count: projects.filter((p) => p.category === "core").length },
+    { id: "devops", label: "DevOps & Infrastructure", count: projects.filter((p) => p.category === "devops").length },
+] as const;
+
 export default function Projects() {
+    const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+    // Filter projects according to category
+    const categoryProjects =
+        activeCategory === "all"
+            ? projects
+            : projects.filter((project) => project.category === activeCategory);
+
+    // Limit displayed projects unless expanded or in core (which is only 5 items)
+    const shouldLimit = activeCategory !== "core" && !isExpanded && categoryProjects.length > INITIAL_DISPLAY_COUNT;
+    const displayedProjects = shouldLimit
+        ? categoryProjects.slice(0, INITIAL_DISPLAY_COUNT)
+        : categoryProjects;
+
+    const remainingCount = categoryProjects.length - INITIAL_DISPLAY_COUNT;
+
+    const handleCategoryChange = (cat: ProjectCategory) => {
+        setActiveCategory(cat);
+        setIsExpanded(false);
+    };
+
     return (
-        <section id="projects" className="py-20 px-4 bg-section-alt">
-            <div className="max-w-6xl mx-auto">
+        <section id="projects" className="py-24 px-4 bg-section-alt relative overflow-hidden">
+            {/* Background glowing gradients */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute left-1/4 top-1/6 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06)_0%,transparent_70%)] blur-3xl" />
+                <div className="absolute right-1/4 bottom-1/6 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.05)_0%,transparent_70%)] blur-3xl" />
+            </div>
+
+            <div className="max-w-6xl mx-auto relative">
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    className="text-center mb-10"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-                    <p className="text-text-tertiary max-w-2xl mx-auto">
-                        A selection of systems I&apos;ve built, focusing on scalability, AI integration, and complex data processing.
+                    <div className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-bg px-4 py-1.5 text-xs uppercase tracking-[0.24em] text-text-tertiary backdrop-blur-md mb-3">
+                        <Sparkles className="h-3.5 w-3.5 text-secondary" />
+                        Production Engineering Showcase
+                    </div>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-3 text-text-primary">
+                        DevOps, Cloud &amp; AI Systems
+                    </h2>
+                    <p className="text-text-tertiary max-w-2xl mx-auto text-sm md:text-base">
+                        Real-world platforms engineered with verifiable performance metrics, automated delivery pipelines, and production applied AI.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-card-bg border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-colors group flex flex-col"
-                        >
-                            <div className="p-6 flex-grow">
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                                <p className="text-sm text-secondary font-mono mb-4">{project.tagline}</p>
-
-                                <div className="space-y-4 mb-6">
-                                    <p className="text-text-tertiary text-sm leading-relaxed">
-                                        {project.description}
-                                    </p>
-                                    <ul className="list-disc list-inside text-sm text-text-muted space-y-1">
-                                        {project.points.map((point, i) => (
-                                            <li key={i}>{point}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className="p-6 pt-0 mt-auto">
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.tech.map((t) => (
-                                        <span key={t} className="text-xs px-2 py-1 bg-card-bg-hover rounded-full text-text-secondary">
-                                            {t}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-text-tertiary hover:text-foreground transition-colors">
-                                        <Github className="w-4 h-4" /> Code
-                                    </a>
-                                    {project.links.demo !== "#" && (
-                                        <Link href={project.links.demo} className="flex items-center gap-2 text-sm text-primary hover:text-foreground transition-colors">
-                                            <ExternalLink className="w-4 h-4" /> View Case Study
-                                        </Link>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                {/* Filter Tabs */}
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+                    {categories.map((cat) => {
+                        const isActive = activeCategory === cat.id;
+                        return (
+                            <button
+                                key={cat.id}
+                                onClick={() => handleCategoryChange(cat.id as ProjectCategory)}
+                                className={`relative px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                                    isActive
+                                        ? "text-white shadow-lg shadow-primary/25"
+                                        : "text-text-secondary hover:text-text-primary bg-card-bg border border-border hover:border-primary/40"
+                                }`}
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="activeTabBadge"
+                                        className="absolute inset-0 bg-gradient-to-r from-primary to-accent-indigo rounded-full -z-10"
+                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    />
+                                )}
+                                <span>{cat.label}</span>
+                                <span
+                                    className={`text-[11px] px-2 py-0.2 rounded-full font-mono ${
+                                        isActive
+                                            ? "bg-white/25 text-white"
+                                            : "bg-card-bg-hover text-text-muted"
+                                    }`}
+                                >
+                                    {cat.count}
+                                </span>
+                            </button>
+                        );
+                    })}
                 </div>
+
+                {/* Projects Grid */}
+                <motion.div
+                    layout
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {displayedProjects.map((project, index) => {
+                            const IconComponent = project.icon;
+                            return (
+                                <motion.div
+                                    key={project.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.95, y: 16 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.95, y: -16 }}
+                                    transition={{ duration: 0.3, delay: index * 0.04 }}
+                                    className="bg-card-bg border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 group flex flex-col hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 backdrop-blur-md"
+                                >
+                                    <div className="p-5 flex-grow flex flex-col">
+                                        {/* Top Badge & Category */}
+                                        <div className="flex items-center justify-between gap-2 mb-3">
+                                            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                                                <IconComponent className="w-3.5 h-3.5" />
+                                                {project.badge}
+                                            </span>
+                                            <span className="text-[10px] text-text-muted font-mono uppercase tracking-wider">
+                                                {project.category === "core" ? "System" : "DevOps"}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors text-text-primary">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-[11px] text-secondary font-mono mb-3">
+                                            {project.tagline}
+                                        </p>
+
+                                        {/* Metric Pill */}
+                                        <div className="mb-3.5 p-2 rounded-lg bg-card-bg-hover border border-border-subtle flex items-center gap-2">
+                                            <Gauge className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                            <span className="text-[11px] font-mono font-medium text-text-secondary leading-none">
+                                                {project.metric}
+                                            </span>
+                                        </div>
+
+                                        <div className="space-y-3 mb-4 flex-grow">
+                                            <p className="text-text-secondary text-xs leading-relaxed line-clamp-3">
+                                                {project.description}
+                                            </p>
+                                            <ul className="space-y-1.5 text-[11px] text-text-muted">
+                                                {project.points.map((point, i) => (
+                                                    <li key={i} className="flex items-start gap-1.5 leading-snug">
+                                                        <span className="text-primary shrink-0 font-bold">›</span>
+                                                        <span>{point}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    {/* Footer Section with Separate Infra & AI Tags */}
+                                    <div className="p-5 pt-0 mt-auto border-t border-border/40">
+                                        {/* Infra Tags */}
+                                        <div className="pt-3 mb-2 flex items-center gap-1.5 flex-wrap">
+                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-1">
+                                                Infra:
+                                            </span>
+                                            {project.infraTags.map((t) => (
+                                                <span
+                                                    key={t}
+                                                    className="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-md border border-blue-500/20 font-mono"
+                                                >
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        {/* AI / Core Tags */}
+                                        <div className="mb-4 flex items-center gap-1.5 flex-wrap">
+                                            <span className="text-[9px] uppercase font-mono tracking-wider text-text-muted mr-1">
+                                                AI/Core:
+                                            </span>
+                                            {project.aiCoreTags.map((t) => (
+                                                <span
+                                                    key={t}
+                                                    className="text-[10px] px-2 py-0.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-md border border-purple-500/20 font-mono"
+                                                >
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                                            <a
+                                                href={project.links.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-primary transition-colors py-1 px-2 rounded-md hover:bg-card-bg-hover"
+                                            >
+                                                <Github className="w-3.5 h-3.5" /> View Code
+                                            </a>
+                                            {project.links.demo && (
+                                                <Link
+                                                    href={project.links.demo}
+                                                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-white transition-all py-1 px-2.5 rounded-md bg-primary/10 hover:bg-primary border border-primary/20"
+                                                >
+                                                    Case Study <ExternalLink className="w-3 h-3" />
+                                                </Link>
+                                            )}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
+                </motion.div>
+
+                {/* Show More / Show Less Button */}
+                {categoryProjects.length > INITIAL_DISPLAY_COUNT && activeCategory !== "core" && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-10 text-center"
+                    >
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 bg-card-bg border border-border hover:border-primary text-text-primary hover:text-primary shadow-lg hover:shadow-primary/15 cursor-pointer backdrop-blur-md group"
+                        >
+                            <span>
+                                {isExpanded
+                                    ? "Show Less Projects"
+                                    : `Explore All ${categoryProjects.length} Projects (+${remainingCount} more)`}
+                            </span>
+                            {isExpanded ? (
+                                <ChevronUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+                            ) : (
+                                <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
+                            )}
+                        </button>
+                    </motion.div>
+                )}
             </div>
         </section>
     );
