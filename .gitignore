@@ -123,16 +123,6 @@ storybook-static/
 tmp/
 temp/
 docs
-# Personal/sensitive documents (keep certificates in details folder but don't commit sensitive docs)
-*.pdf
-!public/assets/*.pdf
-!details/Cirtificate/*.pdf
+# Allow all certificate formats in public/certificates
+!/public/certificates/*
 
-# Lock files (optional - uncomment if you want to ignore)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
-
-# Optimize certificates assets - keep webp only
-/public/certificates/*
-!/public/certificates/*.webp
