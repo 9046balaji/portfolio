@@ -393,8 +393,8 @@ export default function Skills() {
                                         key={tabKey}
                                         onClick={() => setActiveTab(tabKey)}
                                         className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-200 shrink-0 whitespace-nowrap min-h-[38px] ${isSelected
-                                            ? "bg-primary text-white shadow-md shadow-primary/25"
-                                            : "text-text-secondary hover:text-text-primary hover:bg-card-bg-hover"
+                                            ? "bg-primary text-white shadow-md shadow-primary/25 border border-primary"
+                                            : "text-text-secondary hover:text-text-primary hover:bg-card-bg-hover border border-transparent"
                                             }`}
                                     >
                                         <Icon className="w-3.5 h-3.5 shrink-0" />
