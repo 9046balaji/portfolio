@@ -13,73 +13,84 @@ import {
     Terminal,
     GraduationCap,
     MapPin,
-    Workflow,
-    Shield,
     Boxes,
     Award,
     Activity,
     CheckCircle2,
-    ChevronDown
+    ChevronDown,
+    ShieldCheck,
+    Lightbulb,
+    Code2,
+    Users
 } from "lucide-react";
 import Image from "next/image";
 
-// ── 5 Core Competency Pillars (DevOps & Cloud Engineering Focus) ──
+// ── 5 Core Engineering Capabilities (Simple, clear descriptions) ──
 const corePillars = [
     {
         icon: GitBranch,
-        title: "CI/CD & Delivery Automation",
-        badge: "Pipeline Velocity",
+        title: "CI/CD & Automation",
+        badge: "Fast Delivery",
         accentColor: "#2088ff",
         description:
-            "Automate build, test, lint, security scans, and deployment using 7-stage declarative Jenkins pipelines, GitHub Actions workflows, and multi-stage Docker builds (-68% footprint).",
+            "I build automated pipelines with Jenkins and GitHub Actions that test, build, and deploy software automatically whenever code is pushed.",
     },
     {
         icon: Cloud,
-        title: "Cloud Infrastructure as Code",
-        badge: "Modular AWS & Terraform",
+        title: "Cloud Infrastructure",
+        badge: "AWS & Terraform",
         accentColor: "#844fba",
         description:
-            "Provision secure, reproducible AWS architectures (VPC, EC2, S3, ECS, ECR, ALB, Auto Scaling) with modular Terraform IaC and remote S3/DynamoDB state locking.",
+            "I set up secure servers, virtual private networks, and storage on AWS using code (Terraform) so setups are easy to recreate and manage.",
     },
     {
         icon: Server,
-        title: "Observability & Reliability",
-        badge: "Monitoring & Telemetry",
+        title: "Monitoring & Uptime",
+        badge: "Prometheus & Grafana",
         accentColor: "#f46800",
         description:
-            "Configure proactive telemetry with Prometheus scrapers, Node Exporter, AWS CloudWatch, and real-time Grafana dashboards to monitor latency, CPU, and error budgets.",
+            "I configure monitoring dashboards with Prometheus and Grafana to track CPU, memory, and response times to catch issues before users notice.",
     },
     {
         icon: Boxes,
-        title: "Container Orchestration",
+        title: "Containers & Docker",
         badge: "Docker & Kubernetes",
         accentColor: "#009688",
         description:
-            "Containerize multi-tier services, manage isolated networks with Docker Compose, and configure Kubernetes manifests and 11 production-grade Helm charts.",
+            "I package applications into Docker containers and manage them with Kubernetes so they run smoothly on any machine and scale easily.",
     },
     {
         icon: Cpu,
-        title: "Modern Workload & AI Serving",
-        badge: "FastAPI & Model Deployment",
+        title: "Backend & Applied AI",
+        badge: "FastAPI & Python",
         accentColor: "#ec4899",
         description:
-            "Leverage AI/ML academic background to deploy containerized FastAPI inference microservices (<180ms P95), vector search indices (FAISS/ChromaDB), and Redis caching.",
+            "I build fast backend APIs with Python and FastAPI, manage databases, and deploy machine learning models to production.",
     },
 ] as const;
 
-const technicalSkills = [
-    "AWS (VPC, EC2, S3, ECS, ECR)",
-    "Docker & Docker Compose",
-    "Kubernetes & 11 Helm Charts",
-    "Terraform Modular IaC",
-    "7-Stage Jenkins & GitHub Actions",
-    "Bash Scripting & Automation",
-    "Linux System Administration",
-    "Prometheus, Grafana & CloudWatch",
-    "Node Exporter Telemetry",
-    "FastAPI Model Serving",
-    "FAISS & ChromaDB Vector Indexing",
-    "PostgreSQL 16 & Redis Caching",
+// Core engineering principles (replaces duplicate technical skills pills)
+const engineeringValues = [
+    {
+        icon: Zap,
+        title: "Automate Early",
+        desc: "If a task needs to be done twice, I write a script or build a pipeline.",
+    },
+    {
+        icon: ShieldCheck,
+        title: "Reliability First",
+        desc: "Building systems that recover quickly and stay online without downtime.",
+    },
+    {
+        icon: Code2,
+        title: "Learn by Building",
+        desc: "Deploying real projects and testing code in practice teaches the most.",
+    },
+    {
+        icon: Users,
+        title: "Team Player",
+        desc: "Clear documentation, friendly communication, and taking ownership.",
+    },
 ];
 
 const stats = [
@@ -90,8 +101,12 @@ const stats = [
 
 export default function About() {
     const [showFullBio, setShowFullBio] = useState(false);
+
     return (
-        <section id="about" className="relative overflow-hidden pt-10 md:pt-14 pb-16 md:pb-20 px-4 bg-section-alt transition-colors duration-300">
+        <section
+            id="about"
+            className="relative overflow-hidden pt-10 md:pt-14 pb-16 md:pb-20 px-4 bg-section-alt transition-colors duration-300"
+        >
             {/* Ambient Background Glows */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute left-1/2 top-10 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12)_0%,transparent_70%)] blur-3xl" />
@@ -113,11 +128,11 @@ export default function About() {
                     </div>
                     <h2 className="text-3xl md:text-5xl font-bold mb-3 text-text-primary">About Me</h2>
                     <p className="text-text-tertiary max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-                        Building automated CI/CD pipelines, reproducible cloud infrastructure, and observable systems — backed by strong software and AI/ML foundations.
+                        Building automated pipelines, reliable cloud setups, and observable systems in simple and effective ways.
                     </p>
                 </motion.div>
 
-                {/* ── ROW 1: BALANCED 2-COLUMN INTRO (Image on Left, Story on Right) ── */}
+                {/* ── ROW 1: BALANCED 2-COLUMN INTRO (Portrait on Left, Story on Right) ── */}
                 <div className="grid gap-8 lg:grid-cols-12 items-start">
                     {/* Left: Portrait Card with Highlights (Col 5) */}
                     <motion.div
@@ -132,7 +147,7 @@ export default function About() {
                         {/* Portrait Image Frame */}
                         <div className="relative aspect-[4/4.5] sm:aspect-[1/1] lg:aspect-[4/4.2] w-full overflow-hidden rounded-2xl border border-glass-border bg-card-bg shadow-inner">
                             <Image
-                                src="/assets/profile.jpeg"
+                                src="/assets/profile.webp"
                                 alt="Konda Balaji Rao"
                                 fill
                                 priority
@@ -151,7 +166,7 @@ export default function About() {
                             </div>
                         </div>
 
-                        {/* High-Impact Proof Highlights Grid (Fills space cleanly) */}
+                        {/* High-Impact Proof Highlights Grid */}
                         <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">
                             <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
@@ -178,18 +193,18 @@ export default function About() {
                                     <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">CI/CD Pipeline</div>
-                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">7-Stage Jenkins</div>
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Mindset</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">Automate Early</div>
                                 </div>
                             </div>
 
                             <div className="rounded-xl border border-glass-border bg-card-bg/90 p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 min-w-0">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
-                                    <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                    <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Observability</div>
-                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">Prometheus</div>
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono text-text-muted font-bold">Approach</div>
+                                    <div className="text-[10.5px] sm:text-xs font-bold text-text-primary leading-tight">Reliability First</div>
                                 </div>
                             </div>
                         </div>
@@ -230,17 +245,18 @@ export default function About() {
                                 Automating Cloud Infrastructure, CI/CD Pipelines &amp; Systems Reliability
                             </div>
 
+                            {/* Human, simple biography */}
                             <div className="space-y-3.5 text-text-tertiary text-sm md:text-base leading-relaxed">
                                 <p className="text-text-primary text-base md:text-lg leading-relaxed font-normal">
-                                    I&apos;m <span className="font-bold text-primary">Konda Balaji Rao</span>, an aspiring{' '}
-                                    <span className="font-semibold text-secondary">Cloud &amp; DevOps Engineer</span> dedicated to turning software delivery into reliable, automated, and code-defined systems. Pursuing my B.Tech in CSE (Artificial Intelligence &amp; Machine Learning) at VFSTR, Guntur (CGPA: 7.4), I combine hands-on infrastructure engineering with strong computing fundamentals.
+                                    I&apos;m <span className="font-bold text-primary">Konda Balaji Rao</span>, a Computer Science student at VFSTR (CGPA: 7.4) who loves turning software deployment into a{' '}
+                                    <span className="font-semibold text-secondary">smooth, automated, and reliable process</span>.
                                 </p>
                                 <div className={`space-y-3.5 ${showFullBio ? "block" : "hidden md:block"}`}>
                                     <p>
-                                        My engineering focus is centered on <strong>reliable automation and scalable cloud deployments</strong>: crafting declarative 7-stage Jenkins and GitHub Actions CI/CD pipelines, containerizing multi-tier microservices with Docker, provisioning modular AWS environments with Terraform IaC, and configuring proactive monitoring with Prometheus, Grafana, and Node Exporter.
+                                        My main focus is on <strong>practical cloud and DevOps engineering</strong>: writing automated pipelines with Jenkins and GitHub Actions, packaging applications with Docker and Kubernetes, and managing AWS cloud servers with Terraform code.
                                     </p>
                                     <p>
-                                        With my academic specialization in AI &amp; Machine Learning, I bring the added ability to deploy modern intelligent workloads — serving FastAPI inference endpoints, managing vector search indices, and containerizing data pipelines. Holding the <strong>AWS Certified Cloud Practitioner</strong> credential with <strong>2,000+ GitHub contributions</strong>, I am eager to join a high-impact engineering team where I can contribute to high availability and developer velocity from day one.
+                                        I also use my background in AI &amp; Machine Learning to deploy backend services and data tools with Python and FastAPI. As an <strong>AWS Certified Cloud Practitioner</strong> with over <strong>2,000 GitHub contributions</strong>, I am excited to join an engineering team where I can help build and maintain reliable software systems.
                                     </p>
                                 </div>
                                 <button
@@ -271,24 +287,35 @@ export default function About() {
                             ))}
                         </div>
 
-                        {/* Technical Focus Badges */}
-                        <div>
-                            <div className="mb-3 flex items-center gap-2">
+                        {/* Engineering Values (Replaced duplicate skills pills) */}
+                        <div className="space-y-2.5 pt-1">
+                            <div className="flex items-center gap-2">
                                 <Zap className="h-4 w-4 text-secondary" />
                                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-text-primary">
-                                    Technical Focus Areas
+                                    How I Approach Engineering
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap gap-1.5">
-                                {technicalSkills.map((skill) => (
-                                    <span
-                                        key={skill}
-                                        className="rounded-lg border border-glass-border bg-card-bg px-2.5 py-1 text-xs font-medium text-text-secondary hover:border-primary/40 hover:text-primary transition-colors"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                {engineeringValues.map((val) => {
+                                    const Icon = val.icon;
+                                    return (
+                                        <div
+                                            key={val.title}
+                                            className="p-2.5 rounded-xl border border-glass-border bg-card-bg/90 space-y-1"
+                                        >
+                                            <div className="flex items-center gap-1.5">
+                                                <Icon className="w-3.5 h-3.5 text-primary" />
+                                                <span className="text-xs font-bold text-text-primary">
+                                                    {val.title}
+                                                </span>
+                                            </div>
+                                            <p className="text-[11px] text-text-tertiary leading-snug">
+                                                {val.desc}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </motion.div>
