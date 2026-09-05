@@ -354,7 +354,7 @@ export default function Projects() {
 
     // Responsive initial count: 3 on mobile to avoid scroll fatigue, 6 on desktop
     const initialCount = isMobile ? 3 : INITIAL_DISPLAY_COUNT;
-    const shouldLimit = activeCategory !== "core" && !isExpanded && categoryProjects.length > initialCount;
+    const shouldLimit = activeCategory === "all" && !isExpanded && categoryProjects.length > initialCount;
     const displayedProjects = shouldLimit
         ? categoryProjects.slice(0, initialCount)
         : categoryProjects;
@@ -403,24 +403,17 @@ export default function Projects() {
                             <button
                                 key={cat.id}
                                 onClick={() => handleCategoryChange(cat.id as ProjectCategory)}
-                                className={`relative shrink-0 px-3.5 sm:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                                className={`shrink-0 px-3.5 sm:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
                                     isActive
-                                        ? "text-white shadow-lg shadow-primary/25"
+                                        ? "bg-primary text-white shadow-lg shadow-primary/30 border border-primary"
                                         : "text-text-secondary hover:text-text-primary bg-card-bg border border-border hover:border-primary/40"
                                 }`}
                             >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeTabBadge"
-                                        className="absolute inset-0 bg-gradient-to-r from-primary to-accent-indigo rounded-full -z-10"
-                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    />
-                                )}
                                 <span>{cat.label}</span>
                                 <span
-                                    className={`text-[11px] px-2 py-0.2 rounded-full font-mono ${
+                                    className={`text-[11px] px-2 py-0.5 rounded-full font-mono ${
                                         isActive
-                                            ? "bg-white/25 text-white"
+                                            ? "bg-white/20 text-white"
                                             : "bg-card-bg-hover text-text-muted"
                                     }`}
                                 >
@@ -569,7 +562,7 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Show More / Show Less Button */}
-                {categoryProjects.length > initialCount && activeCategory !== "core" && (
+                {categoryProjects.length > initialCount && activeCategory === "all" && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
